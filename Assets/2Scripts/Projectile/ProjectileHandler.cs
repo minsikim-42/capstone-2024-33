@@ -22,8 +22,8 @@ public class ProjectileHandler : MonoBehaviour
         if (!transform.name.Contains("AI"))
         {
             // 바람 적용
-            var windPower = InGameManager.instance.windPower; // 바람 세기
-            var windPowerCoefficient = InGameManager.instance.windPowerCoefficient; // 바람 세기 계수
+            var windPower = InGameManager.IT.windPower; // 바람 세기
+            var windPowerCoefficient = InGameManager.IT.windPowerCoefficient; // 바람 세기 계수
 
             position.x += windPower / 20f * windPowerCoefficient; // 바람 적용    
         }
@@ -43,6 +43,6 @@ public class ProjectileHandler : MonoBehaviour
         if (isDoubleShot)
             return;
         
-        InGameManager.instance.StartTimer(); // 타이머 시작
+        InGameManager.IT.StartTimer(); // 타이머 시작
     }
 }

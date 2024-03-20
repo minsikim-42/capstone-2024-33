@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class BackendManager : MonoBehaviour
 {
-    public static BackendManager instance;
+    public static BackendManager IT;
 
     public bool IsSuccess;
     
     private void Awake()
     {
-        instance = this;
+        IT = this;
         
         DontDestroyOnLoad(gameObject);
         

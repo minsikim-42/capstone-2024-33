@@ -19,8 +19,8 @@ public class OutColliderHandler : MonoBehaviour
                 rigid.velocity = Vector2.zero; // 탱크의 속도 초기화
                 rigid.angularVelocity = 0; // 탱크의 각속도 초기화
                 
-            InGameManager.instance.StopTimer(); // 타이머 멈춤
-            InGameManager.instance.StartTimer(); // 타이머 시작
+            InGameManager.IT.StopTimer(); // 타이머 멈춤
+            InGameManager.IT.StartTimer(); // 타이머 시작
         }
         
         // layer가 Projectile인 경우, 미사일이 맵 밖으로 나갔다는 뜻

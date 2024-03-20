@@ -4,7 +4,7 @@ using UnityEngine.Audio;
 
 public class SoundManager : MonoBehaviour
 {
-    public static SoundManager instance;
+    public static SoundManager IT;
 
     [SerializeField] private AudioMixer mixer; // Audio Mixer
     
@@ -18,9 +18,9 @@ public class SoundManager : MonoBehaviour
     
     private void Awake()
     {
-        if (instance == null)
+        if (IT == null)
         {
-            instance = this;
+            IT = this;
         }
         else
         {

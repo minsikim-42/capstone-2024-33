@@ -50,7 +50,7 @@ public class UserInfo : MonoBehaviour
                 
                 Debug.LogError(callback.GetMessage());
             }
-             
+            
             onUserInfoEvent?.Invoke(); // 유저 정보 이벤트 호출
         });
     }

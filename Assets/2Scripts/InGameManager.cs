@@ -11,7 +11,7 @@ using Random = UnityEngine.Random;
 
 public class InGameManager : MonoBehaviour
 {
-    public static InGameManager instance;
+    public static InGameManager IT;
     
     private TankHandler playerTankHandler; // 플레이어 탱크 핸들러
     private PhotonView PV; // 포톤 뷰
@@ -61,7 +61,7 @@ public class InGameManager : MonoBehaviour
     
     private void Awake()
     {
-        instance = this;
+        IT = this;
         
         PV = GetComponent<PhotonView>(); // 포톤 뷰 설정
         
@@ -70,7 +70,7 @@ public class InGameManager : MonoBehaviour
 
     private async void Start()
     {
-        UIManager.instance.SetDarkScreen(); // 어두운 화면 설정
+        UIManager.IT.SetDarkScreen(); // 어두운 화면 설정
         
         if (PhotonNetwork.IsMasterClient)
         {
@@ -96,7 +96,7 @@ public class InGameManager : MonoBehaviour
             }
             
             // AI
-            if (NetworkManager.instance.aiCount > 0)
+            if (NetworkManager.IT.aiCount > 0)
             {
                 aiSpawnPoints = new List<Transform>(); // AI 스폰 포인트 리스트 초기화
                 
@@ -130,7 +130,7 @@ public class InGameManager : MonoBehaviour
         cameraHandler.SetTarget(player.transform); // 카메라 타겟 설정
         cameraHandler.Zoom(5); // 카메라 줌
         
-        UIManager.instance.SetFade(true); // 페이드 효과
+        UIManager.IT.SetFade(true); // 페이드 효과
         
         if (PhotonNetwork.IsMasterClient)
         {
@@ -146,11 +146,11 @@ public class InGameManager : MonoBehaviour
     private void GenerateAI()
     {
         // AI가 존재하지 않을 경우 리턴
-        if (NetworkManager.instance.aiCount == 0) 
+        if (NetworkManager.IT.aiCount == 0) 
             return;
         
         // AI가 존재할 경우
-        for (var i = 0; i < NetworkManager.instance.aiCount; i++)
+        for (var i = 0; i < NetworkManager.IT.aiCount; i++)
         {
             var aiPosition = aiSpawnPoints[i].position; // AI 스폰 포인트
             var ai = PhotonNetwork.Instantiate(aiPrefabName, aiPosition, Quaternion.identity).GetComponent<AIHandler>(); // AI 생성
@@ -172,7 +172,7 @@ public class InGameManager : MonoBehaviour
         }
 
         // AI
-        for (var i = 0; i < NetworkManager.instance.aiCount; i++)
+        for (var i = 0; i < NetworkManager.IT.aiCount; i++)
         {
             var turn = new Turn { actorNumber = aiList[i].actorNumber, nickname = $"AI_{aiList[i].actorNumber - 1000}"}; // 턴 생성 (AI)
             
@@ -233,7 +233,7 @@ public class InGameManager : MonoBehaviour
             
             SetMissilePlayerNickname(ai.name); // 미사일 발사한 닉네임 설정
             
-            UIManager.instance.ItemButtonInit(); // 아이템 버튼 초기화
+            UIManager.IT.ItemButtonInit(); // 아이템 버튼 초기화
             
             ai.OnTurn(); // AI의 턴 시작
         }
@@ -293,7 +293,7 @@ public class InGameManager : MonoBehaviour
     [PunRPC]
     private void RPC_SetWind(int wind)
     {
-        UIManager.instance.SetWind(wind); // UI에 풍향 설정
+        UIManager.IT.SetWind(wind); // UI에 풍향 설정
         
         windPower = wind; // 풍향 설정
     }
@@ -301,13 +301,13 @@ public class InGameManager : MonoBehaviour
     [PunRPC]
     private void RPC_SendTurn()
     {
-        UIManager.instance.ItemButtonInit(); // 아이템 버튼 초기화
+        UIManager.IT.ItemButtonInit(); // 아이템 버튼 초기화
         
         playerTankHandler.isTurn = true; // 플레이어의 턴을 시작
         playerTankHandler.MoveValueInit(); // 이동 값 초기화
         playerTankHandler.AngleInit(); // 각도 초기화
 
-        UIManager.instance.selectableItem = true; // 아이템 선택 가능
+        UIManager.IT.selectableItem = true; // 아이템 선택 가능
         
         // 아이템 사용 여부 초기화
         isDoubleShot = false; 
@@ -318,7 +318,7 @@ public class InGameManager : MonoBehaviour
     [PunRPC]
     private void RPC_SendOtherTurn(string nickname)
     {
-        UIManager.instance.ItemButtonInit(); // 아이템 버튼 초기화
+        UIManager.IT.ItemButtonInit(); // 아이템 버튼 초기화
         
         playerTankHandler.AngleInit(); // 각도 초기화
     }
@@ -346,7 +346,7 @@ public class InGameManager : MonoBehaviour
         if (PhotonNetwork.IsMasterClient) // 방장일 경우
         {
             // R 누르면 Result
-            if (GameManager.instance.IsTestMode() && Input.GetKeyDown(KeyCode.R))
+            if (GameManager.IT.IsTestMode() && Input.GetKeyDown(KeyCode.R))
                 Result();
             
             if (isPlayingTimer) // 플레이 중일 경우
@@ -437,7 +437,7 @@ public class InGameManager : MonoBehaviour
             
             SetMissilePlayerNickname(ai.name); // 미사일 발사한 닉네임 설정
             
-            UIManager.instance.ItemButtonInit(); // 아이템 버튼 초기화
+            UIManager.IT.ItemButtonInit(); // 아이템 버튼 초기화
 
             ai.OnTurn(); // AI의 턴 시작
         }
@@ -632,8 +632,8 @@ public class InGameManager : MonoBehaviour
     private void RPC_Result(string data)
     {
 		Debug.Log("result RPC fnc!");
-        GameManager.instance.isResult = true; // 결과 표시
-        GameManager.instance.result = data; // 결과 데이터 저장
+        GameManager.IT.isResult = true; // 결과 표시
+        GameManager.IT.result = data; // 결과 데이터 저장
 
         PhotonNetwork.LeaveRoom(); // 방 나가기
         PhotonNetwork.LoadLevel("Lobby"); // 로비 씬으로 이동

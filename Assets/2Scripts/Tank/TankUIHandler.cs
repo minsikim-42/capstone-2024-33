@@ -57,7 +57,7 @@ public class TankUIHandler : MonoBehaviour
         
         SetHitDamage(damage); // Hit Damage 설정
         
-        InGameManager.instance.TankHitEffect(transform.position); // Hit Effect 생성
+        InGameManager.IT.TankHitEffect(transform.position); // Hit Effect 생성
     }
     
     public void SetHP(float value)

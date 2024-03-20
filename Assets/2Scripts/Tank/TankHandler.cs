@@ -75,7 +75,7 @@ public class  TankHandler : MonoBehaviour
     {
         // Initialize
         currentMoveValue = maxMoveValue; // 현재 이동값을 최대 이동값으로 초기화
-        UIManager.instance.SetProjectileAngle(projectileDegrees, direction);  // 파워 게이지 UI 각도 초기화
+        UIManager.IT.SetProjectileAngle(projectileDegrees, direction);  // 파워 게이지 UI 각도 초기화
 
         if (!transform.name.Contains("AI"))
             transform.name = PV.Owner.NickName; // 탱크 이름을 플레이어 닉네임으로 설정
@@ -106,8 +106,8 @@ public class  TankHandler : MonoBehaviour
                 angle = -angle; // angle값을 반전
         }
 
-        if (isTurn && ((isAi && InGameManager.instance.IsAITurn()) || (!isAi && !InGameManager.instance.IsAITurn())))
-            UIManager.instance.SetTankHorizontal(-angle, direction); // 탱크 수평 각도 UI 설정
+        if (isTurn && ((isAi && InGameManager.IT.IsAITurn()) || (!isAi && !InGameManager.IT.IsAITurn())))
+            UIManager.IT.SetTankHorizontal(-angle, direction); // 탱크 수평 각도 UI 설정
         
         SetSprite(); // 탱크 스프라이트 설정
         
@@ -176,14 +176,14 @@ public class  TankHandler : MonoBehaviour
     public void AngleInit()
     {
         projectileDegrees = 0; // 미사일 발사 각도 초기화
-        UIManager.instance.SetProjectileAngle(projectileDegrees, direction); // 미사일 발사 각도 UI 설정
+        UIManager.IT.SetProjectileAngle(projectileDegrees, direction); // 미사일 발사 각도 UI 설정
     }
 
     public void MoveValueInit()
     {
         currentMoveValue = maxMoveValue; // 이동값 초기화
         
-        UIManager.instance.SetMove(currentMoveValue); // 이동 게이지 UI 설정
+        UIManager.IT.SetMove(currentMoveValue); // 이동 게이지 UI 설정
     }
     
     public void LeftArrowPressed()
@@ -197,8 +197,8 @@ public class  TankHandler : MonoBehaviour
         anim.SetBool("Idle", false); // Idle 애니메이션 비활성화
         anim.SetBool("Move", true); // Move 애니메이션 활성화
                     
-        UIManager.instance.SetMove(currentMoveValue); // 이동 게이지 UI 설정
-        UIManager.instance.SetProjectileAngle(projectileDegrees, direction); // 미사일 발사 각도 UI 설정
+        UIManager.IT.SetMove(currentMoveValue); // 이동 게이지 UI 설정
+        UIManager.IT.SetProjectileAngle(projectileDegrees, direction); // 미사일 발사 각도 UI 설정
     }
     
     public void RepeatLeftArrowPressed(float time)
@@ -248,16 +248,16 @@ public class  TankHandler : MonoBehaviour
         anim.SetBool("Idle", false); // Idle 애니메이션 비활성화
         anim.SetBool("Move", true); // Move 애니메이션 활성화
                     
-        UIManager.instance.SetMove(currentMoveValue); // 이동 게이지 UI 설정
-        UIManager.instance.SetProjectileAngle(projectileDegrees, direction); // 미사일 발사 각도 UI 설정
+        UIManager.IT.SetMove(currentMoveValue); // 이동 게이지 UI 설정
+        UIManager.IT.SetProjectileAngle(projectileDegrees, direction); // 미사일 발사 각도 UI 설정
     }
     
     public void SpaceDown()
     {
         currentPowerValue = 0; // 파워값 초기화
-        UIManager.instance.SetPower(currentPowerValue); // 파워 게이지 UI 설정
+        UIManager.IT.SetPower(currentPowerValue); // 파워 게이지 UI 설정
         spacePressed = true; // 스페이스바 누름 상태로 설정
-        UIManager.instance.spacePressed = true; // 스페이스바 누름 상태로 설정
+        UIManager.IT.spacePressed = true; // 스페이스바 누름 상태로 설정
     }
 
     public void SpacePressed()
@@ -267,7 +267,7 @@ public class  TankHandler : MonoBehaviour
         {
             currentPowerValue = maxPowerValue; // 현재 파워값을 최대 파워값으로 설정
                 
-            UIManager.instance.SetPower(currentPowerValue); // 파워 게이지 UI 설정
+            UIManager.IT.SetPower(currentPowerValue); // 파워 게이지 UI 설정
                     
             Fire(); // 미사일 발사
                     
@@ -276,7 +276,7 @@ public class  TankHandler : MonoBehaviour
                 
         currentPowerValue += Time.deltaTime * powerCoefficient; // 파워값 증가
                 
-        UIManager.instance.SetPower(currentPowerValue); // 파워 게이지 UI 설정
+        UIManager.IT.SetPower(currentPowerValue); // 파워 게이지 UI 설정
     }
 
     public void SpaceUp()
@@ -289,12 +289,12 @@ public class  TankHandler : MonoBehaviour
         if (spacePressed)
         {
             spacePressed = false; // 스페이스바 누름 상태 해제
-            UIManager.instance.spacePressed = false; // 스페이스바 누름 상태 해제
+            UIManager.IT.spacePressed = false; // 스페이스바 누름 상태 해제
             Fire(); // 미사일 발사
         }
         else
         {
-            InGameManager.instance.NextTurnToMaster(); // 다음 턴으로 변경   
+            InGameManager.IT.NextTurnToMaster(); // 다음 턴으로 변경   
         }
     }
     
@@ -305,13 +305,13 @@ public class  TankHandler : MonoBehaviour
         {
             projectileDegrees = 90f; // 미사일 발사 각도를 90도로 설정
                 
-            UIManager.instance.SetProjectileAngle(projectileDegrees, direction); // 미사일 발사 각도 UI 설정
+            UIManager.IT.SetProjectileAngle(projectileDegrees, direction); // 미사일 발사 각도 UI 설정
             return;
         }
 
         projectileDegrees += delta * Time.deltaTime; // 미사일 발사 각도 증가
                 
-        UIManager.instance.SetProjectileAngle(projectileDegrees, direction); // 미사일 발사 각도 UI 설정
+        UIManager.IT.SetProjectileAngle(projectileDegrees, direction); // 미사일 발사 각도 UI 설정
     }
 
     public void DownArrowPressed()
@@ -321,61 +321,61 @@ public class  TankHandler : MonoBehaviour
         {
             projectileDegrees = 0; // 미사일 발사 각도를 0으로 설정
                 
-            UIManager.instance.SetProjectileAngle(projectileDegrees, direction); // 미사일 발사 각도 UI 설정
+            UIManager.IT.SetProjectileAngle(projectileDegrees, direction); // 미사일 발사 각도 UI 설정
             return;
         }
             
         projectileDegrees -= delta * Time.deltaTime; // 미사일 발사 각도 감소
                 
-        UIManager.instance.SetProjectileAngle(projectileDegrees, direction); // 미사일 발사 각도 UI 설정
+        UIManager.IT.SetProjectileAngle(projectileDegrees, direction); // 미사일 발사 각도 UI 설정
     }
     
     
     private void Fire()
     {
-		SoundManager.instance.PlaySFX();
+		SoundManager.IT.PlaySFX();
         isTurn = false; // 턴 종료
-        UIManager.instance.selectableItem = false; // 아이템 선택 불가능으로 변경
+        UIManager.IT.selectableItem = false; // 아이템 선택 불가능으로 변경
         
-        projectileTransformPosition = transform.position + UIManager.instance.GetProjectileAngleVector(); // 미사일 발사 위치 설정
+        projectileTransformPosition = transform.position + UIManager.IT.GetProjectileAngleVector(); // 미사일 발사 위치 설정
 
         // 탱크의 방향이 왼쪽이라면
         if (direction == -1)
-            projectileTransformLocalEulerAngles = Vector3.forward * (180 - UIManager.instance.GetProjectileAngle()); // 미사일 발사 각도 설정
+            projectileTransformLocalEulerAngles = Vector3.forward * (180 - UIManager.IT.GetProjectileAngle()); // 미사일 발사 각도 설정
         // 탱크의 방향이 오른쪽이라면
         else
-            projectileTransformLocalEulerAngles = Vector3.forward * UIManager.instance.GetProjectileAngle(); // 미사일 발사 각도 설정
+            projectileTransformLocalEulerAngles = Vector3.forward * UIManager.IT.GetProjectileAngle(); // 미사일 발사 각도 설정
         
         projectileSpeed = currentPowerValue * projectileFireCoefficient; // 미사일 발사 속도 설정
-        projectileAngleVector = UIManager.instance.GetProjectileAngleVector(); // 미사일 발사 각도 벡터 설정
+        projectileAngleVector = UIManager.IT.GetProjectileAngleVector(); // 미사일 발사 각도 벡터 설정
         
         // 사용 아이템 체크
         var itemType = string.Empty;
-        if (InGameManager.instance.isDoubleShot)
+        if (InGameManager.IT.isDoubleShot)
             itemType = "Double";
-        else if (InGameManager.instance.isAttackRange)
+        else if (InGameManager.IT.isAttackRange)
             itemType = "Range";
-        else if (InGameManager.instance.isAttackDamage)
+        else if (InGameManager.IT.isAttackDamage)
             itemType = "Damage";
         
         // RPC_Fire 함수 호출
         PV.RPC(nameof(RPC_Fire), RpcTarget.All, projectileTransformPosition, projectileTransformLocalEulerAngles, projectileSpeed, projectileAngleVector, direction, itemType);
         
         spacePressed = false; // 스페이스바 누름 상태 해제
-        UIManager.instance.spacePressed = false; // 스페이스바 누름 상태 해제
+        UIManager.IT.spacePressed = false; // 스페이스바 누름 상태 해제
         
-        UIManager.instance.SetPreviousPower(); // 이전 파워값 설정
+        UIManager.IT.SetPreviousPower(); // 이전 파워값 설정
     }
 
     [PunRPC]
     private async void RPC_Fire(Vector3 projectileTransformPosition, Vector3 projectileTransformLocalEulerAngles, float projectileSpeed, Vector3 projectileAngleVector, int direction, string itemType)
     {
-        InGameManager.instance.StopTimer(); // 타이머 멈춤
-        InGameManager.instance.initialPosition = projectileTransformPosition; // 미사일 초기 위치 설정 (거리 변수 계산용)
+        InGameManager.IT.StopTimer(); // 타이머 멈춤
+        InGameManager.IT.initialPosition = projectileTransformPosition; // 미사일 초기 위치 설정 (거리 변수 계산용)
         
         // 아이템 체크
-        InGameManager.instance.isAttackRange = false; // 초기화
-        InGameManager.instance.isAttackDamage = false; // 초기화
+        InGameManager.IT.isAttackRange = false; // 초기화
+        InGameManager.IT.isAttackDamage = false; // 초기화
         var isDouble = false; // 초기화
         
         switch (itemType)
@@ -384,10 +384,10 @@ public class  TankHandler : MonoBehaviour
                 isDouble = true;
                 break;
             case "Range": // 피격범위 증폭 1.5배
-                InGameManager.instance.isAttackRange = true;
+                InGameManager.IT.isAttackRange = true;
                 break;  
             case "Damage": // 데미지 증폭 1.5배
-                InGameManager.instance.isAttackDamage = true;
+                InGameManager.IT.isAttackDamage = true;
                 break;
         }
         
@@ -416,7 +416,7 @@ public class  TankHandler : MonoBehaviour
         
             // SetCamera
             if (!isDoubleShot)
-                InGameManager.instance.SetCamera(projectile.transform.name, 10);
+                InGameManager.IT.SetCamera(projectile.transform.name, 10);
         
             projectile = null; // 미사일 초기화
         }
@@ -455,7 +455,7 @@ public class  TankHandler : MonoBehaviour
         // damage = 9999 -> 탱크가 맵 밖으로 나갔다는 뜻
         if (damage != 9999)
         {
-            InGameManager.instance.SetDamage(damage); // 누적 데미지 리스트에 데미지 추가
+            InGameManager.IT.SetDamage(damage); // 누적 데미지 리스트에 데미지 추가
         }
         
         PV.RPC(nameof(RPC_UpdateUI), RpcTarget.All, currentHP, damage); // RPC_UpdateUI 함수 호출
@@ -472,7 +472,7 @@ public class  TankHandler : MonoBehaviour
             if (PhotonNetwork.IsMasterClient && isAi)
                 return;
             
-            UIManager.instance.SetHP(currentHP); // HP UI 갱신
+            UIManager.IT.SetHP(currentHP); // HP UI 갱신
         }
     }
 

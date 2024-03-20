@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public static UIManager instance;
+    public static UIManager IT;
     
     [Header("Sliders")]
     [SerializeField] private SliderHandler hpSlider; // HP 슬라이더
@@ -33,7 +33,7 @@ public class UIManager : MonoBehaviour
     public bool spacePressed = false; // 스페이스바 눌림 여부
     private void Awake()
     {
-        instance = this;
+        IT = this;
         
         doubleShotButton.onClick.AddListener(SetDoubleShot); // Double Shot 버튼 클릭 이벤트 추가
         attackRangeButton.onClick.AddListener(SetAttackRange); // Attack Range 버튼 클릭 이벤트 추가
@@ -54,7 +54,7 @@ public class UIManager : MonoBehaviour
     
     public void SetPower(float value)
     {
-        if (InGameManager.instance.IsAITurn())
+        if (InGameManager.IT.IsAITurn())
             return;
 
         powerSlider.SetValue(value); // Power 슬라이더의 값을 변경
@@ -62,7 +62,7 @@ public class UIManager : MonoBehaviour
     
     public void SetMove(float value)
     {
-        if (InGameManager.instance.IsAITurn())
+        if (InGameManager.IT.IsAITurn())
             return;
 
         moveSlider.SetValue(value); // Move 슬라이더의 값을 변경
@@ -70,7 +70,7 @@ public class UIManager : MonoBehaviour
 
     public void SetPreviousPower()
     {
-        if (InGameManager.instance.IsAITurn())
+        if (InGameManager.IT.IsAITurn())
             return;
 
         powerSlider.SetPreviousPower(); // 이전 Power로 변경
@@ -85,7 +85,7 @@ public class UIManager : MonoBehaviour
     #region Instruments
     public void SetTankHorizontal(float value, int direction)
     {
-        if (InGameManager.instance.IsAITurn())
+        if (InGameManager.IT.IsAITurn())
             instrumentCgForAI.alpha = 1; // AI용 Instrument의 Alpha를 1로 변경
         else
             instrumentCgForAI.alpha = 0; // AI용 Instrument의 Alpha를 0으로 변경
@@ -112,9 +112,9 @@ public class UIManager : MonoBehaviour
     #region Items
     public void ItemButtonInit()
     {
-        InGameManager.instance.isDoubleShot = false; // Double Shot 초기화
-        InGameManager.instance.isAttackRange = false; // Attack Range 초기화
-        InGameManager.instance.isAttackDamage = false; // Attack Damage 초기화
+        InGameManager.IT.isDoubleShot = false; // Double Shot 초기화
+        InGameManager.IT.isAttackRange = false; // Attack Range 초기화
+        InGameManager.IT.isAttackDamage = false; // Attack Damage 초기화
         
         UpdateItemButtonUI(); // Item Button UI 업데이트
     }
@@ -127,9 +127,9 @@ public class UIManager : MonoBehaviour
         if (spacePressed) // 스페이스바 누른 상태에서는 아이템 사용 불가
             return;
         
-        InGameManager.instance.isDoubleShot = !InGameManager.instance.isDoubleShot; // Double Shot 여부 변경
-        InGameManager.instance.isAttackRange = false; // Attack Range는 무조건 false
-        InGameManager.instance.isAttackDamage = false; // Attack Damage는 무조건 false
+        InGameManager.IT.isDoubleShot = !InGameManager.IT.isDoubleShot; // Double Shot 여부 변경
+        InGameManager.IT.isAttackRange = false; // Attack Range는 무조건 false
+        InGameManager.IT.isAttackDamage = false; // Attack Damage는 무조건 false
         
         UpdateItemButtonUI(); // Item Button UI 업데이트
     }
@@ -142,9 +142,9 @@ public class UIManager : MonoBehaviour
         if (spacePressed) // 스페이스바 누른 상태에서는 아이템 사용 불가
             return;
 
-        InGameManager.instance.isAttackRange = !InGameManager.instance.isAttackRange; // Attack Range 여부 변경
-        InGameManager.instance.isDoubleShot = false; // Double Shot은 무조건 false
-        InGameManager.instance.isAttackDamage = false; // Attack Damage는 무조건 false
+        InGameManager.IT.isAttackRange = !InGameManager.IT.isAttackRange; // Attack Range 여부 변경
+        InGameManager.IT.isDoubleShot = false; // Double Shot은 무조건 false
+        InGameManager.IT.isAttackDamage = false; // Attack Damage는 무조건 false
         
         UpdateItemButtonUI(); // Item Button UI 업데이트
     }
@@ -157,18 +157,18 @@ public class UIManager : MonoBehaviour
         if (spacePressed) // 스페이스바 누른 상태에서는 아이템 사용 불가
             return;
 
-        InGameManager.instance.isAttackDamage = !InGameManager.instance.isAttackDamage; // Attack Damage 여부 변경
-        InGameManager.instance.isDoubleShot = false; // Double Shot은 무조건 false
-        InGameManager.instance.isAttackRange = false; // Attack Range는 무조건 false
+        InGameManager.IT.isAttackDamage = !InGameManager.IT.isAttackDamage; // Attack Damage 여부 변경
+        InGameManager.IT.isDoubleShot = false; // Double Shot은 무조건 false
+        InGameManager.IT.isAttackRange = false; // Attack Range는 무조건 false
         
         UpdateItemButtonUI(); // Item Button UI 업데이트
     }
 
     private void UpdateItemButtonUI()
     {
-        doubleShotButton.image.color = InGameManager.instance.isDoubleShot ? Color.green : Color.white; // Double Shot 버튼 색상 변경
-        attackRangeButton.image.color = InGameManager.instance.isAttackRange ? Color.green : Color.white; // Attack Range 버튼 색상 변경
-        attackDamageButton.image.color = InGameManager.instance.isAttackDamage ? Color.green : Color.white; // Attack Damage 버튼 색상 변경
+        doubleShotButton.image.color = InGameManager.IT.isDoubleShot ? Color.green : Color.white; // Double Shot 버튼 색상 변경
+        attackRangeButton.image.color = InGameManager.IT.isAttackRange ? Color.green : Color.white; // Attack Range 버튼 색상 변경
+        attackDamageButton.image.color = InGameManager.IT.isAttackDamage ? Color.green : Color.white; // Attack Damage 버튼 색상 변경
     } 
     #endregion
     
@@ -193,7 +193,7 @@ public class UIManager : MonoBehaviour
         if (spacePressed) // 스페이스바 누른 상태에서는 Exit 불가
             return;
 
-        InGameManager.instance.ExitInGame(); // 게임 종료
+        InGameManager.IT.ExitInGame(); // 게임 종료
     }
     #endregion
 }

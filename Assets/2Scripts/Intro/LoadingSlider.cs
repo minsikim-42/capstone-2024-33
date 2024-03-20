@@ -27,7 +27,7 @@ public class LoadingSlider : MonoBehaviour
         titleShadowText.alpha = 0;
         
         var time = 0f;
-        var timeToLoadDefault = GameManager.instance.loadingTime; // 로딩 시간
+        var timeToLoadDefault = GameManager.IT.loadingTime; // 로딩 시간
         var timeToLoadAfterChecking = .5f;
         
         
@@ -46,7 +46,7 @@ public class LoadingSlider : MonoBehaviour
         time = 0f; // 초기화
         
         // Check Backend Server Connection
-        if (BackendManager.instance.IsSuccess)
+        if (BackendManager.IT.IsSuccess)
         {
             // 로딩 슬라이더 값 변경
             while (time < timeToLoadAfterChecking)
@@ -56,7 +56,7 @@ public class LoadingSlider : MonoBehaviour
                 yield return null;
             }
 
-            SignManager.instance.ShowSignIn(); // 로그인 화면 보이기
+            SignManager.IT.ShowSignIn(); // 로그인 화면 보이기
 
             gameObject.SetActive(false); // 로딩 슬라이더 비활성화
         }

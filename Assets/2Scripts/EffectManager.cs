@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EffectManager : MonoBehaviour
 {
-    public static EffectManager instance;
+    public static EffectManager IT;
 
     [SerializeField] private GameObject projectileEffect; // 포탄 이펙트
     
@@ -10,7 +10,7 @@ public class EffectManager : MonoBehaviour
     
     private void Awake()
     {
-        instance = this;
+        IT = this;
     }
     
     public void ActiveProjectileEffect(Vector3 position)

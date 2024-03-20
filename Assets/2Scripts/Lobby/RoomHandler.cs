@@ -91,6 +91,6 @@ public class RoomHandler : MonoBehaviour
 
     private void DoubleClick()
     {
-        NetworkManager.instance.JoinRoom(roomNameText.text); // 방 입장
+        NetworkManager.IT.JoinRoom(roomNameText.text); // 방 입장
     }
 }

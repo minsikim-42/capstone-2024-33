@@ -38,7 +38,7 @@ public class MapHandler : MonoBehaviour
     {
         var center = collider.bounds.center; // 충돌한 콜라이더의 중심 위치
 
-        var attackRangeRatio = InGameManager.instance.isAttackRange ? 1.5f : 1.0f; // Range 아이템 사용 시 1.5배 증가
+        var attackRangeRatio = InGameManager.IT.isAttackRange ? 1.5f : 1.0f; // Range 아이템 사용 시 1.5배 증가
         
         var radius = Mathf.RoundToInt(collider.bounds.size.x / 2 * pixelWidth / worldWidth * attackRangeRatio); // 반경 (rangeRatio 적용)
 
@@ -77,7 +77,7 @@ public class MapHandler : MonoBehaviour
         Destroy(gameObject.GetComponent<PolygonCollider2D>()); // 기존 폴리곤 콜라이더 삭제
         gameObject.AddComponent<PolygonCollider2D>(); // 새로운 폴리곤 콜라이더 추가
         
-        EffectManager.instance.ActiveProjectileEffect(colliderBoundsCenter); // 포탄 이펙트 활성화
+        EffectManager.IT.ActiveProjectileEffect(colliderBoundsCenter); // 포탄 이펙트 활성화
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -90,16 +90,16 @@ public class MapHandler : MonoBehaviour
         MakeRange(col.GetComponent<CircleCollider2D>()); // MakeRange 호출
         
         // 반경 내에 있는 탱크에 거리에 따른 데미지 적용
-        var attackRangeRatio = InGameManager.instance.isAttackRange ? 1.5f : 1.0f; // Range 아이템 사용 시 1.5배 증가
+        var attackRangeRatio = InGameManager.IT.isAttackRange ? 1.5f : 1.0f; // Range 아이템 사용 시 1.5배 증가
         
-        InGameManager.instance.isAttackRange = false; // Range 아이템 사용 후 초기화
+        InGameManager.IT.isAttackRange = false; // Range 아이템 사용 후 초기화
         
         var radius = col.bounds.size.x / 2 * attackRangeRatio; // 반경 (rangeRatio 적용)
 
         var colliders = Physics2D.OverlapCircleAll(col.bounds.center, radius); // 반경 내의 모든 콜라이더
 
         // 거리 변수 계산
-        var distance = Vector3.Distance(col.bounds.center, InGameManager.instance.initialPosition);
+        var distance = Vector3.Distance(col.bounds.center, InGameManager.IT.initialPosition);
         
         var maxDistance = 50; // 최대 거리 (임의로 50으로 설정)
         // ratio // distance = 0 -> 1, distance > maxDistance -> 0.5
@@ -126,7 +126,7 @@ public class MapHandler : MonoBehaviour
 
                 
                 // 데미지 증폭 아이템 유무
-                var damageRatio = InGameManager.instance.isAttackDamage ? 1.5f : 1f;
+                var damageRatio = InGameManager.IT.isAttackDamage ? 1.5f : 1f;
                 
                 var damage = 100 * damageRatio * distanceRatio * rangeRatio; // 데미지 계산
                 

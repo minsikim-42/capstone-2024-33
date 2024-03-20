@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 public class LobbyManager : MonoBehaviour
 {
-    public static LobbyManager instance;
+    public static LobbyManager IT;
 
     [SerializeField] private UserInfo user; // 유저 정보
     
@@ -64,7 +64,7 @@ public class LobbyManager : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        IT = this;
         
         // 버튼 클릭 이벤트 추가
         nicknameButton.onClick.AddListener(ShowNickname);
@@ -92,11 +92,11 @@ public class LobbyManager : MonoBehaviour
     private void Start()
     {
         // 결과창을 보여줘여하는지 확인
-        if (GameManager.instance.isResult)
+        if (GameManager.IT.isResult)
         {
-            GameManager.instance.isResult = false; // 결과창 표시 여부를 false로 변경
+            GameManager.IT.isResult = false; // 결과창 표시 여부를 false로 변경
             Debug.Log("show result!");
-            ShowResult(GameManager.instance.result); // 결과창 표시
+            ShowResult(GameManager.IT.result); // 결과창 표시
         }
         else
             HideResult(); // 결과창 숨기기
@@ -120,7 +120,7 @@ public class LobbyManager : MonoBehaviour
             {
                 if (testJoinRoom)
                 {
-                    NetworkManager.instance.JoinRoom("Test Room");
+                    NetworkManager.IT.JoinRoom("Test Room");
                 }
             }
         }
@@ -366,7 +366,7 @@ public class LobbyManager : MonoBehaviour
         }
         
         // 방 이름 중복 확인
-        if (NetworkManager.instance.CheckRoomName(createRoomInputField.text))
+        if (NetworkManager.IT.CheckRoomName(createRoomInputField.text))
         {
             createRoomAlertText.text = "중복된 방 이름입니다.";
             
@@ -378,7 +378,7 @@ public class LobbyManager : MonoBehaviour
         createRoomCg.blocksRaycasts = false;
         createRoomCg.interactable = false;
         
-        NetworkManager.instance.CreateRoom(createRoomInputField.text); // 방 생성
+        NetworkManager.IT.CreateRoom(createRoomInputField.text); // 방 생성
     }
 
     public void SetRoom()
@@ -432,7 +432,7 @@ public class LobbyManager : MonoBehaviour
         ShowLoading(); // 로딩창 보이기
         HideRoom(); // 방 숨기기
         ShowRoomList(); // 방 리스트 보이기
-        NetworkManager.instance.LeftRoom(); // 방에서 나가기
+        NetworkManager.IT.LeftRoom(); // 방에서 나가기
     }
 
     // 게임 시작 버튼 보이기 (마스터 클라이언트만)
@@ -444,7 +444,7 @@ public class LobbyManager : MonoBehaviour
     {
         ShowLoading(); // 로딩창 보이기
         
-        NetworkManager.instance.GameStart(); // 게임 시작
+        NetworkManager.IT.GameStart(); // 게임 시작
     }
     
     

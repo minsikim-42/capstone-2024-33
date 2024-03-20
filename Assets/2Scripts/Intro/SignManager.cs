@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class SignManager : MonoBehaviour
 {
-    public static SignManager instance;
+    public static SignManager IT;
     
     [SerializeField] private string testId; // 테스트 아이디
     [SerializeField] private string testPassword; // 테스트 비밀번호
@@ -28,7 +28,7 @@ public class SignManager : MonoBehaviour
     
     private void Awake()
     {
-        instance = this;
+        IT = this;
         
         // 버튼 이벤트 추가
         signInButton.onClick.AddListener(SignIn);

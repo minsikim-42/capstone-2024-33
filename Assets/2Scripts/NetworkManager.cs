@@ -10,7 +10,7 @@ using UnityEngine.SceneManagement;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
-    public static NetworkManager instance;
+    public static NetworkManager IT;
     
     private PhotonView PV; // PhotonView
     private readonly string gameVersion = "1"; // 게임 버전
@@ -19,9 +19,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     
     private void Awake()
     {
-        if (instance == null)
+        if (IT == null)
         {
-            instance = this;
+            IT = this;
         
             DontDestroyOnLoad(gameObject);
 
@@ -90,7 +90,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     
     public override void OnJoinedLobby()
     {
-        GameManager.instance.CheckTestMode(); // 테스트 모드 확인
+        GameManager.IT.CheckTestMode(); // 테스트 모드 확인
     }
     
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
@@ -142,14 +142,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         
             if (allRoomList.Count == 0)
             {
-                LobbyManager.instance.ShowNoRoom(); // 방이 없을 때 No room UI 표시
+                LobbyManager.IT.ShowNoRoom(); // 방이 없을 때 No room UI 표시
             }
             else
             {
-                LobbyManager.instance.HideNoRoom(); // No room UI 숨기기
+                LobbyManager.IT.HideNoRoom(); // No room UI 숨기기
             }
         
-            LobbyManager.instance.SetRoomList(allRoomList); // 방 리스트 설정
+            LobbyManager.IT.SetRoomList(allRoomList); // 방 리스트 설정
         
             Invoke(nameof(DelayHideLoading), 1f); // 로딩 숨기기
         }
@@ -158,7 +158,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     
     private void DelayHideLoading()
     {
-        LobbyManager.instance.HideLoading();
+        LobbyManager.IT.HideLoading();
     }
 
     public bool CheckRoomName(string roomName)
@@ -205,27 +205,27 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     
     public override void OnCreatedRoom()
     {
-        LobbyManager.instance.SetRoom(); // 방 설정
-        LobbyManager.instance.SetGameStart(PhotonNetwork.IsMasterClient); // 게임 시작 버튼 설정
+        LobbyManager.IT.SetRoom(); // 방 설정
+        LobbyManager.IT.SetGameStart(PhotonNetwork.IsMasterClient); // 게임 시작 버튼 설정
         
-        LobbyManager.instance.SetSlot(0, PhotonNetwork.MasterClient.NickName); // 방장 슬롯
+        LobbyManager.IT.SetSlot(0, PhotonNetwork.MasterClient.NickName); // 방장 슬롯
             
         for (var i = 0; i < slotList.Count; i++)
         {
             if (slotList[i].actorNumber == -1)
-                LobbyManager.instance.SetSlotEmpty(i + 1); // 빈 슬롯
+                LobbyManager.IT.SetSlotEmpty(i + 1); // 빈 슬롯
             else if (slotList[i].actorNumber == 99)
-                LobbyManager.instance.SetSlotAI(i + 1); // AI 슬롯
+                LobbyManager.IT.SetSlotAI(i + 1); // AI 슬롯
             else
-                LobbyManager.instance.SetSlot(i + 1, PhotonNetwork.PlayerList.FirstOrDefault(a => a.ActorNumber == slotList[i].actorNumber)?.NickName); // 플레이어 슬롯
+                LobbyManager.IT.SetSlot(i + 1, PhotonNetwork.PlayerList.FirstOrDefault(a => a.ActorNumber == slotList[i].actorNumber)?.NickName); // 플레이어 슬롯
         }
         
-        LobbyManager.instance.HideLoading(); // 로딩 숨기기
+        LobbyManager.IT.HideLoading(); // 로딩 숨기기
     }
     
     public void JoinRoom(string roomName)
     {
-        LobbyManager.instance.ShowLoading(); // 로딩 표시
+        LobbyManager.IT.ShowLoading(); // 로딩 표시
         
         PhotonNetwork.JoinRoom(roomName); // 방 입장
     }
@@ -251,9 +251,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             };
         }
 
-        LobbyManager.instance.SetGameStart(PhotonNetwork.IsMasterClient); // 게임 시작 버튼 설정
-        LobbyManager.instance.SetRoom(); // 방 설정
-        LobbyManager.instance.HideLoading(); // 로딩 숨기기
+        LobbyManager.IT.SetGameStart(PhotonNetwork.IsMasterClient); // 게임 시작 버튼 설정
+        LobbyManager.IT.SetRoom(); // 방 설정
+        LobbyManager.IT.HideLoading(); // 로딩 숨기기
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -304,11 +304,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         // 방장이 나가면 방 삭제
         if (SceneManager.GetActiveScene().name == "Lobby")
         {
-            LobbyManager.instance.LeftRoom(); 
+            LobbyManager.IT.LeftRoom(); 
         }
         else
         {
-            InGameManager.instance.ExitInGame(); // 인게임에서 나가기
+            InGameManager.IT.ExitInGame(); // 인게임에서 나가기
         }
     }
 
@@ -319,7 +319,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnLeftRoom()
     {
         if (PhotonNetwork.IsMasterClient)
-            InGameManager.instance.ExitInGame(); // 인게임에서 나가기
+            InGameManager.IT.ExitInGame(); // 인게임에서 나가기
     }
 
     public override void OnPlayerLeftRoom(Player player)
@@ -340,7 +340,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         else if (SceneManager.GetActiveScene().name == "Game")
         {
             if (PhotonNetwork.IsMasterClient)
-                InGameManager.instance.NextTurn(); // 다음 턴
+                InGameManager.IT.NextTurn(); // 다음 턴
         }
     }
 
@@ -371,17 +371,17 @@ public class NetworkManager : MonoBehaviourPunCallbacks
                 new(Slot7, (int)propertiesThatChanged[Slot7])
             };
 
-            LobbyManager.instance.SetSlot(0, PhotonNetwork.MasterClient.NickName); // 방장
+            LobbyManager.IT.SetSlot(0, PhotonNetwork.MasterClient.NickName); // 방장
         
             // 나머지 슬롯 설정
             for (var i = 0; i < slotList.Count; i++)
             {
                 if (slotList[i].actorNumber == -1)
-                    LobbyManager.instance.SetSlotEmpty(i + 1); // 빈 슬롯
+                    LobbyManager.IT.SetSlotEmpty(i + 1); // 빈 슬롯
                 else if (slotList[i].actorNumber == 99)
-                    LobbyManager.instance.SetSlotAI(i + 1); // AI 슬롯
+                    LobbyManager.IT.SetSlotAI(i + 1); // AI 슬롯
                 else
-                    LobbyManager.instance.SetSlot(i + 1, PhotonNetwork.PlayerList.FirstOrDefault(a => a.ActorNumber == slotList[i].actorNumber)?.NickName); // 플레이어 슬롯
+                    LobbyManager.IT.SetSlot(i + 1, PhotonNetwork.PlayerList.FirstOrDefault(a => a.ActorNumber == slotList[i].actorNumber)?.NickName); // 플레이어 슬롯
             }
         }
     }

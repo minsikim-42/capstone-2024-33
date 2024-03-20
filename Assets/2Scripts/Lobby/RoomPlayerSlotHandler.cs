@@ -69,13 +69,13 @@ public class RoomPlayerSlotHandler : MonoBehaviourPun
         {
             emptyButtonText.text = "Empty";
             playerNicknameText.text = string.Empty;
-            NetworkManager.instance.SetSlotToEmpty(slotIndex); // 슬롯을 빈 슬롯으로 변경
+            NetworkManager.IT.SetSlotToEmpty(slotIndex); // 슬롯을 빈 슬롯으로 변경
         }
         else
         {
             emptyButtonText.text = string.Empty;
             playerNicknameText.text = "AI";
-            NetworkManager.instance.SetSlotToAI(slotIndex); // 슬롯을 AI 슬롯으로 변경
+            NetworkManager.IT.SetSlotToAI(slotIndex); // 슬롯을 AI 슬롯으로 변경
         }
     }
 }

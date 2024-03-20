@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    public static GameManager IT;
 
     [Header("Loading")]
     [SerializeField] private LoadingSlider loadingSlider; // 로딩 슬라이더
@@ -18,8 +18,8 @@ public class GameManager : MonoBehaviour
     
     private void Awake()
     {
-        if (instance == null)
-            instance = this;
+        if (IT == null)
+            IT = this;
         else
             Destroy(gameObject);
         
@@ -30,12 +30,12 @@ public class GameManager : MonoBehaviour
     {
         loadingSlider.LoadingStart(); // 로딩 시작
         
-        SignManager.instance.CheckAutoLogin(isTestMode); // 자동 로그인 여부 확인
+        SignManager.IT.CheckAutoLogin(isTestMode); // 자동 로그인 여부 확인
     }
 
     public void CheckTestMode()
     {
-        LobbyManager.instance.CheckTestMode(isTestMode, testCreateRoom, testJoinRoom); // 테스트 모드에 따라 방 생성 및 입장
+        LobbyManager.IT.CheckTestMode(isTestMode, testCreateRoom, testJoinRoom); // 테스트 모드에 따라 방 생성 및 입장
     }
 
     public bool IsTestMode()

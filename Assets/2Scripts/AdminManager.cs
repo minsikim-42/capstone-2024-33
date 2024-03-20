@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class AdminManager : MonoBehaviour
 {
-    public static AdminManager instance;
+    public static AdminManager IT;
 
     private User user;
     
@@ -13,7 +13,7 @@ public class AdminManager : MonoBehaviour
     
     private void Awake()
     {
-        instance = this;
+        IT = this;
     }
 
     public void GenerateUser(int viewId, string nickname)
