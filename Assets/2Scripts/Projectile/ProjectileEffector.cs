@@ -8,10 +8,16 @@ public class ProjectileEffector : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D col)
     {
         // 충둘한 대상이 맵이 아니거나 플레이어가 아니면 리턴
-        if (!col.gameObject.CompareTag("Map") || col.gameObject.CompareTag("Player"))
+        if (col.gameObject.CompareTag("Map")) {
+			Debug.Log("Collision(Map)");
+			Active();
             return;
-        
-        Active();
+		}
+		if (col.gameObject.CompareTag("Tank")) {
+			Debug.Log("Collision(Tank)");
+			Active();
+            return;
+		}
     }
 
     public void Active()
