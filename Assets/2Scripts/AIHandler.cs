@@ -17,7 +17,7 @@ public class AIHandler : MonoBehaviour
     
     private bool isLeftMove; // 왼쪽 방향 전환
     private bool isRightMove; // 오른쪽 방향 전환
-
+ 
     private int reCount = -1; // 재시도 횟수
     private float preX; // 이전 x값
     private void Awake()

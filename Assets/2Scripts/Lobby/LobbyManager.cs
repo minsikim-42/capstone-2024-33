@@ -60,7 +60,7 @@ public class LobbyManager : MonoBehaviour
     [Header("Result")]
     [SerializeField] private CanvasGroup resultCanvasGroup; // 결과 캔버스 그룹
     [SerializeField] private Button goToLobbyButton; // 로비로 가는 버튼
-
+    [SerializeField] private List<ResultSlotHandler> resultSlots; // 결과 표시 슬롯들
 
     private void Awake()
     {
@@ -95,7 +95,7 @@ public class LobbyManager : MonoBehaviour
         if (GameManager.IT.isResult)
         {
             GameManager.IT.isResult = false; // 결과창 표시 여부를 false로 변경
-            Debug.Log("show result!");
+            
             ShowResult(GameManager.IT.result); // 결과창 표시
         }
         else
@@ -461,6 +461,7 @@ public class LobbyManager : MonoBehaviour
     
     public void ShowResult(string data)
     {
+		Debug.Log("LBM- showResult");
 		resultCanvasGroup.alpha = 1; // 결과 캔버스 그룹의 알파값을 0으로 변경
         resultCanvasGroup.blocksRaycasts = true; // 결과 캔버스 그룹의 블록 레이캐스트를 false로 변경
         resultCanvasGroup.interactable = true; // 결과 캔버스 그룹의 인터렉터블을 false로 변경
@@ -469,9 +470,12 @@ public class LobbyManager : MonoBehaviour
         
         for (int i = 0; i < dataList.Length; i++)
         {
+            var slot = resultSlots[i]; // 결과 슬롯
             var resultData = dataList[i].Split('/'); // 결과 데이터를 /로 나누어 배열로 저장
             var nickname = resultData[0]; // 닉네임
             var damage = resultData[1]; // 데미지
+            
+            slot.SetSlot(nickname, damage); // 슬롯에 닉네임과 데미지를 표시
         }
         
         resultCanvasGroup.alpha = 1; // 결과 캔버스 그룹의 알파값을 1로 변경
