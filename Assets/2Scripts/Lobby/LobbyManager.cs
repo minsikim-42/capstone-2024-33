@@ -53,6 +53,7 @@ public class LobbyManager : MonoBehaviour
     private List<RoomHandler> roomList = new List<RoomHandler>(); // 방 리스트
     [SerializeField] private Button leftRoomButton; // 방 뒤로가기 버튼
     [SerializeField] private Button gameStartButton; // 게임 시작 버튼
+	[SerializeField] private Button changeTeamButton; // 팀 변경 버튼
 
     [Header("Room Player List")] 
     [SerializeField] private List<RoomPlayerSlotHandler> roomPlayerSlotHandlers; // 방 플레이어 슬롯 핸들러들
@@ -81,7 +82,7 @@ public class LobbyManager : MonoBehaviour
         leftRoomButton.onClick.AddListener(LeftRoom);
         
         gameStartButton.onClick.AddListener(GameStart);
-        
+        changeTeamButton.onClick.AddListener(ChangeTeam);
         goToLobbyButton.onClick.AddListener(GoToLobby);
         
         user.GetUserInfoFromBackend(); // 유저 정보를 가져옴
@@ -402,6 +403,10 @@ public class LobbyManager : MonoBehaviour
     {
         roomPlayerSlotHandlers[slotIndex].SetPlayerNickname(nickname); // 슬롯을 플레이어 슬롯으로 변경
     }
+
+    public void SetTeamColor(int slotIndex, int teamNum) {
+        roomPlayerSlotHandlers[slotIndex].SetTeamColor(teamNum);
+    }
     
     // 방 생성 창 숨기기
     private void BackCreateRoom()
@@ -433,6 +438,11 @@ public class LobbyManager : MonoBehaviour
         HideRoom(); // 방 숨기기
         ShowRoomList(); // 방 리스트 보이기
         NetworkManager.IT.LeftRoom(); // 방에서 나가기
+    }
+
+    public void ChangeTeam()
+    {
+        NetworkManager.IT.SetChangeTeam();
     }
 
     // 게임 시작 버튼 보이기 (마스터 클라이언트만)

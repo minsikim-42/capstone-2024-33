@@ -78,4 +78,15 @@ public class RoomPlayerSlotHandler : MonoBehaviourPun
             NetworkManager.IT.SetSlotToAI(slotIndex); // 슬롯을 AI 슬롯으로 변경
         }
     }
+
+    public void SetTeamColor(int teamNum) {
+        ColorBlock colorBlock = emptyButton.colors;
+        if (teamNum == 1) {
+            colorBlock.normalColor = Color.red;
+        } else {
+            colorBlock.normalColor = Color.blue;
+        }
+
+        emptyButton.colors = colorBlock;
+    }
 }
