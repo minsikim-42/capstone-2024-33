@@ -405,7 +405,12 @@ public class LobbyManager : MonoBehaviour
     }
 
     public void SetTeamColor(int slotIndex, int teamNum) {
-        roomPlayerSlotHandlers[slotIndex].SetTeamColor(teamNum);
+        // roomPlayerSlotHandlers[slotIndex].SetTeamColor(teamNum);
+        GameObject slotHand = roomPlayerSlotHandlers[slotIndex].gameObject;
+        if (teamNum == 1)
+            roomPlayerSlotHandlers[slotIndex].transform.GetChild(0).GetComponent<Image>().color = Color.red;
+        else
+            roomPlayerSlotHandlers[slotIndex].transform.GetChild(0).GetComponent<Image>().color = Color.blue;
     }
     
     // 방 생성 창 숨기기

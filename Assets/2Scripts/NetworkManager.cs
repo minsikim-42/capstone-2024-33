@@ -181,16 +181,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public void CreateRoom(string roomName)
     {
         // 방 설정 setRoomProperties
-        var roomOptions = new RoomOptions
-        {
-            CustomRoomPropertiesForLobby = new[] {IsStarted, Slot0, Slot1, Slot2, Slot3, Slot4, Slot5, Slot6, Slot7, "team"+Slot1, "team"+Slot2, "team"+Slot3, "team"+Slot4, "team"+Slot5, "team"+Slot6, "team"+Slot7},
-            CustomRoomProperties = new Hashtable {
-                {IsStarted, false}, {Slot0, 1}, {Slot1, -1}, {Slot2, -1}, {Slot3, -1}, {Slot4, -1}, {Slot5, -1}, {Slot6, -1}, {Slot7, -1},
-                {"team"+Slot0, 1}, {"team"+Slot1, 1}, {"team"+Slot2, 1}, {"team"+Slot3, 1}, {"team"+Slot4, 1}, {"team"+Slot5, 1}, {"team"+Slot6, 1}, {"team"+Slot7, 1}
-            },
-            MaxPlayers = 8
-        };
-        
         slotList = new List<Slot>
         {
             new(Slot1, -1, 1),
@@ -203,7 +193,16 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             new(Slot0, 1, 1)
         };
 
-
+        var roomOptions = new RoomOptions
+        {
+            CustomRoomPropertiesForLobby = new[] {IsStarted, Slot0, Slot1, Slot2, Slot3, Slot4, Slot5, Slot6, Slot7, "team"+Slot1, "team"+Slot2, "team"+Slot3, "team"+Slot4, "team"+Slot5, "team"+Slot6, "team"+Slot7},
+            CustomRoomProperties = new Hashtable {
+                {IsStarted, false}, {Slot0, 1}, {Slot1, -1}, {Slot2, -1}, {Slot3, -1}, {Slot4, -1}, {Slot5, -1}, {Slot6, -1}, {Slot7, -1},
+                {"team"+Slot0, 1}, {"team"+Slot1, 1}, {"team"+Slot2, 1}, {"team"+Slot3, 1}, {"team"+Slot4, 1}, {"team"+Slot5, 1}, {"team"+Slot6, 1}, {"team"+Slot7, 1}
+            },
+            MaxPlayers = 8
+        };
+        
         PhotonNetwork.CreateRoom($"{roomName}", roomOptions); // 방 생성
     }
     
@@ -224,8 +223,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             else
                 LobbyManager.IT.SetSlot(i + 1, PhotonNetwork.PlayerList.FirstOrDefault(a => a.ActorNumber == slotList[i].actorNumber)?.NickName); // 플레이어 슬롯
 
-            LobbyManager.IT.SetTeamColor(i, slotList[i].teamNumber);
+            LobbyManager.IT.SetTeamColor(i + 1, slotList[i].teamNumber);
         }
+        LobbyManager.IT.SetTeamColor(0, slotList[7].teamNumber);
         
         LobbyManager.IT.HideLoading(); // 로딩 숨기기
     }
@@ -316,13 +316,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         // Debug.Log(player);
         // Debug.Log(slot);
         // Debug.Log(slotList[0].actorNumber);
-        Debug.Log("Change Team To " + (int)cProperties["team"+slot.slotName]);
+        Debug.Log("Change Team To " + (int)cProperties["team"+slot.slotName] + ", Slot: " + slot.slotName);
         if ((int)cProperties["team"+slot.slotName] == 1)
         {
             cProperties["team"+slot.slotName] = 2;
         } else {
             cProperties["team"+slot.slotName] = 1;
         }
+        PhotonNetwork.CurrentRoom.SetCustomProperties(cProperties);
     }
     
     public override void OnMasterClientSwitched(Player newMasterClient)
@@ -413,6 +414,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
                 // 팀 설정
                 LobbyManager.IT.SetTeamColor(i + 1, slotList[i].teamNumber);
             }
+            LobbyManager.IT.SetTeamColor(0, slotList[7].teamNumber);
         }
     }
 
@@ -426,7 +428,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             return;
         
         Hashtable CustomRoomProperties = PhotonNetwork.CurrentRoom.CustomProperties; // 방의 프로퍼티
-        Hashtable CustomTeamProperties = PhotonNetwork.CurrentRoom.CustomProperties; // 방의 팀 프로퍼티
 
         // AI Slot Check
         if (slotList.Any(a => a.actorNumber == 99))
@@ -436,7 +437,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         
         CustomRoomProperties[IsStarted] = true; // 게임 시작
         
-        PhotonNetwork.CurrentRoom.SetCustomProperties(CustomTeamProperties); // 방의 프로퍼티 설정
+        PhotonNetwork.CurrentRoom.SetCustomProperties(CustomRoomProperties); // 방의 프로퍼티 설정
     }
 }
 
