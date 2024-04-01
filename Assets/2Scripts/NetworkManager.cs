@@ -418,7 +418,46 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         }
     }
 
+    public int GetTeamNum(int t) {
+        int n=0;
+        foreach (var slot in slotList) {
+            if (slot.actorNumber != -1 && slot.teamNumber == t) {
+                n++;
+            }
+        }
 
+        return n;
+    }
+
+    public int GetSlotTeamNum(string name)
+    {
+        Debug.Log("acNum: " + name);
+        foreach (var slot in slotList) {
+            if (slot.slotName == name) {
+                Debug.Log("acNum: " +slot.slotName + ", teamNum: " + slot.teamNumber);
+                return slot.teamNumber;
+            }
+        }
+
+        Debug.Log("Can Not Find slot as actorNumber");
+        return -1;
+    }
+
+    public List<Slot> GetSlots()
+    {
+        var li = new List<Slot>();
+
+        foreach(var slot in slotList)
+        {
+            if (slot.actorNumber != -1) // 빈 슬롯이 아니면
+            {
+                li.Add(slot);
+            }
+        }
+
+        return li;
+    }
+    
     public int aiCount; // AI 수
     
     // Game Start
