@@ -17,7 +17,7 @@
   - Theme Chooser에서 태마선택
   - 수정후 팀페이지 확인하여 점검.
 
-**팀페이지 주소** -> https://kookmin-sw.github.io/capstone-2024-2024-33
+**팀페이지 주소** -> [https://kookmin-sw.github.io/capstone-2024-2024-33](https://the-fortress-project.github.io/capstone-2024-33.github.io/)
 
 **예시)** 2023년 0조  https://kookmin-sw.github.io/capstone-2023-00/
 
