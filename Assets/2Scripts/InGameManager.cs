@@ -191,18 +191,25 @@ public class InGameManager : MonoBehaviour
         //     turnList.Add(turn); // 턴 리스트에 추가
         // }
 
-        int aiCount=0;
+        int aiIdx=0;
         foreach (var slot in NetworkManager.IT.GetSlots()) {
+            Debug.Log("slot actor Num: " + slot.actorNumber);
+            Debug.Log("slot nickname: " + slot.nickName);
             if (slot.actorNumber == 99)
             {
-                var turn = new Turn { actorNumber = aiList[aiCount].actorNumber, nickname = slot.slotName, teamNumber = slot.teamNumber }; // AI턴 생성
+                Debug.Log("slot AI actNum: " + slot.actorNumber);
+                var turn = new Turn { actorNumber = aiList[aiIdx].actorNumber, nickName = "AI_"+(aiList[aiIdx].actorNumber-1000), teamNumber = slot.teamNumber }; // AI턴 생성
                 turnList.Add(turn);
-                aiCount++;
+                aiIdx++;
+            }
+            else if (slot.actorNumber != -1)
+            {
+                var turn = new Turn { actorNumber = slot.actorNumber, nickName = slot.nickName, teamNumber = slot.teamNumber }; // Player턴 생성
+                turnList.Add(turn);
             }
             else
             {
-                var turn = new Turn { actorNumber = slot.actorNumber, nickname = slot.slotName, teamNumber = slot.teamNumber }; // Player턴 생성
-                turnList.Add(turn);
+                // 빈 슬롯
             }
         }
         
@@ -224,7 +231,7 @@ public class InGameManager : MonoBehaviour
         // }
         foreach (var turn in turnList)
         {
-            var damage = new Damage { nickname = turn.nickname, damage = 0, teamNumber = turn.teamNumber };
+            var damage = new Damage { nickName = turn.nickName, damage = 0, teamNumber = turn.teamNumber };
             damageList.Add(damage);
         }
     }
@@ -288,8 +295,8 @@ public class InGameManager : MonoBehaviour
     // 누적 데미지 리스트에 데미지 추가
     public void SetDamage(float damage)
     {
-        var turn = damageList.Find(t => t.nickname == missilePlayerNickname); // 턴 찾기
-            turn.damage += (int)damage; // 누적 데미지 추가
+        var turn = damageList.Find(t => t.nickName == missilePlayerNickname); // 턴 찾기
+        turn.damage += (int)damage; // 누적 데미지 추가
     }
     
     // RPC로 player에게 턴을 넘김 
@@ -548,8 +555,8 @@ public class InGameManager : MonoBehaviour
         
         foreach (var turn in turnList)
         {
-            if (turn.nickname != string.Empty)
-                turn.nickname = string.Empty; // 닉네임 초기화
+            if (turn.nickName != string.Empty)
+                turn.nickName = string.Empty; // 닉네임 초기화
             
             // 플레이어 (actorNumber < 1000)
             if (turn.actorNumber < 1000) 
@@ -691,7 +698,7 @@ public class InGameManager : MonoBehaviour
         
         foreach (var d in damageList)
         {
-            data += d.nickname + "/" + d.damage + ",";
+            data += d.nickName + "/" + d.damage + ",";
             
             // 마지막이라면
             if (d == damageList[^1])
@@ -718,14 +725,14 @@ public class Turn
 {
     //public int orderIndex; // 순서 인덱스
     public int actorNumber; // ActorNumber
-    public string nickname; // 닉네임
+    public string nickName; // 닉네임
     public int teamNumber; // TeamNumber
 }
 
 [Serializable]
 public class Damage
 {
-    public string nickname; // 닉네임
+    public string nickName; // 닉네임
     public int damage; // 데미지
     public int teamNumber;
 }

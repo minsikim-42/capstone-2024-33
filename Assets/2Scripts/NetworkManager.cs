@@ -183,22 +183,23 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         // 방 설정 setRoomProperties
         slotList = new List<Slot>
         {
-            new(Slot1, -1, 1),
-            new(Slot2, -1, 1),
-            new(Slot3, -1, 1),
-            new(Slot4, -1, 1),
-            new(Slot5, -1, 1),
-            new(Slot6, -1, 1),
-            new(Slot7, -1, 1),
-            new(Slot0, 1, 1)
+            new(Slot1, -1, string.Empty, 1),
+            new(Slot2, -1, string.Empty, 1),
+            new(Slot3, -1, string.Empty, 1),
+            new(Slot4, -1, string.Empty, 1),
+            new(Slot5, -1, string.Empty, 1),
+            new(Slot6, -1, string.Empty, 1),
+            new(Slot7, -1, string.Empty, 1),
+            new(Slot0, 1, PhotonNetwork.LocalPlayer.NickName, 1)
         };
 
         var roomOptions = new RoomOptions
         {
-            CustomRoomPropertiesForLobby = new[] {IsStarted, Slot0, Slot1, Slot2, Slot3, Slot4, Slot5, Slot6, Slot7, "team"+Slot1, "team"+Slot2, "team"+Slot3, "team"+Slot4, "team"+Slot5, "team"+Slot6, "team"+Slot7},
+            CustomRoomPropertiesForLobby = new[] {IsStarted, Slot0, Slot1, Slot2, Slot3, Slot4, Slot5, Slot6, Slot7, "team"+Slot1, "team"+Slot2, "team"+Slot3, "team"+Slot4, "team"+Slot5, "team"+Slot6, "team"+Slot7,"name"+Slot1, "name"+Slot2, "name"+Slot3, "name"+Slot4, "name"+Slot5, "name"+Slot6, "name"+Slot7},
             CustomRoomProperties = new Hashtable {
                 {IsStarted, false}, {Slot0, 1}, {Slot1, -1}, {Slot2, -1}, {Slot3, -1}, {Slot4, -1}, {Slot5, -1}, {Slot6, -1}, {Slot7, -1},
-                {"team"+Slot0, 1}, {"team"+Slot1, 1}, {"team"+Slot2, 1}, {"team"+Slot3, 1}, {"team"+Slot4, 1}, {"team"+Slot5, 1}, {"team"+Slot6, 1}, {"team"+Slot7, 1}
+                {"team"+Slot0, 1}, {"team"+Slot1, 1}, {"team"+Slot2, 1}, {"team"+Slot3, 1}, {"team"+Slot4, 1}, {"team"+Slot5, 1}, {"team"+Slot6, 1}, {"team"+Slot7, 1},
+                {"name"+Slot0, PhotonNetwork.LocalPlayer.NickName}, {"name"+Slot1, string.Empty}, {"name"+Slot2, string.Empty}, {"name"+Slot3, string.Empty}, {"name"+Slot4, string.Empty}, {"name"+Slot5, string.Empty}, {"name"+Slot6, string.Empty}, {"name"+Slot7, string.Empty}
             },
             MaxPlayers = 8
         };
@@ -248,14 +249,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             // Slot 설정
             slotList = new List<Slot>
             {
-                new(Slot1, (int)CustomRoomProperties[Slot1]),
-                new(Slot2, (int)CustomRoomProperties[Slot2]),
-                new(Slot3, (int)CustomRoomProperties[Slot3]),
-                new(Slot4, (int)CustomRoomProperties[Slot4]),
-                new(Slot5, (int)CustomRoomProperties[Slot5]),
-                new(Slot6, (int)CustomRoomProperties[Slot6]),
-                new(Slot7, (int)CustomRoomProperties[Slot7]),
-                new(Slot0, (int)CustomRoomProperties[Slot0])
+                new(Slot1, (int)CustomRoomProperties[Slot1], (string)CustomRoomProperties["name"+Slot1], (int)CustomRoomProperties["team"+Slot1]),
+                new(Slot2, (int)CustomRoomProperties[Slot2], (string)CustomRoomProperties["name"+Slot2], (int)CustomRoomProperties["team"+Slot2]),
+                new(Slot3, (int)CustomRoomProperties[Slot3], (string)CustomRoomProperties["name"+Slot3], (int)CustomRoomProperties["team"+Slot3]),
+                new(Slot4, (int)CustomRoomProperties[Slot4], (string)CustomRoomProperties["name"+Slot4], (int)CustomRoomProperties["team"+Slot4]),
+                new(Slot5, (int)CustomRoomProperties[Slot5], (string)CustomRoomProperties["name"+Slot5], (int)CustomRoomProperties["team"+Slot5]),
+                new(Slot6, (int)CustomRoomProperties[Slot6], (string)CustomRoomProperties["name"+Slot6], (int)CustomRoomProperties["team"+Slot6]),
+                new(Slot7, (int)CustomRoomProperties[Slot7], (string)CustomRoomProperties["name"+Slot7], (int)CustomRoomProperties["team"+Slot7]),
+                new(Slot0, (int)CustomRoomProperties[Slot0], (string)CustomRoomProperties["name"+Slot0], (int)CustomRoomProperties["team"+Slot0])
             };
         }
 
@@ -278,7 +279,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             
             var slotName = slotList.Find(a => a.actorNumber == newPlayer.ActorNumber).slotName; // 슬롯 이름
             
-            SetSlot(slotName, newPlayer.ActorNumber); // 슬롯 설정
+            SetSlot(slotName, newPlayer.ActorNumber, newPlayer.NickName); // 슬롯 설정
         }
     }
 
@@ -287,7 +288,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         var slot = slotList[slotNumber - 1]; // 슬롯
             slot.actorNumber = 99; // AI 번호인 99로 설정
         
-        SetSlot(slot.slotName, 99); // 슬롯 설정
+        SetSlot(slot.slotName, 99, "AI_"+slotNumber); // 슬롯 설정
     }
     
     public void SetSlotToEmpty(int slotNumber)
@@ -295,15 +296,16 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         var slot = slotList[slotNumber - 1]; // 슬롯
             slot.actorNumber = -1; // 빈 슬롯인 -1로 설정
         
-        SetSlot(slot.slotName, -1); // 슬롯 설정
+        SetSlot(slot.slotName, -1, null); // 슬롯 설정
     }
     
-    private void SetSlot(string slotName, int actorNumber)
+    private void SetSlot(string slotName, int actorNumber, string nickName)
     {
         Hashtable CustomRoomProperties = PhotonNetwork.CurrentRoom.CustomProperties; // 방의 프로퍼티
         
         CustomRoomProperties[slotName] = actorNumber; // 슬롯 설정
         CustomRoomProperties["team"+slotName] = 1; // 슬롯 팀 설정
+        CustomRoomProperties["name"+slotName] = nickName;
         
         PhotonNetwork.CurrentRoom.SetCustomProperties(CustomRoomProperties); // 방의 프로퍼티 설정
     }
@@ -362,7 +364,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             slot.actorNumber = -1; 
 
             if (PhotonNetwork.IsMasterClient)
-                SetSlot(slot.slotName, -1); // 슬롯 설정
+                SetSlot(slot.slotName, -1, null); // 슬롯 설정
         }
         else if (SceneManager.GetActiveScene().name == "Game")
         {
@@ -389,14 +391,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             // Slot 변경
             slotList = new List<Slot>
             {
-                new(Slot1, (int)propertiesThatChanged[Slot1], (int)propertiesThatChanged["team"+Slot1]),
-                new(Slot2, (int)propertiesThatChanged[Slot2], (int)propertiesThatChanged["team"+Slot2]),
-                new(Slot3, (int)propertiesThatChanged[Slot3], (int)propertiesThatChanged["team"+Slot3]),
-                new(Slot4, (int)propertiesThatChanged[Slot4], (int)propertiesThatChanged["team"+Slot4]),
-                new(Slot5, (int)propertiesThatChanged[Slot5], (int)propertiesThatChanged["team"+Slot5]),
-                new(Slot6, (int)propertiesThatChanged[Slot6], (int)propertiesThatChanged["team"+Slot6]),
-                new(Slot7, (int)propertiesThatChanged[Slot7], (int)propertiesThatChanged["team"+Slot7]),
-                new(Slot0, (int)propertiesThatChanged[Slot0], (int)propertiesThatChanged["team"+Slot0])
+                new(Slot1, (int)propertiesThatChanged[Slot1], (string)propertiesThatChanged["name"+Slot1], (int)propertiesThatChanged["team"+Slot1]),
+                new(Slot2, (int)propertiesThatChanged[Slot2], (string)propertiesThatChanged["name"+Slot2], (int)propertiesThatChanged["team"+Slot2]),
+                new(Slot3, (int)propertiesThatChanged[Slot3], (string)propertiesThatChanged["name"+Slot3], (int)propertiesThatChanged["team"+Slot3]),
+                new(Slot4, (int)propertiesThatChanged[Slot4], (string)propertiesThatChanged["name"+Slot4], (int)propertiesThatChanged["team"+Slot4]),
+                new(Slot5, (int)propertiesThatChanged[Slot5], (string)propertiesThatChanged["name"+Slot5], (int)propertiesThatChanged["team"+Slot5]),
+                new(Slot6, (int)propertiesThatChanged[Slot6], (string)propertiesThatChanged["name"+Slot6], (int)propertiesThatChanged["team"+Slot6]),
+                new(Slot7, (int)propertiesThatChanged[Slot7], (string)propertiesThatChanged["name"+Slot7], (int)propertiesThatChanged["team"+Slot7]),
+                new(Slot0, (int)propertiesThatChanged[Slot0], (string)propertiesThatChanged["name"+Slot0], (int)propertiesThatChanged["team"+Slot0])
             };
 
             LobbyManager.IT.SetSlot(0, PhotonNetwork.MasterClient.NickName); // 방장
@@ -484,12 +486,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 public class Slot
 {
     public string slotName;
+    public string nickName;
     public int actorNumber;
     public int teamNumber;
 
-    public Slot(string slotName, int actorNumber, int teamNumber = 1)
+    public Slot(string slotName, int actorNumber, string nickName, int teamNumber = 1)
     {
         this.slotName = slotName;
+        this.nickName = nickName;
         this.actorNumber = actorNumber;
         this.teamNumber = teamNumber;
     }
