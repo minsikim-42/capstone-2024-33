@@ -2,7 +2,8 @@
 
 **팀페이지 주소** -> [https://kookmin-sw.github.io/capstone-2024-33](https://the-fortress-project.github.io/capstone-2024-33.github.io/)
 
-https://kookmin-sw.github.io/capstone-2024-33 
+https://kookmin-sw.github.io/capstone-2024-33
+https://kookmin-sw.github.io/capstone-2024-33/
 
 
 ## 프로젝트 소개
