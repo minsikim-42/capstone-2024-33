@@ -27,7 +27,7 @@
 
 ### Game
 <div style="display: flex; gap: 6px;">
-    <img src="https://img.shields.io/badge/Unity-FFFFFF?style=for-the-badge&logo=Unity&logoColor=white">
+    <img src="https://img.shields.io/badge/Unity-FFFFFF?style=for-the-badge&logo=Unity&logoColor=black">
 </div>
 
 ### BackEnd
