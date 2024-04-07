@@ -40,12 +40,12 @@
 ### BackEnd
 
 <div>
-    <img src=https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/67a49b5d-4956-49ab-b5df-3a990999f0fd
+    <img src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/67a49b5d-4956-49ab-b5df-3a990999f0fd"
         width="100" height="35">
 </div>
 
 <div>
-    <img src=https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/a85e15e5-33ef-4256-bad3-dbd1e5b9aacf
+    <img src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/a85e15e5-33ef-4256-bad3-dbd1e5b9aacf"
         width=100 height=35>
 </div>
 
