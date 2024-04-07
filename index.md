@@ -29,13 +29,17 @@
 ## 기술 스택
 
 ### Game
-![image](https://img.shields.io/badge/Unity-FFFFFF?style=for-the-badge&logo=Unity&logoColor=black)
+<div>
+    <img src="https://img.shields.io/badge/Unity-FFFFFF?style=for-the-badge&logo=Unity&logoColor=black"
+        width="100" height="100">
+<div>
 
 ### BackEnd
-![image](https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/67a49b5d-4956-49ab-b5df-3a990999f0fd){: width="100" height="100"}
+<img src=https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/67a49b5d-4956-49ab-b5df-3a990999f0fd
+width="100" height="100">
 
-![image](https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/91492c79-500f-4b8e-b497-ea949983f6c1){:
-background="white" width=100 height=100}
+<img src=https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/91492c79-500f-4b8e-b497-ea949983f6c1
+background="white" width=100 height=100>
 ![image](https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/1d83cb0f-8c0d-4882-bfdb-d6cf243ba404)
 
 
