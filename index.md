@@ -67,14 +67,14 @@
 <br> <br>
 
 ## 팀포트리스 첫 구상 feat.Figma
-<img width="619" alt="스크린샷 2024-04-07 오후 10 11 00" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/7cccd3f5-d478-4dbf-a0fc-8fb3ee0f8b6e"> </div>
+<img width="619" alt="스크린샷 2024-04-07 오후 10 11 00" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/7cccd3f5-d478-4dbf-a0fc-8fb3ee0f8b6e">
 [피그마 프로토타입 링크](https://www.figma.com/file/VrGnKXI2fd1GEfBjVr7mW1/Fortress-Project?type=design&mode=design&t=oQ4VLdoqE5T0LlQK-1)
 
 
 <br> <br>
 
 ## 시연 영상
-<img width="1434" alt="스크린샷 2024-04-07 오후 10 22 45" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/68fd87e1-a904-4744-85f4-3325e7d5fff1"> </div>
+<img width="1434" alt="스크린샷 2024-04-07 오후 10 22 45" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/68fd87e1-a904-4744-85f4-3325e7d5fff1">
 
 [유튜브 링크](https://youtu.be/yBHum1S55Eo)
 
