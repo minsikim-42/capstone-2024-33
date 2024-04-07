@@ -70,6 +70,7 @@
 <div>
     <img width="619" alt="스크린샷 2024-04-07 오후 10 11 00" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/7cccd3f5-d478-4dbf-a0fc-8fb3ee0f8b6e">
 </div>
+
 [피그마 프로토타입 링크](https://www.figma.com/file/VrGnKXI2fd1GEfBjVr7mW1/Fortress-Project?type=design&mode=design&t=oQ4VLdoqE5T0LlQK-1)
 
 
