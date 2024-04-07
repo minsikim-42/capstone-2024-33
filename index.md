@@ -7,7 +7,7 @@
 
 [중간 보고서 docs](https://docs.google.com/document/d/1UBRzcrMtn_R3fvz-Ow17mZ73ug6iCcqp/edit?usp=drive_link&ouid=114998932213411349234&rtpof=true&sd=true)
 
-</br> </br>
+<br> <br>
 
 ## 팀 소개
 <table>
@@ -28,7 +28,7 @@
     </tr>
 </table>
 
-</br> </br>
+<br> <br>
 
 ## 기술 스택
 
@@ -58,20 +58,20 @@
     <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
 </div>
 
-</br> </br>
+<br> <br>
 
 ## 게임 기술 소개
 ### 유니티, Photon, 뒤끝서버
 
 
-</br> </br>
+<br> <br>
 
 ## 팀포트리스 첫 구상 feat.Figma
 <img width="619" alt="스크린샷 2024-04-07 오후 10 11 00" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/7cccd3f5-d478-4dbf-a0fc-8fb3ee0f8b6e"> </div>
 [피그마 프로토타입](https://www.figma.com/file/VrGnKXI2fd1GEfBjVr7mW1/Fortress-Project?type=design&mode=design&t=oQ4VLdoqE5T0LlQK-1)
 
 
-</br> </br>
+<br> <br>
 
 ## 시연 영상
 <img width="1434" alt="스크린샷 2024-04-07 오후 10 22 45" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/68fd87e1-a904-4744-85f4-3325e7d5fff1"> </div>
