@@ -3,6 +3,9 @@
 ## 프로젝트 소개
 ### 저의 "팀포트리스"는 예전에 큰 인기를 끌엇던 포트리스게임을 재현 및 재구성하여 포트리스의 부활을 목표로 합니다.
 
+[중간발표 pptx](https://docs.google.com/presentation/d/1JO1jnwr7y5JQ6jxWW7t-PiPppP9xzBQy/edit?usp=drive_link&ouid=114998932213411349234&rtpof=true&sd=true)
+
+[중간 보고서 docs](https://docs.google.com/document/d/1UBRzcrMtn_R3fvz-Ow17mZ73ug6iCcqp/edit?usp=drive_link&ouid=114998932213411349234&rtpof=true&sd=true)
 
 ## 팀 소개
 <table>
