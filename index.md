@@ -7,6 +7,8 @@
 
 [중간 보고서 docs](https://docs.google.com/document/d/1UBRzcrMtn_R3fvz-Ow17mZ73ug6iCcqp/edit?usp=drive_link&ouid=114998932213411349234&rtpof=true&sd=true)
 
+</br> </br>
+
 ## 팀 소개
 <table>
     <tr align="center">
@@ -26,29 +28,27 @@
     </tr>
 </table>
 
+</br> </br>
+
 ## 기술 스택
 
 ### Game
 <div>
-    <img src="https://img.shields.io/badge/Unity-FFFFFF?style=for-the-badge&logo=Unity&logoColor=black"
-        width="100" height="100">
+    <img src="https://img.shields.io/badge/Unity-FFFFFF?style=for-the-badge&logo=Unity&logoColor=black">
 <div>
 
 ### BackEnd
-<img src=https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/67a49b5d-4956-49ab-b5df-3a990999f0fd
-width="100" height="100">
 
-<img src=https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/91492c79-500f-4b8e-b497-ea949983f6c1
-background="white" width=100 height=100>
-![image](https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/1d83cb0f-8c0d-4882-bfdb-d6cf243ba404)
-
-
-<div style="display: flex; gap: 6px;">
-    <img src="https://img.shields.io/badge/뒤끝-181717?style=for-the-badge&logoColor=white">
+<div>
+    <img src=https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/67a49b5d-4956-49ab-b5df-3a990999f0fd
+        width="100" height="35">
 </div>
-<div style="display: flex; gap: 6px;">
-    <img src="https://img.shields.io/badge/PhotonUnityNetwork-181717?style=for-the-badge&logo=&logoColor=white">
+
+<div>
+    <img src=https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/a85e15e5-33ef-4256-bad3-dbd1e5b9aacf
+        width=100 height=35>
 </div>
+
 
 ### Tools
 <div style="display: flex; gap: 6px;">
@@ -58,21 +58,28 @@ background="white" width=100 height=100>
     <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
 </div>
 
+</br> </br>
+
 ## 게임 기술 소개
 ### 유니티, Photon, 뒤끝서버
 
 
+</br> </br>
+
 ## 팀포트리스 첫 구상 feat.Figma
 팀 페이지 확인
 
+</br> </br>
 
 ## 시연 영상
 팀 페이지 확인
 
+</br> </br>
 
 ## 설치 방법
-### 추후 설치파일 배포, 바로 실행 가능합니다.
+### 맥용 윈도우용 실행파일 배포, 바로 실행 가능합니다.
 
+</br> </br>
 
 ## 이후 추가할 내용
 1. 팀기능 추가
