@@ -32,10 +32,10 @@
 
 ### BackEnd
 <div style="display: flex; gap: 6px;">
-    <img src="https://img.shields.io/badge/뒤끝-181717?style=for-the-badge&logo=github&logoColor=white">
+    <img src="https://img.shields.io/badge/뒤끝-181717?style=for-the-badge&logoColor=white">
 </div>
 <div style="display: flex; gap: 6px;">
-    <img src="https://img.shields.io/badge/PhotonUnityNetwork-181717?style=for-the-badge&logo=github&logoColor=white">
+    <img src="https://img.shields.io/badge/PhotonUnityNetwork-181717?style=for-the-badge&logo=&logoColor=white">
 </div>
 
 ### Tools
