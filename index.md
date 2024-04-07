@@ -1,4 +1,40 @@
-## Welcome to GitHub Pages
+# Welcome to "Team Fortress" Page!</h1>
+
+## 프로젝트 소개
+### 저의 "팀포트리스"는 예전에 큰 인기를 끌엇던 포트리스게임을 재현 및 재구성하여 포트리스의 부활을 목표로 합니다.
+
+
+## 팀 소개
+### 20171187 김민식 팀장
+- 역할: 게임파트
+### 20175162 박우진
+- 역할: 디자인, 로비, 뒤끝
+### 20213080 정윤민
+- 역할: 게임파트, 로비
+
+
+## 게임 기술 소개
+### 유니티, Photon, 뒤끝서버
+
+
+## 팀포트리스 첫 구상 feat.Figma
+팀 페이지 확인
+
+
+## 시연 영상
+팀 페이지 확인
+
+
+## 설치 방법
+### 추후 설치파일 배포, 바로 실행 가능합니다.
+
+
+## 이후 추가할 내용
+1. 팀기능 추가
+2. 화살모드 추가
+3. UI및 게임성 개선
+4. 딥러닝 AI기능 구현
+
 
 You can use the [editor on GitHub](https://github.com/kookmin-sw/cap-template/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
 
