@@ -1,10 +1,27 @@
-# Welcome to "Team Fortress" Page!</h1>
+# Welcome to "Team Fortress" Page!
 
 ## 프로젝트 소개
 ### 저의 "팀포트리스"는 예전에 큰 인기를 끌엇던 포트리스게임을 재현 및 재구성하여 포트리스의 부활을 목표로 합니다.
 
 
 ## 팀 소개
+<table>
+    <tr align="center">
+        <td>김민식</td>
+        <td>박우진</td>
+        <td>정윤민</td>
+    </tr>
+    <tr align="center">
+        <td>20171187</td>
+        <td>-</td>
+        <td>-</td>
+    </tr>
+    <tr align="center">
+        <td>게임파트</td>
+        <td>디자인, 로비파트, 뒤끝</td>
+        <td>게임파트, 로비파트</td>
+    </tr>
+</table>
 ### 20171187 김민식 팀장
 - 역할: 게임파트
 ### 20175162 박우진
