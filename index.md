@@ -31,6 +31,10 @@
 </div>
 
 ### BackEnd
+![image](https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/91492c79-500f-4b8e-b497-ea949983f6c1)
+![image](https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/1d83cb0f-8c0d-4882-bfdb-d6cf243ba404)
+
+
 <div style="display: flex; gap: 6px;">
     <img src="https://img.shields.io/badge/뒤끝-181717?style=for-the-badge&logoColor=white">
 </div>
