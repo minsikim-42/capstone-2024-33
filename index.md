@@ -26,9 +26,7 @@
 ## 기술 스택
 
 ### Game
-<div style="display: flex; gap: 6px;">
-    <img src="https://img.shields.io/badge/Unity-FFFFFF?style=for-the-badge&logo=Unity&logoColor=black">
-</div>
+![image](https://img.shields.io/badge/Unity-FFFFFF?style=for-the-badge&logo=Unity&logoColor=black)
 
 ### BackEnd
 ![image](https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/91492c79-500f-4b8e-b497-ea949983f6c1)
