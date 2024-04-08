@@ -9,6 +9,8 @@
 
 [다운로드링크 (MAC용)](https://drive.google.com/drive/folders/1lkGn2Kx4IRMAW2_HA38CnN7UROODHrOx?usp=drive_link)
 
+[다운로드링크 (윈도우용)](https://drive.google.com/file/d/1Oa6vBsyMUJmEejIaRBnhecmtiii4fBHN/view?usp=drive_link)
+
 <br> <br>
 
 ## 팀 소개
