@@ -166,6 +166,8 @@ public class InGameManager : MonoBehaviour
         {
             var aiPosition = aiSpawnPoints[i].position; // AI 스폰 포인트
             var ai = PhotonNetwork.Instantiate(aiPrefabName, aiPosition, Quaternion.identity).GetComponent<AIHandler>(); // AI 생성
+
+            Debug.Log(ai.actorNumber); // AI actorNumber
                 
             aiList.Add(ai); // AI 리스트에 추가
         }
