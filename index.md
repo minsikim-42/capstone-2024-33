@@ -7,6 +7,8 @@
 
 [중간 보고서 docs](https://docs.google.com/document/d/1UBRzcrMtn_R3fvz-Ow17mZ73ug6iCcqp/edit?usp=drive_link&ouid=114998932213411349234&rtpof=true&sd=true)
 
+[다운로드링크 (MAC용)](https://drive.google.com/drive/folders/1lkGn2Kx4IRMAW2_HA38CnN7UROODHrOx?usp=drive_link)
+
 <br> <br>
 
 ## 팀 소개
