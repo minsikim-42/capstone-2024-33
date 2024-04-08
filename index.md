@@ -1,8 +1,16 @@
 # Welcome to "Team Fortress" Page!
-<img width="518" alt="스크린샷 2024-04-08 오후 10 53 34" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/4d1a2802-f097-43a8-aa38-aa70b79b2f28"
-    width="400" height="300">
-<img width="955" alt="스크린샷 2024-04-08 오후 10 55 22" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/7120e3e9-ad8d-4fb4-b51d-f70db42603a8"
-    width="400" height="300">
+<div>
+    <img src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/4d1a2802-f097-43a8-aa38-aa70b79b2f28"
+    width="500" height="300">
+</div>
+<div>
+    <img src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/7120e3e9-ad8d-4fb4-b51d-f70db42603a8"
+    width="500" height="300">
+</div>
+<div>
+    <img src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/5f2e2bd3-1d4a-4a57-b399-62139858530f"
+        width="500" height="300">
+</div>
 
 ## 프로젝트 소개
 ### 저의 "팀포트리스"는 예전에 큰 인기를 끌엇던 포트리스게임을 재현 및 재구성하여 포트리스의 부활을 목표로 합니다.
@@ -54,7 +62,7 @@
 
 <div>
     <img src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/a85e15e5-33ef-4256-bad3-dbd1e5b9aacf"
-        width=100 height=35>
+        width="100" height="35">
 </div>
 
 
