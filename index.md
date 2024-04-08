@@ -28,7 +28,7 @@
 ## 팀 소개
 <table>
     <tr align="center">
-        <td>김민식</td>
+        <td>김민식 (팀장)</td>
         <td>박우진</td>
         <td>정윤민</td>
     </tr>
