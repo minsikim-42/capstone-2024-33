@@ -237,6 +237,16 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         
         LobbyManager.IT.HideLoading(); // 로딩 숨기기
     }
+
+    public int GetPlayerNum() {
+        int num=0;
+        for (int i=0; i<7; i++) { // 방장을 제외한 인원 수
+            if (slotList[i].actorNumber != -1)
+                num++;
+        }
+
+        return num;
+    }
     
     public void JoinRoom(string roomName)
     {

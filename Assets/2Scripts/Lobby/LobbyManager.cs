@@ -506,6 +506,10 @@ public class LobbyManager : MonoBehaviour
     }
     private void GameStart()
     {
+        if (NetworkManager.IT.GetPlayerNum() < 1) { // 방장을 제외한 인원수
+            return ;
+        }
+
         ShowLoading(); // 로딩창 보이기
         
         NetworkManager.IT.GameStart(); // 게임 시작
