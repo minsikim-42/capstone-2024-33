@@ -4564,8 +4564,8 @@ MonoBehaviour:
   loadingTime: 0.5
   isResult: 0
   result: 
-  isTestMode: 1
-  testCreateRoom: 1
+  isTestMode: 0
+  testCreateRoom: 0
   testJoinRoom: 0
 --- !u!4 &1657573346
 Transform:

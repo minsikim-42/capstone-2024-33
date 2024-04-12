@@ -72,7 +72,7 @@ public class InGameManager : MonoBehaviour
         
         cameraHandler = FindObjectOfType<CameraHandler>(); // 카메라 핸들러 설정
 
-        isTeamMode = true;
+        isTeamMode = LobbyManager.IT.isTeamMode;
     }
 
     private async void Start()

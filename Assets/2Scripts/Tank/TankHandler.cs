@@ -99,7 +99,7 @@ public class  TankHandler : MonoBehaviour
         // 레이캐스트 충돌 정보가 있다면
         if (hit1 && hit2 && hit3)
         {
-            angle = -Vector2.Angle(direction * (hit1.point - hit3.point), Vector2.right); // 레이캐스트 충돌 정보 1과 2의 점 사이의 각도
+            angle = -Vector2.Angle(direction * (hit1.point - hit3.point), Vector2.right); // 레이캐스트 충돌 정보 1과 3의 점 사이의 각도
             angle = Mathf.Clamp(angle, -60, 60); // angle min: -60, max: 60
 
             if (hit1.point.y >= hit3.point.y) // 레이캐스트 충돌 정보 2의 y값이 더 작다면

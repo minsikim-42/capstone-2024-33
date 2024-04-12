@@ -29,6 +29,8 @@ public class LobbyManager : MonoBehaviour
     [Serializable]
     public class NicknameEvent : UnityEvent { }
     public NicknameEvent onNicknameEvent = new NicknameEvent(); // 닉네임 이벤트
+
+    [SerializeField] TextMeshProUGUI titleText;
     
     [Header("Create Room")]
     [SerializeField] private Button createRoomButton; // 방 생성 버튼
@@ -36,6 +38,9 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] private TMP_InputField createRoomInputField; // 방 생성 입력 필드
     [SerializeField] private TextMeshProUGUI createRoomAlertText; // 방 생성 경고 텍스트
     [SerializeField] private Button createRoomCreateButton; // 방 생성 버튼
+    [SerializeField] private Button isTeamButtonTrue; // 팀전 선택 버튼
+    [SerializeField] private Button isTeamButtonFalse; // 팀전 선택 버튼
+    public bool isTeamMode;
     [SerializeField] private Button createRoomBackButton; // 방 생성 뒤로가기 버튼
     [SerializeField] private CanvasGroup createRoomButtonCg; // 방 생성 버튼 캔버스 그룹
     
@@ -72,8 +77,13 @@ public class LobbyManager : MonoBehaviour
         nicknameSaveButton.onClick.AddListener(SaveNickname);
         nicknameBackButton.onClick.AddListener(BackNickname);
         
+        createRoomCg.alpha = 0;
         createRoomButton.onClick.AddListener(ShowCreateRoom);
         createRoomCreateButton.onClick.AddListener(CreateRoom);
+        isTeamMode = false;
+        isTeamButtonFalse.onClick.AddListener(SetIsTeamMode);
+        isTeamButtonTrue.onClick.AddListener(SetIsTeamMode);
+        isTeamButtonTrue.gameObject.SetActive(false);
         createRoomBackButton.onClick.AddListener(BackCreateRoom);
         
         leftButton.onClick.AddListener(LeftRoomList);
@@ -176,6 +186,13 @@ public class LobbyManager : MonoBehaviour
         createRoomButtonCg.alpha = 0;
         createRoomButtonCg.blocksRaycasts = false;
         createRoomButtonCg.interactable = false;
+
+        titleText.SetText(PhotonNetwork.CurrentRoom.Name);
+
+        if (isTeamMode == false) 
+            changeTeamButton.gameObject.SetActive(false);
+        else
+            changeTeamButton.gameObject.SetActive(true);
     }
     // Room 숨기기
     public void HideRoom()
@@ -187,6 +204,8 @@ public class LobbyManager : MonoBehaviour
         createRoomButtonCg.alpha = 1;
         createRoomButtonCg.blocksRaycasts = true;
         createRoomButtonCg.interactable = true;
+
+        titleText.SetText("Lobby");
     }
     
     
@@ -378,8 +397,22 @@ public class LobbyManager : MonoBehaviour
         createRoomCg.alpha = 0;
         createRoomCg.blocksRaycasts = false;
         createRoomCg.interactable = false;
-        
+
         NetworkManager.IT.CreateRoom(createRoomInputField.text); // 방 생성
+    }
+
+    private void SetIsTeamMode()
+    {
+        if (isTeamMode == false) {
+            isTeamMode = true;
+            isTeamButtonTrue.gameObject.SetActive(true);
+            isTeamButtonFalse.gameObject.SetActive(false);
+        }
+        else {
+            isTeamMode = false;
+            isTeamButtonTrue.gameObject.SetActive(false);
+            isTeamButtonFalse.gameObject.SetActive(true);
+        }
     }
 
     public void SetRoom()
@@ -405,12 +438,23 @@ public class LobbyManager : MonoBehaviour
     }
 
     public void SetTeamColor(int slotIndex, int teamNum) {
+        if (isTeamMode == false) {
+            roomPlayerSlotHandlers[slotIndex].GetComponent<Image>().color = new Color(0.3f, 0.3f, 0.3f);
+            return ;
+        }
         // roomPlayerSlotHandlers[slotIndex].SetTeamColor(teamNum);
         GameObject slotHand = roomPlayerSlotHandlers[slotIndex].gameObject;
         if (teamNum == 1)
-            roomPlayerSlotHandlers[slotIndex].transform.GetChild(0).GetComponent<Image>().color = Color.red;
+            roomPlayerSlotHandlers[slotIndex].GetComponent<Image>().color = new Color(.9f, .2f, .2f, 0.9f); // Red
         else
-            roomPlayerSlotHandlers[slotIndex].transform.GetChild(0).GetComponent<Image>().color = Color.blue;
+            roomPlayerSlotHandlers[slotIndex].GetComponent<Image>().color = new Color(.2f, .2f, .9f, 0.9f); // Blue
+    }
+
+    public void SetIsPlayerColor(int slotIndex, bool isPlayer) {
+        if (isPlayer == true)
+            roomPlayerSlotHandlers[slotIndex].transform.GetChild(0).GetComponent<Image>().color = new Color(0.9f, 0.9f, 0.9f);
+        else
+            roomPlayerSlotHandlers[slotIndex].transform.GetChild(0).GetComponent<Image>().color = new Color(0.6f, 0.6f, 0.6f);
     }
     
     // 방 생성 창 숨기기
@@ -461,10 +505,7 @@ public class LobbyManager : MonoBehaviour
         
         NetworkManager.IT.GameStart(); // 게임 시작
     }
-    
-    
-    
-    
+
     
     #region Result
     public void HideResult()
