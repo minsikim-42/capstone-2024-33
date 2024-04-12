@@ -356,6 +356,11 @@ public class LobbyManager : MonoBehaviour
                 aiCount++;
 
             // 방 리스트에서 방 찾아서 활성화
+            if ((bool)properties["isTeamMode"] == true) {
+                roomList[roomInfos.IndexOf(room)].transform.GetChild(0).GetComponent<Image>().color = new Color(.8f, .4f, .8f);
+            } else {
+                roomList[roomInfos.IndexOf(room)].transform.GetChild(0).GetComponent<Image>().color = new Color(.7f, .7f, .7f);
+            }
             roomList[roomInfos.IndexOf(room)].Active(room.Name, room.PlayerCount + aiCount);
         }
     }
