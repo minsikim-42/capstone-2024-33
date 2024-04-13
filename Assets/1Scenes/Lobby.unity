@@ -2786,7 +2786,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 391b08cf907c8f64db4b42148a523c94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotList: []
   aiCount: 0
 --- !u!4 &580680927
 Transform:
@@ -3459,7 +3458,7 @@ MonoBehaviour:
   leftRoomButton: {fileID: 1800874461}
   gameStartButton: {fileID: 2074700862}
   changeTeamButton: {fileID: 771395446}
-  roomPlayerSlotHandlers:
+  roomPlayerSlots:
   - {fileID: 6860842455669407411}
   - {fileID: 1408613108}
   - {fileID: 1568965466}

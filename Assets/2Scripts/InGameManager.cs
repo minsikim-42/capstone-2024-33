@@ -194,7 +194,7 @@ public class InGameManager : MonoBehaviour
         // }
 
         int aiIdx=0;
-        foreach (var slot in NetworkManager.IT.GetSlots()) {
+        foreach (var slot in LobbyManager.IT.GetSlots()) {
             Debug.Log("slot actor Num: " + slot.actorNumber);
             Debug.Log("slot nickname: " + slot.nickName);
             if (slot.actorNumber == 99)

@@ -61,7 +61,7 @@ public class LobbyManager : MonoBehaviour
 	[SerializeField] private Button changeTeamButton; // 팀 변경 버튼
 
     [Header("Room Player List")] 
-    [SerializeField] private List<RoomPlayerSlotHandler> roomPlayerSlotHandlers; // 방 플레이어 슬롯 핸들러들
+    [SerializeField] public List<RoomPlayerSlotHandler> roomPlayerSlots; // 방 플레이어 슬롯 핸들러들
     
     [Header("Result")]
     [SerializeField] private CanvasGroup resultCanvasGroup; // 결과 캔버스 그룹
@@ -428,41 +428,93 @@ public class LobbyManager : MonoBehaviour
         ShowRoom(); // 방 보이기
     }
 
+    public List<RoomPlayerSlotHandler> GetAllSlots()
+    {
+        var li = new List<RoomPlayerSlotHandler>();
+
+        foreach(var slot in roomPlayerSlots)
+        {
+            li.Add(slot);
+        }
+
+        return li;
+    }
+
+    public List<RoomPlayerSlotHandler> GetSlots()
+    {
+        var li = new List<RoomPlayerSlotHandler>();
+
+        foreach(var slot in roomPlayerSlots)
+        {
+            if (slot.actorNumber != -1) // 빈 슬롯이 아니면
+            {
+                li.Add(slot);
+            }
+        }
+
+        return li;
+    }
+
     public void SetSlotEmpty(int slotIndex)
     {
-        roomPlayerSlotHandlers[slotIndex].SetEmptySlot(); // 슬롯을 빈 슬롯으로 변경
+        roomPlayerSlots[slotIndex].SetEmptySlot(); // 슬롯을 빈 슬롯으로 변경
     }
     
     public void SetSlotAI(int slotIndex)
     {
-        roomPlayerSlotHandlers[slotIndex].SetSlotAI(); // 슬롯을 AI 슬롯으로 변경
+        roomPlayerSlots[slotIndex].SetSlotAI(); // 슬롯을 AI 슬롯으로 변경
     }
     
-    public void SetSlot(int slotIndex, string nickname)
+    public void SetSlotPlayer(int slotIndex, string nickname)
     {
-        roomPlayerSlotHandlers[slotIndex].SetPlayerNickname(nickname); // 슬롯을 플레이어 슬롯으로 변경
+        roomPlayerSlots[slotIndex].SetPlayerNickname(nickname); // 슬롯을 플레이어 슬롯으로 변경
+    }
+
+    public void SetSlot(int slotIndex, string slotName, int actorNumber, string nickName, int tNum) {
+        roomPlayerSlots[slotIndex].SetSlot(slotName, actorNumber, nickName, tNum);
+    }
+
+    public void InitSlot(int isT) {
+        if (isT == 1) {
+            roomPlayerSlots[0].SetSlot("Slot0", 1, PhotonNetwork.LocalPlayer.NickName, 1);
+            roomPlayerSlots[1].SetSlot("Slot1", -1, string.Empty, 0);
+            roomPlayerSlots[2].SetSlot("Slot2", -1, string.Empty, 0);
+            roomPlayerSlots[3].SetSlot("Slot3", -1, string.Empty, 0);
+            roomPlayerSlots[4].SetSlot("Slot4", -1, string.Empty, 0);
+            roomPlayerSlots[5].SetSlot("Slot5", -1, string.Empty, 0);
+            roomPlayerSlots[6].SetSlot("Slot6", -1, string.Empty, 0);
+            roomPlayerSlots[7].SetSlot("Slot7", -1, string.Empty, 0);
+        } else {
+            roomPlayerSlots[0].SetSlot("Slot0", 1, PhotonNetwork.LocalPlayer.NickName, 0);
+            roomPlayerSlots[1].SetSlot("Slot1", -1, string.Empty, 0);
+            roomPlayerSlots[2].SetSlot("Slot2", -1, string.Empty, 0);
+            roomPlayerSlots[3].SetSlot("Slot3", -1, string.Empty, 0);
+            roomPlayerSlots[4].SetSlot("Slot4", -1, string.Empty, 0);
+            roomPlayerSlots[5].SetSlot("Slot5", -1, string.Empty, 0);
+            roomPlayerSlots[6].SetSlot("Slot6", -1, string.Empty, 0);
+            roomPlayerSlots[7].SetSlot("Slot7", -1, string.Empty, 0);
+        }
     }
 
     public void SetTeamColor(int slotIndex, int teamNum) {
         if (isTeamMode == false) {
-            roomPlayerSlotHandlers[slotIndex].GetComponent<Image>().color = new Color(0.3f, 0.3f, 0.3f);
+            roomPlayerSlots[slotIndex].GetComponent<Image>().color = new Color(0.3f, 0.3f, 0.3f);
             return ;
         }
-        // roomPlayerSlotHandlers[slotIndex].SetTeamColor(teamNum);
-        GameObject slotHand = roomPlayerSlotHandlers[slotIndex].gameObject;
+        // roomPlayerSlots[slotIndex].SetTeamColor(teamNum);
         if (teamNum == 1)
-            roomPlayerSlotHandlers[slotIndex].GetComponent<Image>().color = new Color(.9f, .2f, .2f, 0.9f); // Red
+            roomPlayerSlots[slotIndex].GetComponent<Image>().color = new Color(.9f, .2f, .2f, 0.9f); // Red
         else if (teamNum == 2)
-            roomPlayerSlotHandlers[slotIndex].GetComponent<Image>().color = new Color(.2f, .2f, .9f, 0.9f); // Blue
+            roomPlayerSlots[slotIndex].GetComponent<Image>().color = new Color(.2f, .2f, .9f, 0.9f); // Blue
         else
-            roomPlayerSlotHandlers[slotIndex].GetComponent<Image>().color = new Color(.3f, .3f, .3f); // Gray
+            roomPlayerSlots[slotIndex].GetComponent<Image>().color = new Color(.3f, .3f, .3f); // Gray
     }
 
     public void SetIsPlayerColor(int slotIndex, bool isPlayer) {
         if (isPlayer == true)
-            roomPlayerSlotHandlers[slotIndex].transform.GetChild(0).GetComponent<Image>().color = new Color(0.9f, 0.9f, 0.9f);
+            roomPlayerSlots[slotIndex].transform.GetChild(0).GetComponent<Image>().color = new Color(0.9f, 0.9f, 0.9f);
         else
-            roomPlayerSlotHandlers[slotIndex].transform.GetChild(0).GetComponent<Image>().color = new Color(0.6f, 0.6f, 0.6f);
+            roomPlayerSlots[slotIndex].transform.GetChild(0).GetComponent<Image>().color = new Color(0.6f, 0.6f, 0.6f);
     }
     
     // 방 생성 창 숨기기
