@@ -700,22 +700,28 @@ public class InGameManager : MonoBehaviour
         
         foreach (var d in damageList)
         {
-            data += d.nickName + "/" + d.damage + ",";
+            data += d.nickName + "/" + d.damage + "/" + d.teamNumber + ",";
             
             // 마지막이라면
             if (d == damageList[^1])
                 data = data.Remove(data.Length - 1); // 마지막 콤마 제거
         }
         
-        PV.RPC(nameof(RPC_Result), RpcTarget.All, data); // RPC로 결과 표시
+        PV.RPC(nameof(RPC_Result), RpcTarget.All, data, t); // RPC로 결과 표시
     }
     
     [PunRPC]
-    private void RPC_Result(string data)
+    private void RPC_Result(string data, int t)
     {
         Debug.Log("result RPC fnc!");
         GameManager.IT.isResult = true; // 결과 표시
         GameManager.IT.result = data; // 결과 데이터 저장
+		if (t == 0)
+			GameManager.IT.resultText = "Result";
+		else if (t == 1)
+			GameManager.IT.resultText = "Red Team Win!";
+		else
+			GameManager.IT.resultText = "Blue Team Win!";
 
         PhotonNetwork.LeaveRoom(); // 방 나가기
         PhotonNetwork.LoadLevel("Lobby"); // 로비 씬으로 이동

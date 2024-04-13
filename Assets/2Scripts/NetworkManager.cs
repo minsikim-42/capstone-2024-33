@@ -182,29 +182,44 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public void CreateRoom(string roomName)
     {
         // 방 설정 setRoomProperties
-        slotList = new List<Slot>
-        {
-            new(Slot1, -1, string.Empty, 1),
-            new(Slot2, -1, string.Empty, 1),
-            new(Slot3, -1, string.Empty, 1),
-            new(Slot4, -1, string.Empty, 1),
-            new(Slot5, -1, string.Empty, 1),
-            new(Slot6, -1, string.Empty, 1),
-            new(Slot7, -1, string.Empty, 1),
-            new(Slot0, 1, PhotonNetwork.LocalPlayer.NickName, 1)
-        };
-
+        if (LobbyManager.IT.isTeamMode == true) {
+            slotList = new List<Slot>
+            {
+                new(Slot1, -1, string.Empty, 0),
+                new(Slot2, -1, string.Empty, 0),
+                new(Slot3, -1, string.Empty, 0),
+                new(Slot4, -1, string.Empty, 0),
+                new(Slot5, -1, string.Empty, 0),
+                new(Slot6, -1, string.Empty, 0),
+                new(Slot7, -1, string.Empty, 0),
+                new(Slot0, 1, PhotonNetwork.LocalPlayer.NickName, 1)
+            };
+        }
+        else {
+            slotList = new List<Slot>
+            {
+                new(Slot1, -1, string.Empty, 0),
+                new(Slot2, -1, string.Empty, 0),
+                new(Slot3, -1, string.Empty, 0),
+                new(Slot4, -1, string.Empty, 0),
+                new(Slot5, -1, string.Empty, 0),
+                new(Slot6, -1, string.Empty, 0),
+                new(Slot7, -1, string.Empty, 0),
+                new(Slot0, 1, PhotonNetwork.LocalPlayer.NickName, 0)
+            };
+        }
+        
         var roomOptions = new RoomOptions
         {
             CustomRoomPropertiesForLobby = new[] {IsStarted, IsTeamMode, Slot0, Slot1, Slot2, Slot3, Slot4, Slot5, Slot6, Slot7, "team"+Slot1, "team"+Slot2, "team"+Slot3, "team"+Slot4, "team"+Slot5, "team"+Slot6, "team"+Slot7,"name"+Slot1, "name"+Slot2, "name"+Slot3, "name"+Slot4, "name"+Slot5, "name"+Slot6, "name"+Slot7},
             CustomRoomProperties = new Hashtable {
                 {IsStarted, false}, {IsTeamMode, LobbyManager.IT.isTeamMode}, {Slot0, 1}, {Slot1, -1}, {Slot2, -1}, {Slot3, -1}, {Slot4, -1}, {Slot5, -1}, {Slot6, -1}, {Slot7, -1},
-                {"team"+Slot0, 1}, {"team"+Slot1, 1}, {"team"+Slot2, 1}, {"team"+Slot3, 1}, {"team"+Slot4, 1}, {"team"+Slot5, 1}, {"team"+Slot6, 1}, {"team"+Slot7, 1},
+                {"team"+Slot0, slotList[0].teamNumber}, {"team"+Slot1, slotList[1].teamNumber}, {"team"+Slot2, slotList[2].teamNumber}, {"team"+Slot3, slotList[3].teamNumber}, {"team"+Slot4, slotList[4].teamNumber}, {"team"+Slot5, slotList[5].teamNumber}, {"team"+Slot6, slotList[6].teamNumber}, {"team"+Slot7, slotList[7].teamNumber},
                 {"name"+Slot0, PhotonNetwork.LocalPlayer.NickName}, {"name"+Slot1, string.Empty}, {"name"+Slot2, string.Empty}, {"name"+Slot3, string.Empty}, {"name"+Slot4, string.Empty}, {"name"+Slot5, string.Empty}, {"name"+Slot6, string.Empty}, {"name"+Slot7, string.Empty}
             },
             MaxPlayers = 8
         };
-        
+
         PhotonNetwork.CreateRoom($"{roomName}", roomOptions); // 방 생성
     }
     
@@ -298,16 +313,23 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             
             var slotName = slotList.Find(a => a.actorNumber == newPlayer.ActorNumber).slotName; // 슬롯 이름
             
-            SetSlot(slotName, newPlayer.ActorNumber, newPlayer.NickName); // 슬롯 설정
+            if (LobbyManager.IT.isTeamMode)
+                SetSlot(slotName, newPlayer.ActorNumber, newPlayer.NickName, 1); // 슬롯 설정
+            else
+                SetSlot(slotName, newPlayer.ActorNumber, newPlayer.NickName, 0); // 슬롯 설정
         }
     }
 
     public void SetSlotToAI(int slotNumber)
     {
         var slot = slotList[slotNumber - 1]; // 슬롯
-            slot.actorNumber = 99; // AI 번호인 99로 설정
+        slot.actorNumber = 99; // AI 번호인 99로 설정
         
-        SetSlot(slot.slotName, 99, "AI_"+slotNumber); // 슬롯 설정
+        if (LobbyManager.IT.isTeamMode == true)
+            SetSlot(slot.slotName, 99, "AI_"+slotNumber, 1); // 슬롯 설정
+        else
+            SetSlot(slot.slotName, 99, "AI_"+slotNumber, 0); // 슬롯 설정
+
     }
     
     public void SetSlotToEmpty(int slotNumber)
@@ -315,15 +337,15 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         var slot = slotList[slotNumber - 1]; // 슬롯
             slot.actorNumber = -1; // 빈 슬롯인 -1로 설정
         
-        SetSlot(slot.slotName, -1, null); // 슬롯 설정
+        SetSlot(slot.slotName, -1, null, 0); // 슬롯 설정
     }
     
-    private void SetSlot(string slotName, int actorNumber, string nickName)
+    private void SetSlot(string slotName, int actorNumber, string nickName, int teamNum)
     {
         Hashtable CustomRoomProperties = PhotonNetwork.CurrentRoom.CustomProperties; // 방의 프로퍼티
         
         CustomRoomProperties[slotName] = actorNumber; // 슬롯 설정
-        CustomRoomProperties["team"+slotName] = 1; // 슬롯 팀 설정
+        CustomRoomProperties["team"+slotName] = teamNum; // 슬롯 팀 설정
         CustomRoomProperties["name"+slotName] = nickName;
         
         PhotonNetwork.CurrentRoom.SetCustomProperties(CustomRoomProperties); // 방의 프로퍼티 설정
@@ -383,7 +405,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             slot.actorNumber = -1; 
 
             if (PhotonNetwork.IsMasterClient)
-                SetSlot(slot.slotName, -1, null); // 슬롯 설정
+                SetSlot(slot.slotName, -1, null, 0); // 빈슬롯 설정
         }
         else if (SceneManager.GetActiveScene().name == "Game")
         {
@@ -445,7 +467,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         }
     }
 
-    public int GetTeamNum(int t) {
+    public int GetTeamNum(int t) { // 플레이어 수
         int n=0;
         foreach (var slot in slotList) {
             if (slot.actorNumber != -1 && slot.teamNumber == t) {

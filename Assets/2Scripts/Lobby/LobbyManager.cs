@@ -65,6 +65,7 @@ public class LobbyManager : MonoBehaviour
     
     [Header("Result")]
     [SerializeField] private CanvasGroup resultCanvasGroup; // 결과 캔버스 그룹
+    [SerializeField] private TextMeshProUGUI resultText; // result text
     [SerializeField] private Button goToLobbyButton; // 로비로 가는 버튼
     [SerializeField] private List<ResultSlotHandler> resultSlots; // 결과 표시 슬롯들
 
@@ -451,8 +452,10 @@ public class LobbyManager : MonoBehaviour
         GameObject slotHand = roomPlayerSlotHandlers[slotIndex].gameObject;
         if (teamNum == 1)
             roomPlayerSlotHandlers[slotIndex].GetComponent<Image>().color = new Color(.9f, .2f, .2f, 0.9f); // Red
-        else
+        else if (teamNum == 2)
             roomPlayerSlotHandlers[slotIndex].GetComponent<Image>().color = new Color(.2f, .2f, .9f, 0.9f); // Blue
+        else
+            roomPlayerSlotHandlers[slotIndex].GetComponent<Image>().color = new Color(.3f, .3f, .3f); // Gray
     }
 
     public void SetIsPlayerColor(int slotIndex, bool isPlayer) {
@@ -526,10 +529,11 @@ public class LobbyManager : MonoBehaviour
     
     public void ShowResult(string data)
     {
-		Debug.Log("LBM- showResult");
 		resultCanvasGroup.alpha = 1; // 결과 캔버스 그룹의 알파값을 0으로 변경
         resultCanvasGroup.blocksRaycasts = true; // 결과 캔버스 그룹의 블록 레이캐스트를 false로 변경
         resultCanvasGroup.interactable = true; // 결과 캔버스 그룹의 인터렉터블을 false로 변경
+
+        resultText.SetText(GameManager.IT.resultText);
 
         var dataList = data.Split(','); // 결과 데이터를 /로 나누어 배열로 저장
         
@@ -539,8 +543,21 @@ public class LobbyManager : MonoBehaviour
             var resultData = dataList[i].Split('/'); // 결과 데이터를 /로 나누어 배열로 저장
             var nickname = resultData[0]; // 닉네임
             var damage = resultData[1]; // 데미지
+            var teamNum = resultData[2]; // 팀넘버 (0,1,2)
             
-            slot.SetSlot(nickname, damage); // 슬롯에 닉네임과 데미지를 표시
+            slot.SetResultSlot(nickname, damage, teamNum); // 슬롯에 닉네임과 데미지를 표시
+
+			var c = teamNum switch
+			{
+				// 개인전
+				"0" => new Color(0.7f, 0.7f, 0.7f, 0.8f),
+				// 레드
+				"1" => new Color(0.9f, 0.2f, 0.2f, 0.8f),
+				// 블루
+				"2" => new Color(0.2f, 0.2f, 0.9f, 0.8f),
+				_ => Color.magenta,
+			};
+			slot.GetComponent<Image>().color = c;
         }
         
         resultCanvasGroup.alpha = 1; // 결과 캔버스 그룹의 알파값을 1로 변경
