@@ -175,7 +175,7 @@ public class  TankHandler : MonoBehaviour
     
     public void AngleInit()
     {
-        projectileDegrees = 0; // 미사일 발사 각도 초기화
+        // projectileDegrees = 0; // 미사일 발사 각도 초기화
         UIManager.IT.SetProjectileAngle(projectileDegrees, direction); // 미사일 발사 각도 UI 설정
     }
 

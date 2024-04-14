@@ -19,6 +19,8 @@ public class InGameManager : MonoBehaviour
     
     private string playerPrefabName = "Tank"; // 플레이어 프리팹 이름
     private string aiPrefabName = "AI"; // AI 프리팹 이름
+	public float MAX_WIDTH = 2048;
+	public float MAX_HEIGHT = 1600;
     
     [Header("Spawn Points")]
     [SerializeField] private List<Transform> spawnPoints; // 스폰 포인트 리스트

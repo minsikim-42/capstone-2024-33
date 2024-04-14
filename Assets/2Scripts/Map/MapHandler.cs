@@ -1,5 +1,6 @@
 using System;
 using Photon.Pun;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MapHandler : MonoBehaviour
@@ -7,7 +8,6 @@ public class MapHandler : MonoBehaviour
     private SpriteRenderer spriteRenderer; // 맵 스프라이트 렌더러
     private Texture2D texture; // 맵 텍스쳐
     [SerializeField] private Texture2D mapTexture; // 사용할 맵 텍스쳐
-
     private float worldWidth; // 월드 너비
     private float worldHeight; // 월드 높이
     private int pixelWidth; // 픽셀 너비
@@ -22,6 +22,22 @@ public class MapHandler : MonoBehaviour
         
         // 사용할 맵 텍스쳐로 생성 후 할당
         texture = Instantiate(mapTexture);
+
+        Debug.Log(texture.Size());
+
+        int width = (int)InGameManager.IT.MAX_WIDTH;
+        int height = (int)InGameManager.IT.MAX_HEIGHT;
+        for (int h=height; h<texture.Size().y; h++) {
+            for (int w=0; w<texture.Size().x; w++) {
+                texture.SetPixel(w, h, Color.clear);
+            }
+        }
+        for (int w=width; w<texture.Size().x; w++) {
+            for (int h=0; h<texture.Size().y; h++) {
+                texture.SetPixel(w, h, Color.clear);
+            }
+        }
+
         texture.Apply();
         SetSprite();
         
@@ -30,7 +46,7 @@ public class MapHandler : MonoBehaviour
         worldHeight = spriteRenderer.bounds.size.y;
         pixelWidth = spriteRenderer.sprite.texture.width;
         pixelHeight = spriteRenderer.sprite.texture.height;
-        
+
         gameObject.AddComponent<PolygonCollider2D>(); // 폴리곤 콜라이더 추가
     }
 
