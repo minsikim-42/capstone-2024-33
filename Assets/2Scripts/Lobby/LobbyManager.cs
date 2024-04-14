@@ -457,7 +457,7 @@ public class LobbyManager : MonoBehaviour
 
     public void SetSlotEmpty(int slotIndex)
     {
-        roomPlayerSlots[slotIndex].SetEmptySlot(); // 슬롯을 빈 슬롯으로 변경
+        roomPlayerSlots[slotIndex].SetSlotEmpty(); // 슬롯을 빈 슬롯으로 변경
     }
     
     public void SetSlotAI(int slotIndex)
@@ -475,8 +475,9 @@ public class LobbyManager : MonoBehaviour
     }
 
     public void InitSlot(int isT) {
+        var player = PhotonNetwork.LocalPlayer;
         if (isT == 1) {
-            roomPlayerSlots[0].SetSlot("Slot0", 1, PhotonNetwork.LocalPlayer.NickName, 1);
+            roomPlayerSlots[0].SetSlot("Slot0", 1, player.NickName, 1); // actorNumber : 1
             roomPlayerSlots[1].SetSlot("Slot1", -1, string.Empty, 0);
             roomPlayerSlots[2].SetSlot("Slot2", -1, string.Empty, 0);
             roomPlayerSlots[3].SetSlot("Slot3", -1, string.Empty, 0);
@@ -485,7 +486,7 @@ public class LobbyManager : MonoBehaviour
             roomPlayerSlots[6].SetSlot("Slot6", -1, string.Empty, 0);
             roomPlayerSlots[7].SetSlot("Slot7", -1, string.Empty, 0);
         } else {
-            roomPlayerSlots[0].SetSlot("Slot0", 1, PhotonNetwork.LocalPlayer.NickName, 0);
+            roomPlayerSlots[0].SetSlot("Slot0", 1, player.NickName, 0);
             roomPlayerSlots[1].SetSlot("Slot1", -1, string.Empty, 0);
             roomPlayerSlots[2].SetSlot("Slot2", -1, string.Empty, 0);
             roomPlayerSlots[3].SetSlot("Slot3", -1, string.Empty, 0);

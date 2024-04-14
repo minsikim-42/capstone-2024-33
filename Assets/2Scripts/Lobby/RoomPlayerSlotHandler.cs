@@ -26,10 +26,10 @@ public class RoomPlayerSlotHandler : MonoBehaviourPun
 
     private void Init()
     {
-        SetEmptySlot(); // 빈 슬롯으로 초기화
+        SetSlotEmpty(); // 빈 슬롯으로 초기화
     }
     
-    public void SetEmptySlot()
+    public void SetSlotEmpty()
     {
         playerNicknameText.text = string.Empty; // 플레이어 닉네임 텍스트를 비움
         emptyButtonText.text = "Empty"; // Empty 버튼 텍스트를 Empty로 변경
@@ -43,6 +43,9 @@ public class RoomPlayerSlotHandler : MonoBehaviourPun
             
             emptyButton.onClick.RemoveAllListeners();
             emptyButton.onClick.AddListener(SetAI);
+
+			// actorNumber = 1;
+			// nickName = PhotonNetwork.LocalPlayer.NickName;
         }
         else
         {
@@ -61,6 +64,14 @@ public class RoomPlayerSlotHandler : MonoBehaviourPun
 		actorNumber = actorNum;
 		nickName = nickNa;
 		teamNumber = tNum;
+
+		if (actorNum == -1) {
+			SetSlotEmpty();
+		} else if (actorNum == 99) {
+			SetSlotAI();
+		} else {
+			SetSlotPlayer();
+		}
 	}
     
     private void SetSlotPlayer()
