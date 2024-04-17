@@ -64,6 +64,7 @@ public class  TankHandler : MonoBehaviour
     
     public bool isAi = false; // AI 여부
     public bool isDead = false; // 사망 여부
+    public int teamNum = 0; // 팀 번호
     
     private void Awake()
     {
@@ -77,8 +78,15 @@ public class  TankHandler : MonoBehaviour
         currentMoveValue = maxMoveValue; // 현재 이동값을 최대 이동값으로 초기화
         UIManager.IT.SetProjectileAngle(projectileDegrees, direction);  // 파워 게이지 UI 각도 초기화
 
-        if (!transform.name.Contains("AI"))
+        // if (!transform.name.Contains("AI")) {
+        if (!transform.name.Contains("AI")) {
             transform.name = PV.Owner.NickName; // 탱크 이름을 플레이어 닉네임으로 설정
+            Debug.Log("tankHandler Start");
+        }
+
+        // if (PhotonNetwork.IsMasterClient) {
+        //     PV.RPC(nameof(RPC_SetTeamNum), RpcTarget.All);
+        // }
         
         currentHP = maxHP; // 현재 HP를 최대 HP로 초기화
     }
@@ -488,5 +496,34 @@ public class  TankHandler : MonoBehaviour
         transform.GetChild(0).gameObject.SetActive(false); // 탱크 스프라이트 비활성화
         transform.GetChild(1).gameObject.SetActive(false); // 탱크 UI 비활성화
         transform.GetChild(2).gameObject.SetActive(false); // 탱크 미니맵 아이콘 비활성화
+    }
+
+    public void SetTeamNum(int t) {
+        teamNum = t;
+    }
+
+    [PunRPC]
+    private void RPC_SetTeamNum() {
+        if (transform.name.Contains("AI")) return ;
+
+        Debug.Log("tankHandler RPC setTeamNum");
+        foreach (var slot in NetworkManager.IT.gameForSlots) {
+            if (slot.actorNumber > 0)
+                Debug.Log("transName: " + transform.name + ", slot.nickName : " + slot.nickName + ", slot.t : " + slot.teamNumber);
+            if (transform.name == slot.nickName) {
+                teamNum = slot.teamNumber;
+                break;
+            }
+        }
+        if (transform.name == PV.Owner.NickName) {
+            if (teamNum == 1)
+                teamNum = 3; // bright red
+            else if (teamNum == 2)
+                teamNum = 4; // bright blue
+            else
+                teamNum = -1; // yellow
+        }
+
+        tankUIHandler.SetColor(teamNum);
     }
 }

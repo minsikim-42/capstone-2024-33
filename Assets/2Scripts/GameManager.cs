@@ -1,4 +1,8 @@
 using UnityEngine;
+using System;
+using System.Collections.Generic;
+using Photon.Pun;
+using Unity.Properties;
 
 public class GameManager : MonoBehaviour
 {

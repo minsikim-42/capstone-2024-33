@@ -166,7 +166,7 @@ public class InGameManager : MonoBehaviour
         {
             var aiPosition = aiSpawnPoints[i].position; // AI 스폰 포인트
             var ai = PhotonNetwork.Instantiate(aiPrefabName, aiPosition, Quaternion.identity).GetComponent<AIHandler>(); // AI 생성
-
+            ai.tankHandler.SetTeamNum(1);
             Debug.Log(ai.actorNumber); // AI actorNumber
                 
             aiList.Add(ai); // AI 리스트에 추가
@@ -194,7 +194,8 @@ public class InGameManager : MonoBehaviour
         // }
 
         int aiIdx=0;
-        foreach (var slot in LobbyManager.IT.GetSlots()) {
+        // foreach (var slot in LobbyManager.IT.GetSlots()) { // 왜 로비매니저인데 작동하지?
+        foreach (var slot in NetworkManager.IT.gameForSlots) {
             Debug.Log("slot actor Num: " + slot.actorNumber);
             Debug.Log("slot nickname: " + slot.nickName);
             if (slot.actorNumber == 99)

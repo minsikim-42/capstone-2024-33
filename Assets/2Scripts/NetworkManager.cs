@@ -16,6 +16,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     private readonly string gameVersion = "1"; // 게임 버전
     
     private List<RoomInfo> allRoomList; // 모든 방 리스트
+
+    public bool isStarted; // PhotonNetwork.CurrentRoom.CustomProperties
     
     private void Awake()
     {
@@ -48,6 +50,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     private void Start()
     {
         allRoomList = new List<RoomInfo>(); // 모든 방 리스트 초기화
+
+        isStarted = false;
     }
 
     public void SendViewId(int viewId)
@@ -178,7 +182,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     const string Slot6 = "Slot6";
     const string Slot7 = "Slot7";
     
-    // [SerializeField] public List<Slot> LobbyManager.IT.roomPlayerSlots; // 슬롯 리스트
+    [SerializeField] public List<Slot> gameForSlots; // 슬롯 리스트
     public void CreateRoom(string roomName)
     {
         var player = PhotonNetwork.LocalPlayer;
@@ -201,6 +205,17 @@ public class NetworkManager : MonoBehaviourPunCallbacks
                 {"name"+Slot0, player.NickName}, {"name"+Slot1, string.Empty}, {"name"+Slot2, string.Empty}, {"name"+Slot3, string.Empty}, {"name"+Slot4, string.Empty}, {"name"+Slot5, string.Empty}, {"name"+Slot6, string.Empty}, {"name"+Slot7, string.Empty}
             },
             MaxPlayers = 8
+        };
+        gameForSlots = new List<Slot>
+        {
+            new(Slot0, 1, player.NickName, LobbyManager.IT.roomPlayerSlots[0].teamNumber),
+            new(Slot1, -1, string.Empty, 0),
+            new(Slot2, -1, string.Empty, 0),
+            new(Slot3, -1, string.Empty, 0),
+            new(Slot4, -1, string.Empty, 0),
+            new(Slot5, -1, string.Empty, 0),
+            new(Slot6, -1, string.Empty, 0),
+            new(Slot7, -1, string.Empty, 0)
         };
 
         PhotonNetwork.CreateRoom($"{roomName}", roomOptions); // 방 생성
@@ -424,6 +439,18 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             LobbyManager.IT.SetSlot(5, Slot5, (int)propertiesThatChanged[Slot5], (string)propertiesThatChanged["name"+Slot5], (int)propertiesThatChanged["team"+Slot5]);
             LobbyManager.IT.SetSlot(6, Slot6, (int)propertiesThatChanged[Slot6], (string)propertiesThatChanged["name"+Slot6], (int)propertiesThatChanged["team"+Slot6]);
             LobbyManager.IT.SetSlot(7, Slot7, (int)propertiesThatChanged[Slot7], (string)propertiesThatChanged["name"+Slot7], (int)propertiesThatChanged["team"+Slot7]);
+            
+            gameForSlots = new List<Slot>
+            {
+                new(Slot0, (int)propertiesThatChanged[Slot0], (string)propertiesThatChanged["name"+Slot0], (int)propertiesThatChanged["team"+Slot0]),
+                new(Slot1, (int)propertiesThatChanged[Slot1], (string)propertiesThatChanged["name"+Slot1], (int)propertiesThatChanged["team"+Slot1]),
+                new(Slot2, (int)propertiesThatChanged[Slot2], (string)propertiesThatChanged["name"+Slot2], (int)propertiesThatChanged["team"+Slot2]),
+                new(Slot3, (int)propertiesThatChanged[Slot3], (string)propertiesThatChanged["name"+Slot3], (int)propertiesThatChanged["team"+Slot3]),
+                new(Slot4, (int)propertiesThatChanged[Slot4], (string)propertiesThatChanged["name"+Slot4], (int)propertiesThatChanged["team"+Slot4]),
+                new(Slot5, (int)propertiesThatChanged[Slot5], (string)propertiesThatChanged["name"+Slot5], (int)propertiesThatChanged["team"+Slot5]),
+                new(Slot6, (int)propertiesThatChanged[Slot6], (string)propertiesThatChanged["name"+Slot6], (int)propertiesThatChanged["team"+Slot6]),
+                new(Slot7, (int)propertiesThatChanged[Slot7], (string)propertiesThatChanged["name"+Slot7], (int)propertiesThatChanged["team"+Slot7])
+            };
 
             // LobbyManager.IT.SetSlot(0, PhotonNetwork.MasterClient.NickName); // 방장
         
@@ -462,6 +489,15 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         return n;
     }
 
+    public int GetTankTeamNum(string name) {
+        foreach (var slot in LobbyManager.IT.roomPlayerSlots) {
+            if (slot.nickName == name)
+                return slot.teamNumber;
+        }
+
+        return -1;
+    }
+
     public int GetSlotTeamNum(string name)
     {
         Debug.Log("acNum: " + name);
@@ -493,6 +529,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             aiCount = 0;
         
         CustomRoomProperties[IsStarted] = true; // 게임 시작
+        isStarted = true;
         
         PhotonNetwork.CurrentRoom.SetCustomProperties(CustomRoomProperties); // 방의 프로퍼티 설정
     }
@@ -502,8 +539,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 public class Slot
 {
     public string slotName;
-    public string nickName;
     public int actorNumber;
+    public string nickName;
     public int teamNumber;
 
     public Slot(string slotName, int actorNumber, string nickName, int teamNumber = 0)
