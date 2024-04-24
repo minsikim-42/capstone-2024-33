@@ -958,6 +958,7 @@ MonoBehaviour:
   currentHP: 0
   isAi: 0
   isDead: 0
+  teamNum: 0
 --- !u!114 &9161815681849941370
 MonoBehaviour:
   m_ObjectHideFlags: 0

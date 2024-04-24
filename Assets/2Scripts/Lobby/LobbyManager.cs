@@ -29,6 +29,8 @@ public class LobbyManager : MonoBehaviour
     [Serializable]
     public class NicknameEvent : UnityEvent { }
     public NicknameEvent onNicknameEvent = new NicknameEvent(); // 닉네임 이벤트
+
+    [SerializeField] TextMeshProUGUI titleText;
     
     [Header("Create Room")]
     [SerializeField] private Button createRoomButton; // 방 생성 버튼
@@ -36,6 +38,9 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] private TMP_InputField createRoomInputField; // 방 생성 입력 필드
     [SerializeField] private TextMeshProUGUI createRoomAlertText; // 방 생성 경고 텍스트
     [SerializeField] private Button createRoomCreateButton; // 방 생성 버튼
+    [SerializeField] private Button isTeamButtonTrue; // 팀전 선택 버튼
+    [SerializeField] private Button isTeamButtonFalse; // 팀전 선택 버튼
+    public bool isTeamMode;
     [SerializeField] private Button createRoomBackButton; // 방 생성 뒤로가기 버튼
     [SerializeField] private CanvasGroup createRoomButtonCg; // 방 생성 버튼 캔버스 그룹
     
@@ -53,12 +58,14 @@ public class LobbyManager : MonoBehaviour
     private List<RoomHandler> roomList = new List<RoomHandler>(); // 방 리스트
     [SerializeField] private Button leftRoomButton; // 방 뒤로가기 버튼
     [SerializeField] private Button gameStartButton; // 게임 시작 버튼
+	[SerializeField] private Button changeTeamButton; // 팀 변경 버튼
 
     [Header("Room Player List")] 
-    [SerializeField] private List<RoomPlayerSlotHandler> roomPlayerSlotHandlers; // 방 플레이어 슬롯 핸들러들
+    [SerializeField] public List<RoomPlayerSlotHandler> roomPlayerSlots; // 방 플레이어 슬롯 핸들러들
     
     [Header("Result")]
     [SerializeField] private CanvasGroup resultCanvasGroup; // 결과 캔버스 그룹
+    [SerializeField] private TextMeshProUGUI resultText; // result text
     [SerializeField] private Button goToLobbyButton; // 로비로 가는 버튼
     [SerializeField] private List<ResultSlotHandler> resultSlots; // 결과 표시 슬롯들
 
@@ -71,8 +78,13 @@ public class LobbyManager : MonoBehaviour
         nicknameSaveButton.onClick.AddListener(SaveNickname);
         nicknameBackButton.onClick.AddListener(BackNickname);
         
+        createRoomCg.alpha = 0;
         createRoomButton.onClick.AddListener(ShowCreateRoom);
         createRoomCreateButton.onClick.AddListener(CreateRoom);
+        isTeamMode = false;
+        isTeamButtonFalse.onClick.AddListener(SetIsTeamMode);
+        isTeamButtonTrue.onClick.AddListener(SetIsTeamMode);
+        isTeamButtonTrue.gameObject.SetActive(false);
         createRoomBackButton.onClick.AddListener(BackCreateRoom);
         
         leftButton.onClick.AddListener(LeftRoomList);
@@ -81,7 +93,7 @@ public class LobbyManager : MonoBehaviour
         leftRoomButton.onClick.AddListener(LeftRoom);
         
         gameStartButton.onClick.AddListener(GameStart);
-        
+        changeTeamButton.onClick.AddListener(ChangeTeam);
         goToLobbyButton.onClick.AddListener(GoToLobby);
         
         user.GetUserInfoFromBackend(); // 유저 정보를 가져옴
@@ -175,6 +187,13 @@ public class LobbyManager : MonoBehaviour
         createRoomButtonCg.alpha = 0;
         createRoomButtonCg.blocksRaycasts = false;
         createRoomButtonCg.interactable = false;
+
+        titleText.SetText(PhotonNetwork.CurrentRoom.Name);
+
+        if (isTeamMode == false) 
+            changeTeamButton.gameObject.SetActive(false);
+        else
+            changeTeamButton.gameObject.SetActive(true);
     }
     // Room 숨기기
     public void HideRoom()
@@ -186,6 +205,8 @@ public class LobbyManager : MonoBehaviour
         createRoomButtonCg.alpha = 1;
         createRoomButtonCg.blocksRaycasts = true;
         createRoomButtonCg.interactable = true;
+
+        titleText.SetText("Lobby");
     }
     
     
@@ -336,6 +357,11 @@ public class LobbyManager : MonoBehaviour
                 aiCount++;
 
             // 방 리스트에서 방 찾아서 활성화
+            if ((bool)properties["isTeamMode"] == true) {
+                roomList[roomInfos.IndexOf(room)].transform.GetChild(0).GetComponent<Image>().color = new Color(.8f, .4f, .8f);
+            } else {
+                roomList[roomInfos.IndexOf(room)].transform.GetChild(0).GetComponent<Image>().color = new Color(.7f, .7f, .7f);
+            }
             roomList[roomInfos.IndexOf(room)].Active(room.Name, room.PlayerCount + aiCount);
         }
     }
@@ -377,8 +403,22 @@ public class LobbyManager : MonoBehaviour
         createRoomCg.alpha = 0;
         createRoomCg.blocksRaycasts = false;
         createRoomCg.interactable = false;
-        
+
         NetworkManager.IT.CreateRoom(createRoomInputField.text); // 방 생성
+    }
+
+    private void SetIsTeamMode()
+    {
+        if (isTeamMode == false) {
+            isTeamMode = true;
+            isTeamButtonTrue.gameObject.SetActive(true);
+            isTeamButtonFalse.gameObject.SetActive(false);
+        }
+        else {
+            isTeamMode = false;
+            isTeamButtonTrue.gameObject.SetActive(false);
+            isTeamButtonFalse.gameObject.SetActive(true);
+        }
     }
 
     public void SetRoom()
@@ -388,19 +428,94 @@ public class LobbyManager : MonoBehaviour
         ShowRoom(); // 방 보이기
     }
 
+    public List<RoomPlayerSlotHandler> GetAllSlots()
+    {
+        var li = new List<RoomPlayerSlotHandler>();
+
+        foreach(var slot in roomPlayerSlots)
+        {
+            li.Add(slot);
+        }
+
+        return li;
+    }
+
+    public List<RoomPlayerSlotHandler> GetSlots()
+    {
+        var li = new List<RoomPlayerSlotHandler>();
+
+        foreach(var slot in roomPlayerSlots)
+        {
+            if (slot.actorNumber != -1) // 빈 슬롯이 아니면
+            {
+                li.Add(slot);
+            }
+        }
+
+        return li;
+    }
+
     public void SetSlotEmpty(int slotIndex)
     {
-        roomPlayerSlotHandlers[slotIndex].SetEmptySlot(); // 슬롯을 빈 슬롯으로 변경
+        roomPlayerSlots[slotIndex].SetSlotEmpty(); // 슬롯을 빈 슬롯으로 변경
     }
     
     public void SetSlotAI(int slotIndex)
     {
-        roomPlayerSlotHandlers[slotIndex].SetSlotAI(); // 슬롯을 AI 슬롯으로 변경
+        roomPlayerSlots[slotIndex].SetSlotAI(); // 슬롯을 AI 슬롯으로 변경
     }
     
-    public void SetSlot(int slotIndex, string nickname)
+    public void SetSlotPlayer(int slotIndex, string nickname)
     {
-        roomPlayerSlotHandlers[slotIndex].SetPlayerNickname(nickname); // 슬롯을 플레이어 슬롯으로 변경
+        roomPlayerSlots[slotIndex].SetPlayerNickname(nickname); // 슬롯을 플레이어 슬롯으로 변경
+    }
+
+    public void SetSlot(int slotIndex, string slotName, int actorNumber, string nickName, int tNum) {
+        roomPlayerSlots[slotIndex].SetSlot(slotName, actorNumber, nickName, tNum);
+    }
+
+    public void InitSlot(int isT) {
+        var player = PhotonNetwork.LocalPlayer;
+        if (isT == 1) {
+            roomPlayerSlots[0].SetSlot("Slot0", 1, player.NickName, 1); // actorNumber : 1
+            roomPlayerSlots[1].SetSlot("Slot1", -1, string.Empty, 0);
+            roomPlayerSlots[2].SetSlot("Slot2", -1, string.Empty, 0);
+            roomPlayerSlots[3].SetSlot("Slot3", -1, string.Empty, 0);
+            roomPlayerSlots[4].SetSlot("Slot4", -1, string.Empty, 0);
+            roomPlayerSlots[5].SetSlot("Slot5", -1, string.Empty, 0);
+            roomPlayerSlots[6].SetSlot("Slot6", -1, string.Empty, 0);
+            roomPlayerSlots[7].SetSlot("Slot7", -1, string.Empty, 0);
+        } else {
+            roomPlayerSlots[0].SetSlot("Slot0", 1, player.NickName, 0);
+            roomPlayerSlots[1].SetSlot("Slot1", -1, string.Empty, 0);
+            roomPlayerSlots[2].SetSlot("Slot2", -1, string.Empty, 0);
+            roomPlayerSlots[3].SetSlot("Slot3", -1, string.Empty, 0);
+            roomPlayerSlots[4].SetSlot("Slot4", -1, string.Empty, 0);
+            roomPlayerSlots[5].SetSlot("Slot5", -1, string.Empty, 0);
+            roomPlayerSlots[6].SetSlot("Slot6", -1, string.Empty, 0);
+            roomPlayerSlots[7].SetSlot("Slot7", -1, string.Empty, 0);
+        }
+    }
+
+    public void SetTeamColor(int slotIndex, int teamNum) {
+        if (isTeamMode == false) {
+            roomPlayerSlots[slotIndex].GetComponent<Image>().color = new Color(0.3f, 0.3f, 0.3f);
+            return ;
+        }
+        // roomPlayerSlots[slotIndex].SetTeamColor(teamNum);
+        if (teamNum == 1)
+            roomPlayerSlots[slotIndex].GetComponent<Image>().color = new Color(.9f, .2f, .2f, 0.9f); // Red
+        else if (teamNum == 2)
+            roomPlayerSlots[slotIndex].GetComponent<Image>().color = new Color(.2f, .2f, .9f, 0.9f); // Blue
+        else
+            roomPlayerSlots[slotIndex].GetComponent<Image>().color = new Color(.3f, .3f, .3f); // Gray
+    }
+
+    public void SetIsPlayerColor(int slotIndex, bool isPlayer) {
+        if (isPlayer == true)
+            roomPlayerSlots[slotIndex].transform.GetChild(0).GetComponent<Image>().color = new Color(0.9f, 0.9f, 0.9f);
+        else
+            roomPlayerSlots[slotIndex].transform.GetChild(0).GetComponent<Image>().color = new Color(0.6f, 0.6f, 0.6f);
     }
     
     // 방 생성 창 숨기기
@@ -435,6 +550,11 @@ public class LobbyManager : MonoBehaviour
         NetworkManager.IT.LeftRoom(); // 방에서 나가기
     }
 
+    public void ChangeTeam()
+    {
+        NetworkManager.IT.SetChangeTeam();
+    }
+
     // 게임 시작 버튼 보이기 (마스터 클라이언트만)
     public void SetGameStart(bool isMasterClient)
     {
@@ -442,14 +562,15 @@ public class LobbyManager : MonoBehaviour
     }
     private void GameStart()
     {
+        if (NetworkManager.IT.GetPlayerNum() < 1) { // 방장을 제외한 인원수
+            return ;
+        }
+
         ShowLoading(); // 로딩창 보이기
         
         NetworkManager.IT.GameStart(); // 게임 시작
     }
-    
-    
-    
-    
+
     
     #region Result
     public void HideResult()
@@ -461,10 +582,11 @@ public class LobbyManager : MonoBehaviour
     
     public void ShowResult(string data)
     {
-		Debug.Log("LBM- showResult");
 		resultCanvasGroup.alpha = 1; // 결과 캔버스 그룹의 알파값을 0으로 변경
         resultCanvasGroup.blocksRaycasts = true; // 결과 캔버스 그룹의 블록 레이캐스트를 false로 변경
         resultCanvasGroup.interactable = true; // 결과 캔버스 그룹의 인터렉터블을 false로 변경
+
+        resultText.SetText(GameManager.IT.resultText);
 
         var dataList = data.Split(','); // 결과 데이터를 /로 나누어 배열로 저장
         
@@ -474,8 +596,21 @@ public class LobbyManager : MonoBehaviour
             var resultData = dataList[i].Split('/'); // 결과 데이터를 /로 나누어 배열로 저장
             var nickname = resultData[0]; // 닉네임
             var damage = resultData[1]; // 데미지
+            var teamNum = resultData[2]; // 팀넘버 (0,1,2)
             
-            slot.SetSlot(nickname, damage); // 슬롯에 닉네임과 데미지를 표시
+            slot.SetResultSlot(nickname, damage, teamNum); // 슬롯에 닉네임과 데미지를 표시
+
+			var c = teamNum switch
+			{
+				// 개인전
+				"0" => new Color(0.7f, 0.7f, 0.7f, 0.8f),
+				// 레드
+				"1" => new Color(0.9f, 0.2f, 0.2f, 0.8f),
+				// 블루
+				"2" => new Color(0.2f, 0.2f, 0.9f, 0.8f),
+				_ => Color.magenta,
+			};
+			slot.GetComponent<Image>().color = c;
         }
         
         resultCanvasGroup.alpha = 1; // 결과 캔버스 그룹의 알파값을 1로 변경

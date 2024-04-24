@@ -80,15 +80,15 @@ public class MapHandler : MonoBehaviour
                 py = center.y + j;
                 ny = center.y - j;
                 
-                texture.SetPixel(px, py, Color.clear);
+                texture.SetPixel(px, py, Color.clear); // 랜더러도 갱신됨
                 texture.SetPixel(nx, py, Color.clear);
                 texture.SetPixel(px, ny, Color.clear);
                 texture.SetPixel(nx, ny, Color.clear);
             }
         }
         
-        texture.Apply();
-        SetSprite();
+        texture.Apply(); // 바뀐 픽셀대로 텍스처를 바꿈
+        SetSprite(); // 맵밖 텍스처 색깔 적용
         
         Destroy(gameObject.GetComponent<PolygonCollider2D>()); // 기존 폴리곤 콜라이더 삭제
         gameObject.AddComponent<PolygonCollider2D>(); // 새로운 폴리곤 콜라이더 추가
@@ -165,6 +165,7 @@ public class MapHandler : MonoBehaviour
     }
     private void SetSprite()
     {
-        spriteRenderer.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.one * 0.5f); // 스프라이트 설정
+        spriteRenderer.sprite = Sprite.Create(texture, 
+            new Rect(0, 0, texture.width, texture.height), Vector2.one * 0.5f); // 스프라이트 설정
     }
 }

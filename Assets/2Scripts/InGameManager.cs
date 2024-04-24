@@ -19,8 +19,12 @@ public class InGameManager : MonoBehaviour
     
     private string playerPrefabName = "Tank"; // 플레이어 프리팹 이름
     private string aiPrefabName = "AI"; // AI 프리팹 이름
-	public float MAX_WIDTH = 2048;
-	public float MAX_HEIGHT = 1600;
+
+    public bool isTeamMode;
+    public int redTeam1;
+    public int blueTeam2;
+	  public float MAX_WIDTH = 2048;
+	  public float MAX_HEIGHT = 1600;
     
     [Header("Spawn Points")]
     [SerializeField] private List<Transform> spawnPoints; // 스폰 포인트 리스트
@@ -39,6 +43,7 @@ public class InGameManager : MonoBehaviour
     private int currentTurnTime; // 현재 턴 시간
     private float timer; // 타이머
     private bool isPlayingTimer; // 타이머 플레이 여부
+
     
     private Player currentTurnPlayer; // 현재 턴의 플레이어
     private AIHandler currentTurnAI; // 현재 턴의 AI
@@ -68,14 +73,21 @@ public class InGameManager : MonoBehaviour
         PV = GetComponent<PhotonView>(); // 포톤 뷰 설정
         
         cameraHandler = FindObjectOfType<CameraHandler>(); // 카메라 핸들러 설정
+
+        isTeamMode = LobbyManager.IT.isTeamMode;
     }
 
     private async void Start()
     {
         UIManager.IT.SetDarkScreen(); // 어두운 화면 설정
         
+
         if (PhotonNetwork.IsMasterClient)
         {
+            if (isTeamMode) {
+                redTeam1 = NetworkManager.IT.GetTeamNum(1);
+                blueTeam2 = NetworkManager.IT.GetTeamNum(2);
+            }
             // spawnPoints 중 모든 플레이어에게 랜덤으로 하나의 Spawn Point를 할당 (중복 X)
             // Shuffle Spawn Points
             var spawnPoints = new List<Transform>(this.spawnPoints); // 스폰 포인트 리스트 복사
@@ -156,6 +168,8 @@ public class InGameManager : MonoBehaviour
         {
             var aiPosition = aiSpawnPoints[i].position; // AI 스폰 포인트
             var ai = PhotonNetwork.Instantiate(aiPrefabName, aiPosition, Quaternion.identity).GetComponent<AIHandler>(); // AI 생성
+            ai.tankHandler.SetTeamNum(1);
+            Debug.Log(ai.actorNumber); // AI actorNumber
                 
             aiList.Add(ai); // AI 리스트에 추가
         }
@@ -165,20 +179,43 @@ public class InGameManager : MonoBehaviour
     {
         turnList.Clear(); // 턴 리스트 초기화
         
-        // 플레이어
-        foreach (var player in PhotonNetwork.PlayerList)
-        {
-            var turn = new Turn { actorNumber = player.ActorNumber, nickname = player.NickName }; // 턴 생성 (플레이어)
+        // // 플레이어
+        // foreach (var player in PhotonNetwork.PlayerList)
+        // {
+        //     var turn = new Turn { actorNumber = player.ActorNumber, nickname = player.NickName }; // 턴 생성 (플레이어)
             
-            turnList.Add(turn); // 턴 리스트에 추가
-        }
+        //     turnList.Add(turn); // 턴 리스트에 추가
+        // }
 
-        // AI
-        for (var i = 0; i < NetworkManager.IT.aiCount; i++)
-        {
-            var turn = new Turn { actorNumber = aiList[i].actorNumber, nickname = $"AI_{aiList[i].actorNumber - 1000}"}; // 턴 생성 (AI)
+        // // AI
+        // for (var i = 0; i < NetworkManager.IT.aiCount; i++)
+        // {
+        //     var turn = new Turn { actorNumber = aiList[i].actorNumber, nickname = $"AI_{aiList[i].actorNumber - 1000}"}; // 턴 생성 (AI)
             
-            turnList.Add(turn); // 턴 리스트에 추가
+        //     turnList.Add(turn); // 턴 리스트에 추가
+        // }
+
+        int aiIdx=0;
+        // foreach (var slot in LobbyManager.IT.GetSlots()) { // 왜 로비매니저인데 작동하지?
+        foreach (var slot in NetworkManager.IT.gameForSlots) {
+            Debug.Log("slot actor Num: " + slot.actorNumber);
+            Debug.Log("slot nickname: " + slot.nickName);
+            if (slot.actorNumber == 99)
+            {
+                Debug.Log("slot AI actNum: " + slot.actorNumber);
+                var turn = new Turn { actorNumber = aiList[aiIdx].actorNumber, nickName = "AI_"+(aiList[aiIdx].actorNumber-1000), teamNumber = slot.teamNumber }; // AI턴 생성
+                turnList.Add(turn);
+                aiIdx++;
+            }
+            else if (slot.actorNumber != -1)
+            {
+                var turn = new Turn { actorNumber = slot.actorNumber, nickName = slot.nickName, teamNumber = slot.teamNumber }; // Player턴 생성
+                turnList.Add(turn);
+            }
+            else
+            {
+                // 빈 슬롯
+            }
         }
         
         // Shuffle
@@ -193,9 +230,14 @@ public class InGameManager : MonoBehaviour
         damageList.Clear(); // 누적 데미지 리스트 초기화
         
         // 누적 데미지 리스트에 플레이어, AI 추가
-        foreach (var damage in turnList.Select(turn => new Damage { nickname = turn.nickname, damage = 0}))
+        // foreach (var damage in turnList.Select(turn => new Damage { nickname = turn.nickname, damage = 0}))
+        // {
+        //     damageList.Add(damage); // 데미지 리스트에 추가
+        // }
+        foreach (var turn in turnList)
         {
-            damageList.Add(damage); // 데미지 리스트에 추가
+            var damage = new Damage { nickName = turn.nickName, damage = 0, teamNumber = turn.teamNumber };
+            damageList.Add(damage);
         }
     }
 
@@ -258,8 +300,8 @@ public class InGameManager : MonoBehaviour
     // 누적 데미지 리스트에 데미지 추가
     public void SetDamage(float damage)
     {
-        var turn = damageList.Find(t => t.nickname == missilePlayerNickname); // 턴 찾기
-            turn.damage += (int)damage; // 누적 데미지 추가
+        var turn = damageList.Find(t => t.nickName == missilePlayerNickname); // 턴 찾기
+        turn.damage += (int)damage; // 누적 데미지 추가
     }
     
     // RPC로 player에게 턴을 넘김 
@@ -349,7 +391,7 @@ public class InGameManager : MonoBehaviour
         {
             // R 누르면 Result
             if (GameManager.IT.IsTestMode() && Input.GetKeyDown(KeyCode.R))
-                Result();
+                Result(0);
             
             if (isPlayingTimer) // 플레이 중일 경우
             {
@@ -518,8 +560,8 @@ public class InGameManager : MonoBehaviour
         
         foreach (var turn in turnList)
         {
-            if (turn.nickname != string.Empty)
-                turn.nickname = string.Empty; // 닉네임 초기화
+            if (turn.nickName != string.Empty)
+                turn.nickName = string.Empty; // 닉네임 초기화
             
             // 플레이어 (actorNumber < 1000)
             if (turn.actorNumber < 1000) 
@@ -530,6 +572,8 @@ public class InGameManager : MonoBehaviour
                 if (player == null)
                 {
                     turnListToRemove.Add(turn); // 제거할 턴 리스트에 추가
+                    
+                    DelTeamCount(turn.teamNumber);
                 }
                 // 플레이어가 존재할 경우
                 else
@@ -538,7 +582,11 @@ public class InGameManager : MonoBehaviour
                     var tank = GameObject.Find(player.NickName).GetComponent<TankHandler>(); // 탱크 찾기
 
                     if (tank.currentHP <= 0)
+                    {
                         turnListToRemove.Add(turn); // 제거할 턴 리스트에 추가
+                        
+                        DelTeamCount(turn.teamNumber);
+                    }
                 }
             }
             // AI (actorNumber >= 1000)
@@ -549,6 +597,8 @@ public class InGameManager : MonoBehaviour
                 {
                     // 체력 0 이하일 경우 (죽었을 경우) 턴 리스트에서 제거
                     turnListToRemove.Add(turn); // 제거할 턴 리스트에 추가
+                    
+                    DelTeamCount(turn.teamNumber);
                 }
                 // AI가 없을 경우
                 else
@@ -557,7 +607,11 @@ public class InGameManager : MonoBehaviour
                     
                     // 체력 0 이하일 경우 (죽었을 경우) 턴 리스트에서 제거
                     if (ai.tankHandler.currentHP <= 0)
+                    {
                         turnListToRemove.Add(turn); // 제거할 턴 리스트에 추가
+                        
+                        DelTeamCount(turn.teamNumber);
+                    }
                 }
             }
         }
@@ -570,9 +624,38 @@ public class InGameManager : MonoBehaviour
             turnList.Remove(turn); // 턴 리스트에서 제거
         }
         
+        // 팀모드일경우 한팀의 모든 플레이어가 없을경우
+        if (isTeamMode)
+        {
+            if (redTeam1 < 1)
+            {
+                Result(2); // Blue(2) Team Win
+            }
+            else if (blueTeam2 < 1)
+            {
+                Result(1); // Red(1) Team Win
+            }
+        }
         // turnList.Count가 1이면 결과 표시
-        if (turnList.Count <= 1)
-            Result(); // 결과 표시
+        else if (turnList.Count <= 1)
+            Result(0); // 결과 표시
+    }
+
+    private void DelTeamCount(int t)
+    {
+        if (isTeamMode)
+        {
+            if (t == 1)
+            {
+                Debug.Log("del team1");
+                redTeam1--;
+            }
+            else
+            {
+                Debug.Log("del team2");
+                blueTeam2--;
+            }
+        }
     }
 
     public void TankHitEffect(Vector3 pos)
@@ -610,9 +693,9 @@ public class InGameManager : MonoBehaviour
         PhotonNetwork.LoadLevel("Lobby"); // 로비 씬으로 이동
     }
     
-    public void Result()
+    public void Result(int t)
     {
-		Debug.Log("result fnc!");
+        Debug.Log("result fnc! t: " + t);
         var data = string.Empty; // 데이터
 
         // damage가 큰 순으로 정렬
@@ -620,22 +703,28 @@ public class InGameManager : MonoBehaviour
         
         foreach (var d in damageList)
         {
-            data += d.nickname + "/" + d.damage + ",";
+            data += d.nickName + "/" + d.damage + "/" + d.teamNumber + ",";
             
             // 마지막이라면
             if (d == damageList[^1])
                 data = data.Remove(data.Length - 1); // 마지막 콤마 제거
         }
         
-        PV.RPC(nameof(RPC_Result), RpcTarget.All, data); // RPC로 결과 표시
+        PV.RPC(nameof(RPC_Result), RpcTarget.All, data, t); // RPC로 결과 표시
     }
     
     [PunRPC]
-    private void RPC_Result(string data)
+    private void RPC_Result(string data, int t)
     {
-		Debug.Log("result RPC fnc!");
+        Debug.Log("result RPC fnc!");
         GameManager.IT.isResult = true; // 결과 표시
         GameManager.IT.result = data; // 결과 데이터 저장
+		if (t == 0)
+			GameManager.IT.resultText = "Result";
+		else if (t == 1)
+			GameManager.IT.resultText = "Red Team Win!";
+		else
+			GameManager.IT.resultText = "Blue Team Win!";
 
         PhotonNetwork.LeaveRoom(); // 방 나가기
         PhotonNetwork.LoadLevel("Lobby"); // 로비 씬으로 이동
@@ -647,12 +736,14 @@ public class Turn
 {
     //public int orderIndex; // 순서 인덱스
     public int actorNumber; // ActorNumber
-    public string nickname; // 닉네임
+    public string nickName; // 닉네임
+    public int teamNumber; // TeamNumber
 }
 
 [Serializable]
 public class Damage
 {
-    public string nickname; // 닉네임
+    public string nickName; // 닉네임
     public int damage; // 데미지
+    public int teamNumber;
 }

@@ -1,4 +1,8 @@
 using UnityEngine;
+using System;
+using System.Collections.Generic;
+using Photon.Pun;
+using Unity.Properties;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +14,7 @@ public class GameManager : MonoBehaviour
 
     public bool isResult = false; // 결과창 표시 여부
     public string result = string.Empty; // 결과창 표시 내용
+    public string resultText = string.Empty; // 결과창 텍스트
     
     [Header("Test Mode")]
     [SerializeField] private bool isTestMode; // 테스트 모드 여부

@@ -5,7 +5,11 @@ using UnityEngine.UI;
 
 public class RoomPlayerSlotHandler : MonoBehaviourPun
 {
-    private int slotIndex; // 슬롯의 인덱스
+    public int slotIndex; // 슬롯의 인덱스
+	public string slotName;
+    public int actorNumber;
+    public string nickName;
+    public int teamNumber;
     
     [SerializeField] private TextMeshProUGUI playerNicknameText; // 플레이어 닉네임 텍스트
     [SerializeField] private Button emptyButton; // Empty 버튼
@@ -22,13 +26,15 @@ public class RoomPlayerSlotHandler : MonoBehaviourPun
 
     private void Init()
     {
-        SetEmptySlot(); // 빈 슬롯으로 초기화
+        SetSlotEmpty(); // 빈 슬롯으로 초기화
     }
     
-    public void SetEmptySlot()
+    public void SetSlotEmpty()
     {
         playerNicknameText.text = string.Empty; // 플레이어 닉네임 텍스트를 비움
         emptyButtonText.text = "Empty"; // Empty 버튼 텍스트를 Empty로 변경
+
+		teamNumber = 0;
 
         // 마스터 클라이언트인 경우 Empty 버튼을 활성화하고, 클릭 이벤트를 추가
         if (PhotonNetwork.IsMasterClient)
@@ -37,6 +43,9 @@ public class RoomPlayerSlotHandler : MonoBehaviourPun
             
             emptyButton.onClick.RemoveAllListeners();
             emptyButton.onClick.AddListener(SetAI);
+
+			// actorNumber = 1;
+			// nickName = PhotonNetwork.LocalPlayer.NickName;
         }
         else
         {
@@ -47,10 +56,25 @@ public class RoomPlayerSlotHandler : MonoBehaviourPun
     public void SetPlayerNickname(string nickname)
     {
         playerNicknameText.text = nickname; // 플레이어 닉네임 텍스트를 변경
-        SetPlayerSlot(); // 플레이어 슬롯으로 변경
+        SetSlotPlayer(); // 플레이어 슬롯으로 변경
     }
+
+	public void SetSlot(string slotNa, int actorNum, string nickNa, int tNum) {
+		slotName = slotNa;
+		actorNumber = actorNum;
+		nickName = nickNa;
+		teamNumber = tNum;
+
+		if (actorNum == -1) {
+			SetSlotEmpty();
+		} else if (actorNum == 99) {
+			SetSlotAI();
+		} else {
+			SetSlotPlayer();
+		}
+	}
     
-    private void SetPlayerSlot()
+    private void SetSlotPlayer()
     {
         emptyButtonText.text = string.Empty; // Empty 버튼 텍스트를 비움
         emptyButton.enabled = false; // Empty 버튼 비활성화
@@ -77,5 +101,16 @@ public class RoomPlayerSlotHandler : MonoBehaviourPun
             playerNicknameText.text = "AI";
             NetworkManager.IT.SetSlotToAI(slotIndex); // 슬롯을 AI 슬롯으로 변경
         }
+    }
+
+    public void SetTeamColor(int teamNum) {
+        ColorBlock colorBlock = emptyButton.colors;
+        if (teamNum == 1) {
+            colorBlock.normalColor = Color.red;
+        } else {
+            colorBlock.normalColor = Color.blue;
+        }
+
+        emptyButton.colors = colorBlock;
     }
 }

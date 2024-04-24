@@ -8084,6 +8084,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9938fc2d46440b4f9a275413d1248f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTeamMode: 0
+  redTeam1: 0
+  blueTeam2: 0
   spawnPoints:
   - {fileID: 1233092371}
   - {fileID: 1233092370}
