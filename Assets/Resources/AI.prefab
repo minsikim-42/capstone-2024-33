@@ -940,12 +940,12 @@ MonoBehaviour:
   sprite: {fileID: 8812513033542056804}
   maxMoveValue: 100
   currentMoveValue: 0
-  moveCoefficient: 15
+  moveCoefficient: 30
   tankMoveSpeed: 2
   maxPowerValue: 100
   currentPowerValue: 0
   powerCoefficient: 100
-  projectileFireCoefficient: 0.15
+  projectileFireCoefficient: 0.3
   projectileDegrees: 0
   delta: 30
   spacePressed: 0

@@ -31,7 +31,7 @@ public class  TankHandler : MonoBehaviour
 
     public bool spacePressed = false; // 스페이스바 눌림 여부
     
-    private int direction = 1; // 탱크 방향 (1: 오른쪽, -1: 왼쪽)
+    [SerializeField] private int direction = 1; // 탱크 방향 (1: 오른쪽, -1: 왼쪽)
     
     [SerializeField] private ProjectileHandler projectilePrefab; // 미사일 프리팹
     
@@ -137,7 +137,22 @@ public class  TankHandler : MonoBehaviour
         // 스페이스바를 누르지 않은 상태라면
         else
         {
-            // 현재 이동값이 0보다 크다면
+            // if (Input.GetKey(KeyCode.LeftArrow)) {
+            //     if (currentMoveValue > 0 && !isAi && isTurn) // 현재 이동가능이 0보다 크다면
+            //     {
+            //         LeftArrowPressed();
+            //     }
+            //     direction = -1;
+            // } else if (Input.GetKey(KeyCode.RightArrow)) {
+            //     if (currentMoveValue > 0 && !isAi && isTurn) // 현재 이동값이 0보다 크다면
+            //     {
+            //         RightArrowPressed();
+            //     }
+            //     direction = 1;
+            // } else {
+            //     anim.SetBool("Idle", true); // Idle 애니메이션 활성화
+            //     anim.SetBool("Move", false); // Move 애니메이션 비활성화
+            // }
             if (currentMoveValue > 0) 
             {
                 // Left, Right : Move
@@ -183,7 +198,8 @@ public class  TankHandler : MonoBehaviour
     
     public void AngleInit()
     {
-        projectileDegrees = 0; // 미사일 발사 각도 초기화
+        if (isAi)
+            projectileDegrees = 0; // 미사일 발사 각도 초기화
         UIManager.IT.SetProjectileAngle(projectileDegrees, direction); // 미사일 발사 각도 UI 설정
     }
 
@@ -341,7 +357,10 @@ public class  TankHandler : MonoBehaviour
     
     private void Fire()
     {
-		SoundManager.IT.PlaySFX();
+        UIManager.IT.SetMove(currentMoveValue); // 이동 게이지 UI 설정
+        UIManager.IT.SetProjectileAngle(projectileDegrees, direction); // 미사일 발사 각도 UI 설정
+
+        SoundManager.IT.PlaySFX();
         isTurn = false; // 턴 종료
         UIManager.IT.selectableItem = false; // 아이템 선택 불가능으로 변경
         

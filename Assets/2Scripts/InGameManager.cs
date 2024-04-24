@@ -23,6 +23,8 @@ public class InGameManager : MonoBehaviour
     public bool isTeamMode;
     public int redTeam1;
     public int blueTeam2;
+	  public float MAX_WIDTH = 2048;
+	  public float MAX_HEIGHT = 1600;
     
     [Header("Spawn Points")]
     [SerializeField] private List<Transform> spawnPoints; // 스폰 포인트 리스트

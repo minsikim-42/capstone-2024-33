@@ -210,8 +210,16 @@ public class AIHandler : MonoBehaviour
                 return;
             }
 
-            power = launchSpeed * 6.67f * Random.Range(0.9f, 1.0f); // 파워 랜덤 설정
-            
+            power = launchSpeed * (1 / tankHandler.projectileFireCoefficient) * Random.Range(0.7f, 0.9f); // 파워 랜덤 설정
+
+            Debug.Log("dir: " + direction + ",  windP: " + InGameManager.IT.windPower);
+            if ((direction > 0 && InGameManager.IT.windPower > 0) || (direction < 0 && InGameManager.IT.windPower < 0)) // 바람방향 같으면
+            {
+                power *= (float)(100f - InGameManager.IT.windPower * 2f) / 100; // windPower Range(-20, 21)
+            }
+            else
+                power *= (float)(100f + InGameManager.IT.windPower * 2f) / 100; // windPower Range(-20, 21)
+
             // power는 100보다 크면 100으로 설정
             if (power > 100)
             {
@@ -245,7 +253,7 @@ public class AIHandler : MonoBehaviour
             tankHandler.projectileDegrees = 0; // 각도 초기화
             tankHandler.currentPowerValue = 0; // 파워 초기화
             
-            angle *= Random.Range(0.9f, 1.1f); // 각도 랜덤 설정
+            angle *= Random.Range(0.99f, 1.01f); // 각도 랜덤 설정
             
             StartCoroutine(SetAngle()); // 각도 설정 코루틴 시작
         }
