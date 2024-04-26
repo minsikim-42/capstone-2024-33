@@ -12,7 +12,7 @@ public class ProjectileHandler : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>(); 
 
-		rb.mass = 3.5f; // 1.5f: 화살, 3.5f: 미사일
+		rb.mass = InGameManager.IT.projectileMass; // 1.5f: 화살, 3.5f: 미사일
 		massPower = rb.mass;
     }
 
@@ -21,8 +21,9 @@ public class ProjectileHandler : MonoBehaviour
         this.isDoubleShot = isDoubleShot; // 더블샷 여부 설정
         
         // 방향 체크
-        if (direction == -1)
-            position.x = -position.x;
+        // position.x *= direction;
+		
+		Debug.Log("set proj x: " + position.x + ", dir: " + direction);
 
         // if (!transform.name.Contains("AI"))
         // {

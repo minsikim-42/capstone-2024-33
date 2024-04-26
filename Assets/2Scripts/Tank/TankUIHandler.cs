@@ -12,10 +12,15 @@ public class TankUIHandler : MonoBehaviour
     [SerializeField] private Slider hpSlider;
     [SerializeField] private TextMeshProUGUI hitDamageText;
     [SerializeField] private SpriteRenderer minimapIcon;
+    [SerializeField] private LineRenderer lineRenderer;
+    private int lineRenderCount;
 
     private void Awake()
     {
         tankHandler = GetComponent<TankHandler>();
+
+        // lineRenderer = gameObject.GetComponentInChildren<LineRenderer>();
+        lineRenderCount = InGameManager.IT.lineRenderCount;
     }
 
     private void Start()
@@ -52,8 +57,8 @@ public class TankUIHandler : MonoBehaviour
             minimapIcon.color = Color.red; // Minimap Icon 색상 설정
         else if (teamNum == 1)
             minimapIcon.color = Color.red; // Minimap Icon 색상 설정
-		else if (teamNum == 2)
-			minimapIcon.color = Color.blue;
+        else if (teamNum == 2)
+            minimapIcon.color = Color.blue;
         else if (teamNum == 3) // PV.MINE red
             minimapIcon.color = new Color(1f, 0.5f, 1f);
         else if (teamNum == 4) // PV.MINE blue
@@ -62,6 +67,8 @@ public class TankUIHandler : MonoBehaviour
             minimapIcon.color = Color.yellow;
         
         // AIHandler가 있으면 Minimap Icon 색상을 빨간색으로 설정
+
+        lineRenderer = GetComponent<LineRenderer>();
     }
 
     private void Update()
@@ -111,8 +118,8 @@ public class TankUIHandler : MonoBehaviour
             minimapIcon.color = Color.red; // Minimap Icon 색상 설정
         else if (t == 1)
             minimapIcon.color = Color.red; // Minimap Icon 색상 설정
-		else if (t == 2)
-			minimapIcon.color = Color.blue;
+        else if (t == 2)
+            minimapIcon.color = Color.blue;
         else if (t == 3) // PV.MINE red
             minimapIcon.color = new Color(1f, 0.5f, 1f);
         else if (t == 4) // PV.MINE blue
@@ -121,5 +128,33 @@ public class TankUIHandler : MonoBehaviour
             Debug.Log("t else: " + t);
             minimapIcon.color = Color.yellow;
         }
+    }
+
+    public void DrawLine(float value) {
+        float dir = tankHandler.GetDirection();
+        float power = value * tankHandler.projectileFireCoefficient;
+        float angle = UIManager.IT.GetProjectileAngle();
+        float timeStep = 0.02f;
+        Vector2 pos = tankHandler.transform.position + UIManager.IT.GetProjectileAngleVector();
+        float rad = angle * Mathf.Deg2Rad;
+        // float mass = InGameManager.IT.projectileMass;
+        float powerX = power * Mathf.Cos(rad) * dir;
+        float powerY = power * Mathf.Sin(rad);
+        float g = Mathf.Abs(Physics.gravity.y);
+
+        Debug.Log("p: " + power + ", agl: " + angle + ", pos: " + pos);
+
+        int renderCount = (int)(lineRenderCount * angle / 100f);
+        lineRenderer.positionCount = renderCount;
+        float t=0f;
+        for (int i=0; i<renderCount; i++) {
+            float x = powerX * t;
+            float y = powerY * t - g/2 * t*t;
+            Vector2 point = new Vector2(x,y);
+
+            lineRenderer.SetPosition(i, pos+point);
+            t += timeStep;
+        }
+
     }
 }
