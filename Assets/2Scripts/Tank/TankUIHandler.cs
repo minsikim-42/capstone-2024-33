@@ -144,7 +144,7 @@ public class TankUIHandler : MonoBehaviour
 
         Debug.Log("p: " + power + ", agl: " + angle + ", pos: " + pos);
 
-        int renderCount = (int)(lineRenderCount * angle / 100f);
+        int renderCount = (int)(lineRenderCount * Mathf.Abs(angle) / 100f);
         lineRenderer.positionCount = renderCount;
         float t=0f;
         for (int i=0; i<renderCount; i++) {
@@ -155,6 +155,10 @@ public class TankUIHandler : MonoBehaviour
             lineRenderer.SetPosition(i, pos+point);
             t += timeStep;
         }
+    }
 
+    public void CleanLine()
+    {
+        lineRenderer.positionCount = 0;
     }
 }

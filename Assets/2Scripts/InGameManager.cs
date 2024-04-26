@@ -746,6 +746,11 @@ public class InGameManager : MonoBehaviour
             // Debug.Log("turnIdx: " + turnIndex + ", turnNick: " + turnList[turnIndex].nickName);
         }
     }
+
+    public void CleanLine()
+    {
+        playerTankHandler.tankUIHandler.CleanLine();
+    }
 }
 
 [Serializable]
