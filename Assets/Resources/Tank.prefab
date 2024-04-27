@@ -979,7 +979,6 @@ MonoBehaviour:
   hitDamageText: {fileID: 8732018147098327995}
   minimapIcon: {fileID: 4326484105325179665}
   lineRenderer: {fileID: 1649605894744052454}
-  lineRenderCount: 50
 --- !u!50 &1487282787290453442
 Rigidbody2D:
   serializedVersion: 4

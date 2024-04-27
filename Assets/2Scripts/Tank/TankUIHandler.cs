@@ -13,14 +13,12 @@ public class TankUIHandler : MonoBehaviour
     [SerializeField] private TextMeshProUGUI hitDamageText;
     [SerializeField] private SpriteRenderer minimapIcon;
     [SerializeField] private LineRenderer lineRenderer;
-    private int lineRenderCount;
 
     private void Awake()
     {
         tankHandler = GetComponent<TankHandler>();
 
         // lineRenderer = gameObject.GetComponentInChildren<LineRenderer>();
-        lineRenderCount = InGameManager.IT.lineRenderCount;
     }
 
     private void Start()
@@ -131,9 +129,11 @@ public class TankUIHandler : MonoBehaviour
     }
 
     public void DrawLine(float value) {
+        float angle = UIManager.IT.GetProjectileAngle();
+        float lineRenderCount = InGameManager.IT.lineRenderCount;
         float dir = tankHandler.GetDirection();
         float power = value * tankHandler.projectileFireCoefficient;
-        float angle = UIManager.IT.GetProjectileAngle();
+
         float timeStep = 0.02f;
         Vector2 pos = tankHandler.transform.position + UIManager.IT.GetProjectileAngleVector();
         float rad = angle * Mathf.Deg2Rad;
@@ -144,7 +144,10 @@ public class TankUIHandler : MonoBehaviour
 
         Debug.Log("p: " + power + ", agl: " + angle + ", pos: " + pos);
 
-        int renderCount = (int)(lineRenderCount * Mathf.Abs(angle) / 100f);
+        if (angle > 90f && angle < 180f) angle -= 180;
+        else if (angle > 180f) angle -= 360;
+
+        int renderCount = (int)(lineRenderCount * Mathf.Abs(angle) * value / 100f);
         lineRenderer.positionCount = renderCount;
         float t=0f;
         for (int i=0; i<renderCount; i++) {

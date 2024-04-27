@@ -27,7 +27,7 @@ public class InGameManager : MonoBehaviour
     public float MAX_HEIGHT = 1600;
 
     public float projectileMass = 3.5f;
-    public int lineRenderCount = 150;
+    public float lineRenderCount = 2.5f;
     
     [Header("Spawn Points")]
     [SerializeField] private List<Transform> spawnPoints; // 스폰 포인트 리스트
