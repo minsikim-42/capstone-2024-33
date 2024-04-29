@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CameraHandler : MonoBehaviour
 {
-    private CinemachineVirtualCamera camera; // 카메라 (Cinemachine)
+    private CinemachineVirtualCamera _camera; // 카메라 (Cinemachine)
 
     public Transform target; // 카메라 타겟
     public Vector3 position; // 카메라 위치
@@ -17,7 +17,7 @@ public class CameraHandler : MonoBehaviour
     
     private void Awake()
     {
-        camera = GetComponent<CinemachineVirtualCamera>(); // 카메라 할당
+        _camera = GetComponent<CinemachineVirtualCamera>(); // 카메라 할당
     }
     
     public void Zoom(float value)
@@ -28,9 +28,9 @@ public class CameraHandler : MonoBehaviour
     private IEnumerator ZoomCoroutine(float value)
     {
         // orthographicSize와 value의 차이가 0.01f보다 큰 동안 반복 
-        while (Math.Abs(camera.m_Lens.OrthographicSize - value) > 0.01f)
+        while (Math.Abs(_camera.m_Lens.OrthographicSize - value) > 0.01f)
         {
-            camera.m_Lens.OrthographicSize = Mathf.MoveTowards(camera.m_Lens.OrthographicSize, value, zoomSpeed * Time.deltaTime); // 카메라의 orthographicSize를 value로 이동
+            _camera.m_Lens.OrthographicSize = Mathf.MoveTowards(_camera.m_Lens.OrthographicSize, value, zoomSpeed * Time.deltaTime); // 카메라의 orthographicSize를 value로 이동
             
             yield return null;
         }
@@ -40,14 +40,14 @@ public class CameraHandler : MonoBehaviour
     {
         this.target = target; // 타겟 설정
         
-        camera.Follow = target; // 카메라의 Follow를 타겟으로 설정
+        _camera.Follow = target; // 카메라의 Follow를 타겟으로 설정
     }
     
     public void SetOffset(Vector3 offset)
     {
         this.offset = offset; // 오프셋 설정
         
-        camera.GetCinemachineComponent<CinemachineFramingTransposer>().m_ScreenX = offset.x; // 카메라의 ScreenX를 offset.x로 설정
-        camera.GetCinemachineComponent<CinemachineFramingTransposer>().m_ScreenY = offset.y; // 카메라의 ScreenY를 offset.y로 설정
+        _camera.GetCinemachineComponent<CinemachineFramingTransposer>().m_ScreenX = offset.x; // 카메라의 ScreenX를 offset.x로 설정
+        _camera.GetCinemachineComponent<CinemachineFramingTransposer>().m_ScreenY = offset.y; // 카메라의 ScreenY를 offset.y로 설정
     }
 }
