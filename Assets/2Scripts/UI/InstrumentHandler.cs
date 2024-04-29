@@ -66,9 +66,8 @@ public class InstrumentHandler : MonoBehaviour
         // 방향에 따라 angleVector의 x값 부호 변경
         if (direction == -1)
         {
-            angleVector.x = -angleVector.x;
-            
-            return angleVector;
+            // angleVector.x = -angleVector.x;
+            return new Vector3(-angleVector.x, angleVector.y, 0);
         }
         else
         {

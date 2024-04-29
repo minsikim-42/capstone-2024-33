@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Photon.Pun;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private PowerSlider powerSlider; // Power 슬라이더
     [SerializeField] private SliderHandler moveSlider; // Move 슬라이더
     [SerializeField] private WindSliderHandler windSliderHandler; // 바람 슬라이더
+    [SerializeField] private PredictPowerHandler predictPowerSlider; // 예상 power UI용
+
 
     [Header("Instruments")]
     [SerializeField] private InstrumentHandler tankHorizontalInstrument; // 탱크의 수평각
@@ -40,6 +43,8 @@ public class UIManager : MonoBehaviour
         attackDamageButton.onClick.AddListener(SetAttackDamage); // Attack Damage 버튼 클릭 이벤트 추가
         
         exitButton.onClick.AddListener(ExitInGame); // Exit 버튼 클릭 이벤트 추가
+
+        predictPowerSlider.GetComponent<Slider>().onValueChanged.AddListener(DrawLine);
     }
 
     private void Start()
@@ -96,6 +101,7 @@ public class UIManager : MonoBehaviour
     public void SetProjectileAngle(float value,  int direction)
     {
         projectileAngleInstrument.SetAngle(value, direction); // 포탄의 발사각 변경
+        InGameManager.IT.DrawLine(predictPowerSlider.GetValue());
     }
     
     public float GetProjectileAngle()
@@ -186,6 +192,14 @@ public class UIManager : MonoBehaviour
             fadeImage.CrossFadeAlpha(1, time, false); // Fade Out
     }
     #endregion
+
+    public void DrawLine(float value)
+    {
+        InGameManager.IT.DrawLine(value);
+    }
+    public float GetPredictPower() {
+        return predictPowerSlider.GetValue();
+    }
     
     #region Exit
     private void ExitInGame()

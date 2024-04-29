@@ -14,4 +14,9 @@ public class SliderHandler : MonoBehaviour
     {
         slider.value = value; // Slider의 value 설정
     }
+
+    public float GetValue()
+    {
+        return slider.value;
+    }
 }

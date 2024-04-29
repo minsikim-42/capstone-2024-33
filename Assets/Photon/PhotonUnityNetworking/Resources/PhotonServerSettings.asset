@@ -58,6 +58,7 @@ MonoBehaviour:
   - RPC_ExitInGame
   - RPC_Result
   - RPC_Die
+  - RPC_SetTeamNum
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

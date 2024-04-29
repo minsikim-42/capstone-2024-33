@@ -33,7 +33,7 @@ public class  TankHandler : MonoBehaviour
     
     [SerializeField] private int direction = 1; // 탱크 방향 (1: 오른쪽, -1: 왼쪽)
     
-    [SerializeField] private ProjectileHandler projectilePrefab; // 미사일 프리팹
+    [SerializeField] public ProjectileHandler projectilePrefab; // 미사일 프리팹
     
     [Header("Raycast")]
     public float raycastDistance = 0.0f; // 레이캐스트 거리
@@ -60,7 +60,7 @@ public class  TankHandler : MonoBehaviour
     public float maxHP; // 최대 HP
     public float currentHP; // 현재 HP
     
-    private TankUIHandler tankUIHandler; // 탱크 UI 핸들러
+    public TankUIHandler tankUIHandler; // 탱크 UI 핸들러
     
     public bool isAi = false; // AI 여부
     public bool isDead = false; // 사망 여부
@@ -98,7 +98,7 @@ public class  TankHandler : MonoBehaviour
         
         if (isDead) // 사망 상태라면 리턴
             return;
-        
+
         // rayOffset 간격으로 3개의 레이캐스트를 발사하여 지형의 기울기를 계산
         hit1 = Physics2D.Raycast(transform.position + rayOffset * direction, Vector2.down, raycastDistance, LayerMask.GetMask("Map"));
         hit2 = Physics2D.Raycast(transform.position, Vector2.down, raycastDistance, LayerMask.GetMask("Map"));
@@ -357,6 +357,7 @@ public class  TankHandler : MonoBehaviour
     
     private void Fire()
     {
+        Debug.Log("dir: " + direction);
         UIManager.IT.SetMove(currentMoveValue); // 이동 게이지 UI 설정
         UIManager.IT.SetProjectileAngle(projectileDegrees, direction); // 미사일 발사 각도 UI 설정
 
@@ -544,5 +545,10 @@ public class  TankHandler : MonoBehaviour
         }
 
         tankUIHandler.SetColor(teamNum);
+    }
+
+    public int GetDirection()
+    {
+        return direction;
     }
 }

@@ -23,8 +23,11 @@ public class InGameManager : MonoBehaviour
     public bool isTeamMode;
     public int redTeam1;
     public int blueTeam2;
-	  public float MAX_WIDTH = 2048;
-	  public float MAX_HEIGHT = 1600;
+    public float MAX_WIDTH = 2048;
+    public float MAX_HEIGHT = 1600;
+
+    public float projectileMass = 3.5f;
+    public float lineRenderCount = 2.5f;
     
     [Header("Spawn Points")]
     [SerializeField] private List<Transform> spawnPoints; // 스폰 포인트 리스트
@@ -198,17 +201,18 @@ public class InGameManager : MonoBehaviour
         int aiIdx=0;
         // foreach (var slot in LobbyManager.IT.GetSlots()) { // 왜 로비매니저인데 작동하지?
         foreach (var slot in NetworkManager.IT.gameForSlots) {
-            Debug.Log("slot actor Num: " + slot.actorNumber);
-            Debug.Log("slot nickname: " + slot.nickName);
             if (slot.actorNumber == 99)
             {
-                Debug.Log("slot AI actNum: " + slot.actorNumber);
+                Debug.Log("AIslot actorNum: " + slot.actorNumber);
+                Debug.Log("AIslot nickname: " + slot.nickName);
                 var turn = new Turn { actorNumber = aiList[aiIdx].actorNumber, nickName = "AI_"+(aiList[aiIdx].actorNumber-1000), teamNumber = slot.teamNumber }; // AI턴 생성
                 turnList.Add(turn);
                 aiIdx++;
             }
             else if (slot.actorNumber != -1)
             {
+                Debug.Log("slot actor Num: " + slot.actorNumber);
+                Debug.Log("slot nickname: " + slot.nickName);
                 var turn = new Turn { actorNumber = slot.actorNumber, nickName = slot.nickName, teamNumber = slot.teamNumber }; // Player턴 생성
                 turnList.Add(turn);
             }
@@ -330,6 +334,8 @@ public class InGameManager : MonoBehaviour
     private void SetWind()
     {
         var wind = Random.Range(-20, 21); // -20 ~ 20
+
+        wind = 0;
         
         PV.RPC(nameof(RPC_SetWind), RpcTarget.All, wind); // RPC로 풍향 설정
     }
@@ -719,15 +725,31 @@ public class InGameManager : MonoBehaviour
         Debug.Log("result RPC fnc!");
         GameManager.IT.isResult = true; // 결과 표시
         GameManager.IT.result = data; // 결과 데이터 저장
-		if (t == 0)
-			GameManager.IT.resultText = "Result";
-		else if (t == 1)
-			GameManager.IT.resultText = "Red Team Win!";
-		else
-			GameManager.IT.resultText = "Blue Team Win!";
+        if (t == 0)
+            GameManager.IT.resultText = "Result";
+        else if (t == 1)
+            GameManager.IT.resultText = "Red Team Win!";
+        else
+            GameManager.IT.resultText = "Blue Team Win!";
 
         PhotonNetwork.LeaveRoom(); // 방 나가기
         PhotonNetwork.LoadLevel("Lobby"); // 로비 씬으로 이동
+    }
+
+    public void DrawLine(float value)
+    {
+        if (turnList[turnIndex].actorNumber == PhotonNetwork.LocalPlayer.ActorNumber) {
+            playerTankHandler.tankUIHandler.DrawLine(value);
+        }
+        else {
+            // Debug.Log("not your Turn");
+            // Debug.Log("turnIdx: " + turnIndex + ", turnNick: " + turnList[turnIndex].nickName);
+        }
+    }
+
+    public void CleanLine()
+    {
+        playerTankHandler.tankUIHandler.CleanLine();
     }
 }
 
