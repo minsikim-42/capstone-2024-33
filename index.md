@@ -1,4 +1,4 @@
-# Welcome to "Team Fortress" Page!
+# Welcome to "OverWind" Page!
 <div>
     <img src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/4d1a2802-f097-43a8-aa38-aa70b79b2f28"
     width="500" height="300">
@@ -13,7 +13,10 @@
 </div>
 
 ## 프로젝트 소개
-### 저의 "팀포트리스"는 예전에 큰 인기를 끌엇던 포트리스게임을 재현 및 재구성하여 포트리스의 부활을 목표로 합니다.
+### "바람은 계산하는것이 아니라 극복하는것이다."
+영화 최종병기 활에서 나온 명언입니다.
+플레이어들은 바람에따라 변하는 궤도를 예측하며 도전욕구를 끌어일으킬것입니다.
+### 저희 "OverWind"는 예전에 큰 인기를 끌엇던 포트리스게임을 재현 및 재구성하여 포트리스의 부활을 목표로 합니다.
 
 [중간발표 pptx](https://docs.google.com/presentation/d/1JO1jnwr7y5JQ6jxWW7t-PiPppP9xzBQy/edit?usp=drive_link&ouid=114998932213411349234&rtpof=true&sd=true)
 
