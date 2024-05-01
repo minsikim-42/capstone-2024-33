@@ -145,6 +145,7 @@ public class InGameManager : MonoBehaviour
         
         // 카메라 설정
         cameraHandler.SetTarget(player.transform); // 카메라 타겟 설정
+        cameraHandler.StopZoom();
         cameraHandler.Zoom(5); // 카메라 줌
         
         UIManager.IT.SetFade(true); // 페이드 효과
@@ -330,7 +331,7 @@ public class InGameManager : MonoBehaviour
         SetWind(); // 바람 세기 설정 (RPC)
         SetCamera(player.NickName); // 카메라 설정 (RPC)
     }
-    
+
     private void SetWind()
     {
         var wind = Random.Range(-20, 21); // -20 ~ 20
@@ -386,6 +387,7 @@ public class InGameManager : MonoBehaviour
         if (target != null)
         {
             cameraHandler.SetTarget(target.transform); // 카메라 타겟 설정
+            cameraHandler.StopZoom();
             cameraHandler.Zoom(value); // 카메라 줌   
         }
     }
@@ -421,6 +423,23 @@ public class InGameManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void CamZoom(float size)
+    {
+        cameraHandler.Zoom(size);
+    }
+    public void CamStopZoom()
+    {
+        cameraHandler.StopZoom();
+    }
+    public void CamMove(float x, float y)
+    {
+        cameraHandler.Move(x, y);
+    }
+    public void CamMoveBack()
+    {
+        cameraHandler.MoveBack();
     }
     
     private void UpdateTimer()

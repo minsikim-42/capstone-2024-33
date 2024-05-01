@@ -99,6 +99,28 @@ public class  TankHandler : MonoBehaviour
         if (isDead) // 사망 상태라면 리턴
             return;
 
+        if (Input.GetKey(KeyCode.Z)) {
+            if (Input.GetKeyDown(KeyCode.Z)) {
+                InGameManager.IT.CamStopZoom();
+                InGameManager.IT.CamZoom(13);
+            }
+
+            if (Input.GetKey(KeyCode.LeftArrow)) // 카메라 왼쪽으로 이동
+                InGameManager.IT.CamMove(-0.2f, 0);
+            else if (Input.GetKey(KeyCode.RightArrow)) // Right
+                InGameManager.IT.CamMove(0.2f, 0);
+            else if (Input.GetKey(KeyCode.UpArrow)) // Up
+                InGameManager.IT.CamMove(0, 0.2f);
+            else if (Input.GetKey(KeyCode.DownArrow)) // Up
+                InGameManager.IT.CamMove(0, -0.2f);
+
+            return; // 줌인 중에는 탱크 못움직이게
+        } else if (Input.GetKeyUp(KeyCode.Z)) {
+            InGameManager.IT.CamStopZoom();
+            InGameManager.IT.CamZoom(5);
+            InGameManager.IT.CamMoveBack();
+        }
+
         // rayOffset 간격으로 3개의 레이캐스트를 발사하여 지형의 기울기를 계산
         hit1 = Physics2D.Raycast(transform.position + rayOffset * direction, Vector2.down, raycastDistance, LayerMask.GetMask("Map"));
         hit2 = Physics2D.Raycast(transform.position, Vector2.down, raycastDistance, LayerMask.GetMask("Map"));

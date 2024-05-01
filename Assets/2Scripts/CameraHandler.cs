@@ -10,6 +10,7 @@ public class CameraHandler : MonoBehaviour
     public Transform target; // 카메라 타겟
     public Vector3 position; // 카메라 위치
     public Vector3 offset; // 카메라 오프셋
+    private Coroutine zoomCo;
     
     [SerializeField] private float zoomSpeed = 4f; // 줌 속도
     [SerializeField] private float minZoom = 5f; // 최소 줌
@@ -22,9 +23,23 @@ public class CameraHandler : MonoBehaviour
     
     public void Zoom(float value)
     {
-        StartCoroutine(ZoomCoroutine(value)); // 줌 코루틴 시작
+        zoomCo = StartCoroutine(ZoomCoroutine(value)); // 줌 코루틴 시작
     }
-    
+    public void StopZoom()
+    {
+        if (zoomCo != null)
+            StopCoroutine(zoomCo);
+    }
+    public void Move(float x, float y)
+    {
+        _camera.Follow = null;
+        _camera.transform.position += Vector3.right * x + Vector3.up * y;
+    }
+    public void MoveBack()
+    {
+        _camera.Follow = target; // 카메라의 Follow를 타겟으로 설정
+    }
+
     private IEnumerator ZoomCoroutine(float value)
     {
         // orthographicSize와 value의 차이가 0.01f보다 큰 동안 반복 
