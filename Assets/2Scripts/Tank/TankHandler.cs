@@ -18,7 +18,7 @@ public class  TankHandler : MonoBehaviour
     public float maxMoveValue; // 최대 이동값
     public float currentMoveValue; // 현재 이동값
     public float moveCoefficient; // 이동값 계수 (이동 게이지 UI 증가량 계수)
-    public float tankMoveSpeed = 0.0f; // 탱크 이동 속도 (이동 게이지 UI와 탱크의 이동값을 연동하기 위한 계수) 
+    public float tankMoveSpeed = 0.2f; // 탱크 이동 속도 (이동 게이지 UI와 탱크의 이동값을 연동하기 위한 계수) 
     
     [Header("Tank Power Value")]
     public float maxPowerValue; // 최대 파워값
@@ -36,12 +36,12 @@ public class  TankHandler : MonoBehaviour
     [SerializeField] public ProjectileHandler projectilePrefab; // 미사일 프리팹
     
     [Header("Raycast")]
-    public float raycastDistance = 0.0f; // 레이캐스트 거리
+    public float raycastDistance = 2f; // 레이캐스트 거리
     
     [SerializeField] private Vector3 rayOffset; // 레이 오프셋
 
     private RaycastHit2D hit1; // 레이캐스트 충돌 정보 1
-    private RaycastHit2D hit2; // 레이캐스트 충돌 정보 2
+    // private RaycastHit2D hit2; // 레이캐스트 충돌 정보 2
     private RaycastHit2D hit3; // 레이캐스트 충돌 정보 3
 
     public float angle; // 미사일 발사 각도
@@ -70,6 +70,7 @@ public class  TankHandler : MonoBehaviour
     {
         PV = GetComponent<PhotonView>(); // 포톤 뷰 컴포넌트 할당
         tankUIHandler = GetComponent<TankUIHandler>(); // 탱크 UI 핸들러 컴포넌트 할당
+        rayOffset = new Vector3(0.15f,0,0);
     }
 
     public virtual void Start()
@@ -101,16 +102,16 @@ public class  TankHandler : MonoBehaviour
 
         // rayOffset 간격으로 3개의 레이캐스트를 발사하여 지형의 기울기를 계산
         hit1 = Physics2D.Raycast(transform.position + rayOffset * direction, Vector2.down, raycastDistance, LayerMask.GetMask("Map"));
-        hit2 = Physics2D.Raycast(transform.position, Vector2.down, raycastDistance, LayerMask.GetMask("Map"));
+        // hit2 = Physics2D.Raycast(transform.position, Vector2.down, raycastDistance, LayerMask.GetMask("Map"));
         hit3 = Physics2D.Raycast(transform.position - rayOffset * direction, Vector2.down, raycastDistance, LayerMask.GetMask("Map"));
 
         // 레이캐스트 충돌 정보가 있다면
-        if (hit1 && hit2 && hit3)
+        if (hit1 && hit3) // hit2
         {
             angle = -Vector2.Angle(direction * (hit1.point - hit3.point), Vector2.right); // 레이캐스트 충돌 정보 1과 3의 점 사이의 각도
             angle = Mathf.Clamp(angle, -60, 60); // angle min: -60, max: 60
 
-            if (hit1.point.y >= hit3.point.y) // 레이캐스트 충돌 정보 2의 y값이 더 작다면
+            if (hit1.point.y >= hit3.point.y) // 레이캐스트 충돌 정보 2->3의 y값이 더 작다면
                 angle = -angle; // angle값을 반전
         }
 
@@ -453,15 +454,18 @@ public class  TankHandler : MonoBehaviour
     private void SetSprite()
     {
         // angle에 따라 탱크 스프라이트의 각도 설정
-        sprite.transform.localEulerAngles = angle switch
-        {
-            >= -60 and < -30 => Vector3.forward * -30,
-            >= -30 and < -15 => Vector3.forward * -15,
-            > -15 and < 15 => Vector3.zero,
-            >= 15 and < 30 => Vector3.forward * 15,
-            >= 30 and < 60 => Vector3.forward * 30,
-            _ => sprite.transform.localEulerAngles
-        };
+        float ang = Mathf.Clamp(angle, -45, 45);
+        ang = (int)(ang * 5) / 5; // 5단위로 나눔
+        sprite.transform.localEulerAngles = Vector3.forward * ang;
+        // switch
+        // {
+        //     >= -60 and < -30 => Vector3.forward * -30,
+        //     >= -30 and < -15 => Vector3.forward * -15,
+        //     > -15 and < 15 => Vector3.zero,
+        //     >= 15 and < 30 => Vector3.forward * 15,
+        //     >= 30 and < 60 => Vector3.forward * 30,
+        //     _ => sprite.transform.localEulerAngles
+        // };
     }
 
     public void Hit(float damage)
