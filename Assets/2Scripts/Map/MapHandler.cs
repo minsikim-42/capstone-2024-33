@@ -23,17 +23,17 @@ public class MapHandler : MonoBehaviour
         // 사용할 맵 텍스쳐로 생성 후 할당
         texture = Instantiate(mapTexture);
 
-        Debug.Log(texture.Size());
+        Debug.Log(texture.width);
 
         int width = (int)InGameManager.IT.MAX_WIDTH;
         int height = (int)InGameManager.IT.MAX_HEIGHT;
-        for (int h=height; h<texture.Size().y; h++) {
-            for (int w=0; w<texture.Size().x; w++) {
+        for (int h=height; h<texture.height; h++) {
+            for (int w=0; w<texture.width; w++) {
                 texture.SetPixel(w, h, Color.clear);
             }
         }
-        for (int w=width; w<texture.Size().x; w++) {
-            for (int h=0; h<texture.Size().y; h++) {
+        for (int w=width; w<texture.width; w++) {
+            for (int h=0; h<texture.height; h++) {
                 texture.SetPixel(w, h, Color.clear);
             }
         }
