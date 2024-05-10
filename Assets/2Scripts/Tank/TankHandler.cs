@@ -449,7 +449,7 @@ public class  TankHandler : MonoBehaviour
 
         if (isDouble)
         {
-            await Task.Delay(200);
+            await Task.Delay(400);
             
             isDoubleShot = true;
             
