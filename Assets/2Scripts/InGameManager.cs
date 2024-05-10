@@ -63,6 +63,7 @@ public class InGameManager : MonoBehaviour
     [SerializeField] private GameObject hitEffectPrefab; // 히트 이펙트 프리팹
     
     [Header("Wind")]
+    public int maxWindPower = 10;
     public int windPower; // 바람 세기
     public float windPowerCoefficient = 0.5f; // 바람 세기 계수 (강도 조절용)
     
@@ -334,9 +335,7 @@ public class InGameManager : MonoBehaviour
 
     private void SetWind()
     {
-        var wind = Random.Range(-20, 21); // -20 ~ 20
-
-        wind = 0;
+        var wind = Random.Range(-maxWindPower, maxWindPower+1); // -10 ~ 10
         
         PV.RPC(nameof(RPC_SetWind), RpcTarget.All, wind); // RPC로 풍향 설정
     }
