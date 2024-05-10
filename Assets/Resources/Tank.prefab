@@ -943,7 +943,7 @@ MonoBehaviour:
   tankMoveSpeed: 2
   maxPowerValue: 100
   currentPowerValue: 0
-  powerCoefficient: 100
+  powerCoefficient: 50
   projectileFireCoefficient: 0.23
   projectileDegrees: 0
   delta: 30

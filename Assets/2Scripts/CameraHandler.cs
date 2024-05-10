@@ -13,7 +13,7 @@ public class CameraHandler : MonoBehaviour
     private Coroutine zoomCo;
     
     [SerializeField] private float zoomSpeed = 4f; // 줌 속도
-    [SerializeField] private float minZoom = 5f; // 최소 줌
+    [SerializeField] private float minZoom = 9f; // 최소 줌
     [SerializeField] private float maxZoom = 15f; // 최대 줌
     
     private void Awake()

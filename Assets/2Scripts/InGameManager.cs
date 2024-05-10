@@ -147,7 +147,7 @@ public class InGameManager : MonoBehaviour
         // 카메라 설정
         cameraHandler.SetTarget(player.transform); // 카메라 타겟 설정
         cameraHandler.StopZoom();
-        cameraHandler.Zoom(5); // 카메라 줌
+        cameraHandler.Zoom(9); // 카메라 줌
         
         UIManager.IT.SetFade(true); // 페이드 효과
         
@@ -373,13 +373,13 @@ public class InGameManager : MonoBehaviour
         playerTankHandler.AngleInit(); // 각도 초기화
     }
     
-    public void SetCamera(string targetPlayerNickName, float value = 5)
+    public void SetCamera(string targetPlayerNickName, float value = 9)
     {
         PV.RPC(nameof(RPC_SetCamera), RpcTarget.All, targetPlayerNickName, value); // RPC로 카메라 설정
     }
     
     [PunRPC]
-    private void RPC_SetCamera(string targetPlayerNickName, float value = 5)
+    private void RPC_SetCamera(string targetPlayerNickName, float value = 9)
     {
         var target = GameObject.Find(targetPlayerNickName); // 플레이어 찾기
 
