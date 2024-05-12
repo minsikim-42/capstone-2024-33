@@ -129,6 +129,8 @@ public class TankUIHandler : MonoBehaviour
     }
 
     public void DrawLine(float value) {
+		if (tankHandler.isAi == true)
+			return ;
         float angle = UIManager.IT.GetProjectileAngle();
         float lineRenderCount = InGameManager.IT.lineRenderCount;
         float dir = tankHandler.GetDirection();
@@ -142,7 +144,7 @@ public class TankUIHandler : MonoBehaviour
         float powerY = power * Mathf.Sin(rad);
         float g = Mathf.Abs(Physics.gravity.y);
 
-        Debug.Log("p: " + power + ", agl: " + angle + ", pos: " + pos);
+        // Debug.Log("p: " + power + ", agl: " + angle + ", pos: " + pos);
 
         if (angle > 90f && angle < 180f) angle -= 180;
         else if (angle > 180f) angle -= 360;

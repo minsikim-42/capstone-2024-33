@@ -7,6 +7,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
@@ -532,6 +533,31 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         isStarted = true;
         
         PhotonNetwork.CurrentRoom.SetCustomProperties(CustomRoomProperties); // 방의 프로퍼티 설정
+    }
+
+    public List<Turn> ShuffleTurn(List<Turn> turnList)
+    {
+        // Shuffle
+        for (var i = 0; i < turnList.Count; i++)
+        {
+            var temp = turnList[i]; // 임시 저장
+            var randomIndex = Random.Range(i, turnList.Count); // 랜덤 인덱스
+            turnList[i] = turnList[randomIndex]; // 랜덤 인덱스의 값을 현재 인덱스에 저장
+            turnList[randomIndex] = temp; // 현재 인덱스의 값을 랜덤 인덱스에 저장
+        }
+
+        Hashtable CustomRoomProperties = PhotonNetwork.CurrentRoom.CustomProperties; // 방의 프로퍼티
+        int slotIdx=0;
+        foreach (var turn in turnList) {
+            CustomRoomProperties["Slot" + slotIdx] = turn.actorNumber; // 슬롯 설정
+            CustomRoomProperties["team" + "Slot" + slotIdx] = turn.teamNumber; // 슬롯 팀 설정
+            CustomRoomProperties["name" + "Slot" + slotIdx] = turn.nickName;
+            slotIdx++;
+        }
+
+        PhotonNetwork.CurrentRoom.SetCustomProperties(CustomRoomProperties); // 방의 프로퍼티 설정
+
+        return turnList;
     }
 }
 

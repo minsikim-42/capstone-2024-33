@@ -153,6 +153,7 @@ public class  TankHandler : MonoBehaviour
             if (isTurn && Input.GetKeyUp(KeyCode.Space)) // 스페이스바를 떼면
             {
                 SpaceUp();
+                isTurn = false;
                 
                 return;
             }
@@ -202,6 +203,7 @@ public class  TankHandler : MonoBehaviour
             // 스페이스바를 누르는 순간
             if (!isAi && isTurn && Input.GetKeyDown(KeyCode.Space))
             {
+                Debug.Log("space pressed");
                 SpaceDown();
                 
                 return;

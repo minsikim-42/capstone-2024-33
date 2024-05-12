@@ -161,6 +161,11 @@ public class InGameManager : MonoBehaviour
             
             StartTurn(); // 턴 시작
         }
+        else
+        {
+            await Task.Delay(1000); // 5초 대기
+            GetTurn();
+        }
     }
     private void GenerateAI()
     {
@@ -223,15 +228,8 @@ public class InGameManager : MonoBehaviour
                 // 빈 슬롯
             }
         }
-        
-        // Shuffle
-        for (var i = 0; i < turnList.Count; i++)
-        {
-            var temp = turnList[i]; // 임시 저장
-            var randomIndex = Random.Range(i, turnList.Count); // 랜덤 인덱스
-            turnList[i] = turnList[randomIndex]; // 랜덤 인덱스의 값을 현재 인덱스에 저장
-            turnList[randomIndex] = temp; // 현재 인덱스의 값을 랜덤 인덱스에 저장
-        }
+
+        turnList = NetworkManager.IT.ShuffleTurn(turnList);
         
         damageList.Clear(); // 누적 데미지 리스트 초기화
         
@@ -244,6 +242,30 @@ public class InGameManager : MonoBehaviour
         {
             var damage = new Damage { nickName = turn.nickName, damage = 0, teamNumber = turn.teamNumber };
             damageList.Add(damage);
+        }
+    }
+
+    private void GetTurn()
+    {
+        foreach (var slot in NetworkManager.IT.gameForSlots) {
+            if (slot.actorNumber == 99)
+            {
+                Debug.Log("AIslot actorNum: " + slot.actorNumber);
+                Debug.Log("AIslot nickname: " + slot.nickName);
+                var turn = new Turn { actorNumber = -1, nickName = "AI_"+(-1), teamNumber = slot.teamNumber }; // AI턴 생성 // AiList[aiIdx].~
+                turnList.Add(turn);
+            }
+            else if (slot.actorNumber != -1)
+            {
+                Debug.Log("slot actor Num: " + slot.actorNumber);
+                Debug.Log("slot nickname: " + slot.nickName);
+                var turn = new Turn { actorNumber = slot.actorNumber, nickName = slot.nickName, teamNumber = slot.teamNumber }; // Player턴 생성
+                turnList.Add(turn);
+            }
+            else
+            {
+                // 빈 슬롯
+            }
         }
     }
 
@@ -756,10 +778,13 @@ public class InGameManager : MonoBehaviour
 
     public void DrawLine(float value)
     {
-        if (turnList[turnIndex].actorNumber == PhotonNetwork.LocalPlayer.ActorNumber) {
-            playerTankHandler.tankUIHandler.DrawLine(value);
-        }
-        else {
+        if (turnList.Count == 0)
+            return;
+        // if (turnList[turnIndex].actorNumber == PhotonNetwork.LocalPlayer.ActorNumber) {
+        playerTankHandler.tankUIHandler.DrawLine(value);
+        // }
+        // else
+        {
             // Debug.Log("not your Turn");
             // Debug.Log("turnIdx: " + turnIndex + ", turnNick: " + turnList[turnIndex].nickName);
         }
