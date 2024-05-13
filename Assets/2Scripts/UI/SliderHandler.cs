@@ -10,6 +10,11 @@ public class SliderHandler : MonoBehaviour
         slider = GetComponent<Slider>();
     }
 
+    public void SetMaxValue(float value)
+    {
+        slider.maxValue = value; // Slider의 value 설정
+    }
+
     public void SetValue(float value)
     {
         slider.value = value; // Slider의 value 설정

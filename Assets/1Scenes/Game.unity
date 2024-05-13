@@ -8700,6 +8700,8 @@ MonoBehaviour:
   blueTeam2: 0
   MAX_WIDTH: 2048
   MAX_HEIGHT: 1600
+  projectileMass: 3.5
+  lineRenderCount: 2.5
   spawnPoints:
   - {fileID: 1233092371}
   - {fileID: 1233092370}
@@ -8727,8 +8729,10 @@ MonoBehaviour:
   initialPosition: {x: 0, y: 0, z: 0}
   hitEffectPrefab: {fileID: 3709993209174104884, guid: fb71190ec7f352b478ffab888e19fd8a,
     type: 3}
+  maxWindPower: 10
   windPower: 0
   windPowerCoefficient: 0.5
+  maxHP: 300
 --- !u!4 &2004574663
 Transform:
   m_ObjectHideFlags: 0

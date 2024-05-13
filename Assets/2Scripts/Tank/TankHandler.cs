@@ -57,7 +57,6 @@ public class  TankHandler : MonoBehaviour
     public bool isTurn = false; // 턴 여부
     
     [Header("HP")]
-    public float maxHP; // 최대 HP
     public float currentHP; // 현재 HP
     
     public TankUIHandler tankUIHandler; // 탱크 UI 핸들러
@@ -89,7 +88,7 @@ public class  TankHandler : MonoBehaviour
         //     PV.RPC(nameof(RPC_SetTeamNum), RpcTarget.All);
         // }
         
-        currentHP = maxHP; // 현재 HP를 최대 HP로 초기화
+        currentHP = InGameManager.IT.maxHP; // 현재 HP를 최대 HP로 초기화
     }
     
     private void Update()

@@ -49,6 +49,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        hpSlider.SetMaxValue(InGameManager.IT.maxHP);
     }
 
     #region Sliders

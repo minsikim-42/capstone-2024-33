@@ -70,6 +70,9 @@ public class InGameManager : MonoBehaviour
     [Header("AI")]
     private List<AIHandler> aiList = new List<AIHandler>(); // AI 핸들러 리스트
     
+    [Header("MaxHp")]
+    public float maxHP;
+
     private void Awake()
     {
         IT = this;

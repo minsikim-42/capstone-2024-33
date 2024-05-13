@@ -4632,8 +4632,8 @@ MonoBehaviour:
   isResult: 0
   result: 
   resultText: 
-  isTestMode: 0
-  testCreateRoom: 0
+  isTestMode: 1
+  testCreateRoom: 1
   testJoinRoom: 0
 --- !u!4 &1657573346
 Transform:

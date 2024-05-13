@@ -25,8 +25,8 @@ public class TankUIHandler : MonoBehaviour
     {
         SetNickname(transform.name); // Nickname 설정
         
-        hpSlider.maxValue = tankHandler.maxHP; // 최대 HP 설정
-        SetHP(tankHandler.maxHP); // 초기 HP 설정
+        hpSlider.maxValue = InGameManager.IT.maxHP; // 최대 HP 설정
+        SetHP(InGameManager.IT.maxHP); // 초기 HP 설정
 
         minimapIcon.color = tankHandler.PV.IsMine ? Color.black : Color.red; // Minimap Icon 색상 설정
         if (TryGetComponent<AIHandler>(out var aiHandler)) {
