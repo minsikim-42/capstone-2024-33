@@ -133,6 +133,9 @@ public class UIManager : MonoBehaviour
 
         if (spacePressed) // 스페이스바 누른 상태에서는 아이템 사용 불가
             return;
+
+        if (InGameManager.IT.doubleShot == 0) // 아이템이 없으면 사용 불가
+            return;
         
         InGameManager.IT.isDoubleShot = !InGameManager.IT.isDoubleShot; // Double Shot 여부 변경
         InGameManager.IT.isAttackRange = false; // Attack Range는 무조건 false
@@ -147,6 +150,9 @@ public class UIManager : MonoBehaviour
             return;
 
         if (spacePressed) // 스페이스바 누른 상태에서는 아이템 사용 불가
+            return;
+
+        if (InGameManager.IT.attackRange == 0) // 아이템이 없으면 사용 불가
             return;
 
         InGameManager.IT.isAttackRange = !InGameManager.IT.isAttackRange; // Attack Range 여부 변경
@@ -164,6 +170,9 @@ public class UIManager : MonoBehaviour
         if (spacePressed) // 스페이스바 누른 상태에서는 아이템 사용 불가
             return;
 
+        if (InGameManager.IT.attackDamage == 0) // 아이템이 없으면 사용 불가
+            return;
+
         InGameManager.IT.isAttackDamage = !InGameManager.IT.isAttackDamage; // Attack Damage 여부 변경
         InGameManager.IT.isDoubleShot = false; // Double Shot은 무조건 false
         InGameManager.IT.isAttackRange = false; // Attack Range는 무조건 false
@@ -173,9 +182,20 @@ public class UIManager : MonoBehaviour
 
     private void UpdateItemButtonUI()
     {
-        doubleShotButton.image.color = InGameManager.IT.isDoubleShot ? Color.green : Color.white; // Double Shot 버튼 색상 변경
-        attackRangeButton.image.color = InGameManager.IT.isAttackRange ? Color.green : Color.white; // Attack Range 버튼 색상 변경
-        attackDamageButton.image.color = InGameManager.IT.isAttackDamage ? Color.green : Color.white; // Attack Damage 버튼 색상 변경
+        if (InGameManager.IT.doubleShot == 0)
+            doubleShotButton.image.color = Color.gray;
+        else
+            doubleShotButton.image.color = InGameManager.IT.isDoubleShot ? Color.green : Color.white; // Double Shot 버튼 색상 변경
+
+        if (InGameManager.IT.attackRange == 0)
+            attackRangeButton.image.color = Color.gray;
+        else
+            attackRangeButton.image.color = InGameManager.IT.isAttackRange ? Color.green : Color.white; // Attack Range 버튼 색상 변경
+
+        if (InGameManager.IT.attackDamage == 0)
+            attackDamageButton.image.color = Color.gray;
+        else
+            attackDamageButton.image.color = InGameManager.IT.isAttackDamage ? Color.green : Color.white; // Attack Damage 버튼 색상 변경
     } 
     #endregion
     

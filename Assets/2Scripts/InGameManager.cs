@@ -55,6 +55,10 @@ public class InGameManager : MonoBehaviour
     public bool isDoubleShot = false; // Double Shot 여부
     public bool isAttackRange = false; // Attack Range 여부
     public bool isAttackDamage = false; // Attack Damage 여부
+
+    public int doubleShot = 1;
+    public int attackRange = 1;
+    public int attackDamage = 1;
     
     [Header("Distance")]
     public Vector3 initialPosition; // 발사 포탄의 초기 위치

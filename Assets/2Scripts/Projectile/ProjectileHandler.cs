@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Threading.Tasks;
 
 public class ProjectileHandler : MonoBehaviour
 {
@@ -35,6 +36,8 @@ public class ProjectileHandler : MonoBehaviour
         // }
 
         rb.AddForce(position * speed * massPower, ForceMode2D.Impulse); // 발사
+
+        DeleteTimer(5);
     }
 
     private void FixedUpdate()
@@ -55,5 +58,14 @@ public class ProjectileHandler : MonoBehaviour
         
         InGameManager.IT.StartTimer(); // 타이머 시작
         InGameManager.IT.CleanLine(); // 예상각도 UI 제거
+    }
+
+    private async void DeleteTimer(float sec)
+    {
+        int t = (int)(sec * 1000);
+        await Task.Delay(t);
+
+        if (this)
+            Destroy(gameObject);
     }
 }

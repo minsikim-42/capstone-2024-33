@@ -402,11 +402,20 @@ public class  TankHandler : MonoBehaviour
         // 사용 아이템 체크
         var itemType = string.Empty;
         if (InGameManager.IT.isDoubleShot)
+        {
             itemType = "Double";
+            InGameManager.IT.doubleShot--;
+        }
         else if (InGameManager.IT.isAttackRange)
+        {
             itemType = "Range";
+            InGameManager.IT.attackRange--;
+        }
         else if (InGameManager.IT.isAttackDamage)
+        {
             itemType = "Damage";
+            InGameManager.IT.attackDamage--;
+        }
         
         // RPC_Fire 함수 호출
         PV.RPC(nameof(RPC_Fire), RpcTarget.All, projectileTransformPosition, projectileTransformLocalEulerAngles, projectileSpeed, projectileAngleVector, direction, itemType);
