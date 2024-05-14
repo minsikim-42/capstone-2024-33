@@ -99,10 +99,11 @@ public class UIManager : MonoBehaviour
         tankHorizontalInstrument.SetHorizontal(value, direction); // 탱크의 수평각 변경
     }
     
-    public void SetProjectileAngle(float value,  int direction)
+    public void SetProjectileAngle(float value,  int direction, bool draw)
     {
         projectileAngleInstrument.SetAngle(value, direction); // 포탄의 발사각 변경
-        InGameManager.IT.DrawLine(predictPowerSlider.GetValue());
+        if (draw)
+            InGameManager.IT.DrawLine(predictPowerSlider.GetValue());
     }
     
     public float GetProjectileAngle()

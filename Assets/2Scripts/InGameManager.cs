@@ -188,41 +188,21 @@ public class InGameManager : MonoBehaviour
         }
     }
 
-    private void SetTurn()
+    private void SetTurn() // Master
     {
         turnList.Clear(); // 턴 리스트 초기화
-        
-        // // 플레이어
-        // foreach (var player in PhotonNetwork.PlayerList)
-        // {
-        //     var turn = new Turn { actorNumber = player.ActorNumber, nickname = player.NickName }; // 턴 생성 (플레이어)
-            
-        //     turnList.Add(turn); // 턴 리스트에 추가
-        // }
-
-        // // AI
-        // for (var i = 0; i < NetworkManager.IT.aiCount; i++)
-        // {
-        //     var turn = new Turn { actorNumber = aiList[i].actorNumber, nickname = $"AI_{aiList[i].actorNumber - 1000}"}; // 턴 생성 (AI)
-            
-        //     turnList.Add(turn); // 턴 리스트에 추가
-        // }
 
         int aiIdx=0;
         // foreach (var slot in LobbyManager.IT.GetSlots()) { // 왜 로비매니저인데 작동하지?
         foreach (var slot in NetworkManager.IT.gameForSlots) {
             if (slot.actorNumber == 99)
             {
-                Debug.Log("AIslot actorNum: " + slot.actorNumber);
-                Debug.Log("AIslot nickname: " + slot.nickName);
                 var turn = new Turn { actorNumber = aiList[aiIdx].actorNumber, nickName = "AI_"+(aiList[aiIdx].actorNumber-1000), teamNumber = slot.teamNumber }; // AI턴 생성
                 turnList.Add(turn);
                 aiIdx++;
             }
             else if (slot.actorNumber != -1)
             {
-                Debug.Log("slot actor Num: " + slot.actorNumber);
-                Debug.Log("slot nickname: " + slot.nickName);
                 var turn = new Turn { actorNumber = slot.actorNumber, nickName = slot.nickName, teamNumber = slot.teamNumber }; // Player턴 생성
                 turnList.Add(turn);
             }
@@ -233,6 +213,24 @@ public class InGameManager : MonoBehaviour
         }
 
         turnList = NetworkManager.IT.ShuffleTurn(turnList);
+
+        Debug.Log("InGameM::SetTurn");
+        foreach (var slot in turnList) {
+            if (slot.actorNumber == 99)
+            {
+                Debug.Log("AIslot actorNum: " + slot.actorNumber);
+                Debug.Log("AIslot nickname: " + slot.nickName);
+            }
+            else if (slot.actorNumber != -1)
+            {
+                Debug.Log("slot actor Num: " + slot.actorNumber);
+                Debug.Log("slot nickname: " + slot.nickName);
+            }
+            else
+            {
+                // 빈 슬롯
+            }
+        }
         
         damageList.Clear(); // 누적 데미지 리스트 초기화
         
@@ -250,6 +248,7 @@ public class InGameManager : MonoBehaviour
 
     private void GetTurn()
     {
+        Debug.Log("InGameM::GetTurn");
         foreach (var slot in NetworkManager.IT.gameForSlots) {
             if (slot.actorNumber == 99)
             {
@@ -346,13 +345,14 @@ public class InGameManager : MonoBehaviour
         
         PV.RPC(nameof(RPC_SendTurn), player); // RPC로 턴을 넘김
         
-        // 나머지 플레이어에게는 player의 턴을 알림
-        foreach (var otherPlayer in PhotonNetwork.PlayerList)
-        {
-            // 다른 플레이어일 경우
-            if (otherPlayer.ActorNumber != actorNumber)
-                PV.RPC(nameof(RPC_SendOtherTurn), otherPlayer, currentTurnPlayer.NickName); // RPC로 플레이어의 턴을 알림
-        }
+        // // 나머지 플레이어에게는 player의 턴을 알림
+        // foreach (var otherPlayer in PhotonNetwork.PlayerList)
+        // {
+        //     // 다른 플레이어일 경우
+        //     if (otherPlayer.ActorNumber != actorNumber)
+        //         PV.RPC(nameof(RPC_SendOtherTurn), otherPlayer, currentTurnPlayer.NickName); // RPC로 플레이어의 턴을 알림
+        // }
+        PV.RPC(nameof(RPC_SendOtherTurn), RpcTarget.Others, currentTurnPlayer.NickName); // RPC로 플레이어의 턴을 알림
         
         SetWind(); // 바람 세기 설정 (RPC)
         SetCamera(player.NickName); // 카메라 설정 (RPC)
@@ -497,6 +497,8 @@ public class InGameManager : MonoBehaviour
         {
             turnIndex = 0; // 턴 인덱스 초기화
         }
+
+        PV.RPC(nameof(RPC_SetTurn), RpcTarget.Others, turnIndex);
         
         var turn = turnList[turnIndex]; // 현재 턴
         var actorNumber = turn.actorNumber; // 현재 턴의 ActorNumber
@@ -534,6 +536,12 @@ public class InGameManager : MonoBehaviour
 
             ai.OnTurn(); // AI의 턴 시작
         }
+    }
+
+    [PunRPC]
+    private void RPC_SetTurn(int t)
+    {
+        turnIndex = t;
     }
 
     public void NextTurnToMaster()
@@ -781,11 +789,13 @@ public class InGameManager : MonoBehaviour
 
     public void DrawLine(float value)
     {
-        if (turnList.Count == 0)
-            return;
-        // if (turnList[turnIndex].actorNumber == PhotonNetwork.LocalPlayer.ActorNumber) {
-        playerTankHandler.tankUIHandler.DrawLine(value);
-        // }
+        if (isAiTurn && turnList == null)
+            return ;
+
+        Debug.Log("InGame::DrawL::turnIdx:" + turnIndex);
+        if (turnList[turnIndex].actorNumber == PhotonNetwork.LocalPlayer.ActorNumber) {
+            playerTankHandler.tankUIHandler.DrawLine(value);
+        }
         // else
         {
             // Debug.Log("not your Turn");

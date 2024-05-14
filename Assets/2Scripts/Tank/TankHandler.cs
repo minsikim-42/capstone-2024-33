@@ -76,7 +76,7 @@ public class  TankHandler : MonoBehaviour
     {
         // Initialize
         currentMoveValue = maxMoveValue; // 현재 이동값을 최대 이동값으로 초기화
-        UIManager.IT.SetProjectileAngle(projectileDegrees, direction);  // 파워 게이지 UI 각도 초기화
+        UIManager.IT.SetProjectileAngle(projectileDegrees, direction, false);  // 파워 게이지 UI 각도 초기화
 
         // if (!transform.name.Contains("AI")) {
         if (!transform.name.Contains("AI")) {
@@ -222,7 +222,7 @@ public class  TankHandler : MonoBehaviour
     {
         if (isAi)
             projectileDegrees = 0; // 미사일 발사 각도 초기화
-        UIManager.IT.SetProjectileAngle(projectileDegrees, direction); // 미사일 발사 각도 UI 설정
+        UIManager.IT.SetProjectileAngle(projectileDegrees, direction, false); // 미사일 발사 각도 UI 설정
     }
 
     public void MoveValueInit()
@@ -244,7 +244,7 @@ public class  TankHandler : MonoBehaviour
         anim.SetBool("Move", true); // Move 애니메이션 활성화
                     
         UIManager.IT.SetMove(currentMoveValue); // 이동 게이지 UI 설정
-        UIManager.IT.SetProjectileAngle(projectileDegrees, direction); // 미사일 발사 각도 UI 설정
+        UIManager.IT.SetProjectileAngle(projectileDegrees, direction, true); // 미사일 발사 각도 UI 설정
     }
     
     public void RepeatLeftArrowPressed(float time)
@@ -295,7 +295,7 @@ public class  TankHandler : MonoBehaviour
         anim.SetBool("Move", true); // Move 애니메이션 활성화
                     
         UIManager.IT.SetMove(currentMoveValue); // 이동 게이지 UI 설정
-        UIManager.IT.SetProjectileAngle(projectileDegrees, direction); // 미사일 발사 각도 UI 설정
+        UIManager.IT.SetProjectileAngle(projectileDegrees, direction, true); // 미사일 발사 각도 UI 설정
     }
     
     public void SpaceDown()
@@ -351,13 +351,13 @@ public class  TankHandler : MonoBehaviour
         {
             projectileDegrees = 90f; // 미사일 발사 각도를 90도로 설정
                 
-            UIManager.IT.SetProjectileAngle(projectileDegrees, direction); // 미사일 발사 각도 UI 설정
+            UIManager.IT.SetProjectileAngle(projectileDegrees, direction, true); // 미사일 발사 각도 UI 설정
             return;
         }
 
         projectileDegrees += delta * Time.deltaTime; // 미사일 발사 각도 증가
                 
-        UIManager.IT.SetProjectileAngle(projectileDegrees, direction); // 미사일 발사 각도 UI 설정
+        UIManager.IT.SetProjectileAngle(projectileDegrees, direction, true); // 미사일 발사 각도 UI 설정
     }
 
     public void DownArrowPressed()
@@ -367,13 +367,13 @@ public class  TankHandler : MonoBehaviour
         {
             projectileDegrees = 0; // 미사일 발사 각도를 0으로 설정
                 
-            UIManager.IT.SetProjectileAngle(projectileDegrees, direction); // 미사일 발사 각도 UI 설정
+            UIManager.IT.SetProjectileAngle(projectileDegrees, direction, true); // 미사일 발사 각도 UI 설정
             return;
         }
             
         projectileDegrees -= delta * Time.deltaTime; // 미사일 발사 각도 감소
                 
-        UIManager.IT.SetProjectileAngle(projectileDegrees, direction); // 미사일 발사 각도 UI 설정
+        UIManager.IT.SetProjectileAngle(projectileDegrees, direction, true); // 미사일 발사 각도 UI 설정
     }
     
     
@@ -381,7 +381,7 @@ public class  TankHandler : MonoBehaviour
     {
         Debug.Log("dir: " + direction);
         UIManager.IT.SetMove(currentMoveValue); // 이동 게이지 UI 설정
-        UIManager.IT.SetProjectileAngle(projectileDegrees, direction); // 미사일 발사 각도 UI 설정
+        UIManager.IT.SetProjectileAngle(projectileDegrees, direction, true); // 미사일 발사 각도 UI 설정
 
         SoundManager.IT.PlaySFX();
         isTurn = false; // 턴 종료

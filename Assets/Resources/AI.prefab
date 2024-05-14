@@ -1096,7 +1096,6 @@ MonoBehaviour:
   rayOffset: {x: 0.12, y: 0, z: 0}
   angle: 0
   isTurn: 0
-  maxHP: 300
   currentHP: 0
   tankUIHandler: {fileID: 0}
   isAi: 0

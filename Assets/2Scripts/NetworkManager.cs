@@ -477,6 +477,20 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             }
             LobbyManager.IT.SetTeamColor(0, LobbyManager.IT.roomPlayerSlots[0].teamNumber);
         }
+        else if (SceneManager.GetActiveScene().name == "Game")
+        {
+            gameForSlots = new List<Slot>
+            {
+                new(Slot0, (int)propertiesThatChanged[Slot0], (string)propertiesThatChanged["name"+Slot0], (int)propertiesThatChanged["team"+Slot0]),
+                new(Slot1, (int)propertiesThatChanged[Slot1], (string)propertiesThatChanged["name"+Slot1], (int)propertiesThatChanged["team"+Slot1]),
+                new(Slot2, (int)propertiesThatChanged[Slot2], (string)propertiesThatChanged["name"+Slot2], (int)propertiesThatChanged["team"+Slot2]),
+                new(Slot3, (int)propertiesThatChanged[Slot3], (string)propertiesThatChanged["name"+Slot3], (int)propertiesThatChanged["team"+Slot3]),
+                new(Slot4, (int)propertiesThatChanged[Slot4], (string)propertiesThatChanged["name"+Slot4], (int)propertiesThatChanged["team"+Slot4]),
+                new(Slot5, (int)propertiesThatChanged[Slot5], (string)propertiesThatChanged["name"+Slot5], (int)propertiesThatChanged["team"+Slot5]),
+                new(Slot6, (int)propertiesThatChanged[Slot6], (string)propertiesThatChanged["name"+Slot6], (int)propertiesThatChanged["team"+Slot6]),
+                new(Slot7, (int)propertiesThatChanged[Slot7], (string)propertiesThatChanged["name"+Slot7], (int)propertiesThatChanged["team"+Slot7])
+            };
+        }
     }
 
     public int GetTeamNum(int t) { // 플레이어 수
@@ -538,12 +552,17 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public List<Turn> ShuffleTurn(List<Turn> turnList)
     {
         // Shuffle
+        List<Turn> res = new List<Turn>();
         for (var i = 0; i < turnList.Count; i++)
         {
             var temp = turnList[i]; // 임시 저장
             var randomIndex = Random.Range(i, turnList.Count); // 랜덤 인덱스
             turnList[i] = turnList[randomIndex]; // 랜덤 인덱스의 값을 현재 인덱스에 저장
             turnList[randomIndex] = temp; // 현재 인덱스의 값을 랜덤 인덱스에 저장
+        }
+        for (var i = 0; i < turnList.Count; i++)
+        {
+            res.Add(turnList[i]);
         }
 
         Hashtable CustomRoomProperties = PhotonNetwork.CurrentRoom.CustomProperties; // 방의 프로퍼티
@@ -557,7 +576,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
         PhotonNetwork.CurrentRoom.SetCustomProperties(CustomRoomProperties); // 방의 프로퍼티 설정
 
-        return turnList;
+        return res;
     }
 }
 

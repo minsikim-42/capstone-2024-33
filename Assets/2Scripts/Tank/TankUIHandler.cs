@@ -129,8 +129,6 @@ public class TankUIHandler : MonoBehaviour
     }
 
     public void DrawLine(float value) {
-		if (tankHandler.isAi == true)
-			return ;
         float angle = UIManager.IT.GetProjectileAngle();
         float lineRenderCount = InGameManager.IT.lineRenderCount;
         float dir = tankHandler.GetDirection();
