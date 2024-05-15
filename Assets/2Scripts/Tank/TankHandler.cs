@@ -117,7 +117,7 @@ public class  TankHandler : MonoBehaviour
             return; // 줌인 중에는 탱크 못움직이게
         } else if (Input.GetKeyUp(KeyCode.Z)) {
             InGameManager.IT.CamStopZoom();
-            InGameManager.IT.CamZoom(5);
+            InGameManager.IT.CamZoom(9);
             InGameManager.IT.CamMoveBack();
         }
 
