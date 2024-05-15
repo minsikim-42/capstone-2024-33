@@ -412,7 +412,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         }
         else if (SceneManager.GetActiveScene().name == "Game")
         {
-            if (PhotonNetwork.IsMasterClient)
+            if (InGameManager.IT.GetIsTurn(player.NickName) && PhotonNetwork.IsMasterClient)
                 InGameManager.IT.NextTurn(); // 다음 턴
         }
     }

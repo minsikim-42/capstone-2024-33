@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
+using Unity.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
@@ -477,6 +478,11 @@ public class InGameManager : MonoBehaviour
         timerText.text = time.ToString();
     }
     
+    public bool GetIsTurn(string nickName)
+    {
+        return turnList[turnIndex].nickName == nickName;
+    }
+
     private void TurnOver()
     {
         EndTurn(); // 턴 종료
@@ -731,8 +737,9 @@ public class InGameManager : MonoBehaviour
             PV.RPC(nameof(RPC_ExitInGame), RpcTarget.All);
         }
         // 방장이 아닌 플레이어가 방을 나갈 경우
-        else
+        else // 나머지 클라이언트에게 알림
         {
+            PV.RPC(nameof(RPC_LeaveUpdateTurn), RpcTarget.Others, PhotonNetwork.LocalPlayer.NickName);
             LeaveRoom(); // 방 나가기
         }
     }
@@ -748,6 +755,13 @@ public class InGameManager : MonoBehaviour
         PhotonNetwork.LeaveRoom(); // 방 나가기
 
         PhotonNetwork.LoadLevel("Lobby"); // 로비 씬으로 이동
+    }
+
+    [PunRPC]
+    private void RPC_LeaveUpdateTurn(string nickName)
+    {
+        var turn = turnList.Find((t) => t.nickName == nickName);
+        turnList.Remove(turn);
     }
     
     public void Result(int t)

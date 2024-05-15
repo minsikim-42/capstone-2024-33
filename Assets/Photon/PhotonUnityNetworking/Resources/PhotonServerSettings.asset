@@ -59,6 +59,8 @@ MonoBehaviour:
   - RPC_Result
   - RPC_Die
   - RPC_SetTeamNum
+  - RPC_SetTurn
+  - RPC_LeaveUpdateTurn
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
