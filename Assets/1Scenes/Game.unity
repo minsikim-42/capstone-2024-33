@@ -8726,6 +8726,9 @@ MonoBehaviour:
   isDoubleShot: 0
   isAttackRange: 0
   isAttackDamage: 0
+  doubleShot: 1
+  attackRange: 1
+  attackDamage: 1
   initialPosition: {x: 0, y: 0, z: 0}
   hitEffectPrefab: {fileID: 3709993209174104884, guid: fb71190ec7f352b478ffab888e19fd8a,
     type: 3}
@@ -8877,7 +8880,17 @@ PrefabInstance:
     - target: {fileID: 3000725914088928818, guid: 6fdc74b35fde8ea4b9bbfb1abf05e073,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.5
+      value: -12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3279876928134839249, guid: 6fdc74b35fde8ea4b9bbfb1abf05e073,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4098439265057565575, guid: 6fdc74b35fde8ea4b9bbfb1abf05e073,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4225578703221711660, guid: 6fdc74b35fde8ea4b9bbfb1abf05e073,
         type: 3}
@@ -8892,7 +8905,7 @@ PrefabInstance:
     - target: {fileID: 4982260094283297842, guid: 6fdc74b35fde8ea4b9bbfb1abf05e073,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.5
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 7542311556920075729, guid: 6fdc74b35fde8ea4b9bbfb1abf05e073,
         type: 3}
