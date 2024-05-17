@@ -149,6 +149,7 @@ public class TankUIHandler : MonoBehaviour
         else if (angle > 180f) angle -= 360;
 
         int renderCount = (int)(lineRenderCount * Mathf.Abs(angle) * value / 100f);
+        renderCount = InGameManager.IT.gameMode == 2 ? (int)(renderCount * 0.7) : renderCount;
         lineRenderer.positionCount = renderCount;
         float t=0f;
         for (int i=0; i<renderCount; i++) {
