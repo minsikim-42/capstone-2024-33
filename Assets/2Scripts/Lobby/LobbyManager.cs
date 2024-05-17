@@ -58,6 +58,7 @@ public class LobbyManager : MonoBehaviour
     private List<RoomHandler> roomList = new List<RoomHandler>(); // 방 리스트
     [SerializeField] private Button leftRoomButton; // 방 뒤로가기 버튼
     [SerializeField] private Button gameStartButton; // 게임 시작 버튼
+    [SerializeField] public Button esayHardButton; // Easy Hart 버튼
 	[SerializeField] private Button changeTeamButton; // 팀 변경 버튼
 
     [Header("Room Player List")] 
@@ -93,6 +94,7 @@ public class LobbyManager : MonoBehaviour
         leftRoomButton.onClick.AddListener(LeftRoom);
         
         gameStartButton.onClick.AddListener(GameStart);
+        esayHardButton.onClick.AddListener(ChangeMode);
         changeTeamButton.onClick.AddListener(ChangeTeam);
         goToLobbyButton.onClick.AddListener(GoToLobby);
         
@@ -548,6 +550,11 @@ public class LobbyManager : MonoBehaviour
         HideRoom(); // 방 숨기기
         ShowRoomList(); // 방 리스트 보이기
         NetworkManager.IT.LeftRoom(); // 방에서 나가기
+    }
+
+    public void ChangeMode()
+    {
+        NetworkManager.IT.SetChangeMode();
     }
 
     public void ChangeTeam()

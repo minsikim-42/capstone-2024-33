@@ -160,6 +160,8 @@ public class TankUIHandler : MonoBehaviour
             t += timeStep;
         }
 
+		// Predict Wind
+		if (InGameManager.IT.gameMode == 2) return ;// Hard
         float wind = InGameManager.IT.windPower * InGameManager.IT.windPowerCoefficient;
         float mass = InGameManager.IT.projectileMass;
         greenLineRenderer.positionCount = renderCount;
