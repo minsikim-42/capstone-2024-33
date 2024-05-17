@@ -1119,6 +1119,7 @@ MonoBehaviour:
   hitDamageText: {fileID: 8732018147098327995}
   minimapIcon: {fileID: 4326484105325179665}
   lineRenderer: {fileID: 821769509917976099}
+  greenLineRenderer: {fileID: 0}
 --- !u!114 &8978036191581918206
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ public class TankUIHandler : MonoBehaviour
     [SerializeField] private TextMeshProUGUI hitDamageText;
     [SerializeField] private SpriteRenderer minimapIcon;
     [SerializeField] private LineRenderer lineRenderer;
+    [SerializeField] private LineRenderer greenLineRenderer;
 
     private void Awake()
     {
@@ -158,10 +159,24 @@ public class TankUIHandler : MonoBehaviour
             lineRenderer.SetPosition(i, pos+point);
             t += timeStep;
         }
+
+        float wind = InGameManager.IT.windPower * InGameManager.IT.windPowerCoefficient;
+        float mass = InGameManager.IT.projectileMass;
+        greenLineRenderer.positionCount = renderCount;
+        t=0f;
+        for (int i=0; i<renderCount; i++) {
+            float x = powerX * t + wind/2 / mass * t*t;
+            float y = powerY * t - g/2 * t*t;
+            Vector2 point = new Vector2(x,y);
+
+            greenLineRenderer.SetPosition(i, pos+point);
+            t += timeStep;
+        }
     }
 
     public void CleanLine()
     {
         lineRenderer.positionCount = 0;
+        greenLineRenderer.positionCount = 0;
     }
 }
