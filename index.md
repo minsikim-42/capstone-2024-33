@@ -109,6 +109,7 @@
 ### 맥용 윈도우용 실행파일 배포, 바로 실행 가능합니다.
 For Mac :
 https://drive.google.com/file/d/1FdBn03_y_Ic5abgreYtl68RzpOYE01n0/view?usp=sharing 
+
 For Window 64 :
 https://drive.google.com/file/d/1c6wU7N6afiUyeSNhuj8Vr_TggiAV0F0v/view?usp=sharing 
 
