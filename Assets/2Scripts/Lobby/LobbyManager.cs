@@ -69,6 +69,12 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] private Button goToLobbyButton; // 로비로 가는 버튼
     [SerializeField] private List<ResultSlotHandler> resultSlots; // 결과 표시 슬롯들
 
+    [Header("KeyBinding")]
+    [SerializeField] private Button kbButton; // 조작키 설명 버튼
+    [SerializeField] private CanvasGroup kbCg; // 조작키 설명 캔버스 그룹
+    [SerializeField] private bool isKb;
+    //     [SerializeField] private CanvasGroup lobbyCg; // 로비 캔버스 그룹
+
     private void Awake()
     {
         IT = this;
@@ -95,6 +101,9 @@ public class LobbyManager : MonoBehaviour
         gameStartButton.onClick.AddListener(GameStart);
         changeTeamButton.onClick.AddListener(ChangeTeam);
         goToLobbyButton.onClick.AddListener(GoToLobby);
+
+        kbButton.onClick.AddListener(KeyBindingButton);
+        isKb = false;
         
         user.GetUserInfoFromBackend(); // 유저 정보를 가져옴
         
@@ -205,6 +214,7 @@ public class LobbyManager : MonoBehaviour
         createRoomButtonCg.alpha = 1;
         createRoomButtonCg.blocksRaycasts = true;
         createRoomButtonCg.interactable = true;
+        kbButton.gameObject.SetActive(true);
 
         titleText.SetText("Lobby");
     }
@@ -373,6 +383,7 @@ public class LobbyManager : MonoBehaviour
         createRoomInputField.text = "";
         createRoomAlertText.text = "";
         
+        
         createRoomCg.alpha = 1;
         createRoomCg.blocksRaycasts = true;
         createRoomCg.interactable = true;
@@ -403,6 +414,7 @@ public class LobbyManager : MonoBehaviour
         createRoomCg.alpha = 0;
         createRoomCg.blocksRaycasts = false;
         createRoomCg.interactable = false;
+        kbButton.gameObject.SetActive(false);
 
         NetworkManager.IT.CreateRoom(createRoomInputField.text); // 방 생성
     }
@@ -526,6 +538,23 @@ public class LobbyManager : MonoBehaviour
         createRoomCg.interactable = false;
     }
     
+    private void KeyBindingButton()
+    {
+        if (isKb) // Close
+        {
+            kbCg.alpha = 0;
+            kbCg.blocksRaycasts = false;
+            kbCg.interactable = false;
+            isKb = false;
+        }
+        else // Show
+        {
+            kbCg.alpha = 1;
+            isKb = true;
+            kbCg.blocksRaycasts = true;
+            kbCg.interactable = true;
+        }
+    }
     
     // 사용 X
     // 왼쪽 방 리스트 보이기
