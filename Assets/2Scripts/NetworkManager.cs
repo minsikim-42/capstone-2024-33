@@ -8,6 +8,7 @@ using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
+using TMPro;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
@@ -117,7 +118,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
                     startedRoomList.Add(room);
                 }
             }
-            
+
             // room info
             foreach (var room in roomList)
             {
@@ -198,9 +199,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         
         var roomOptions = new RoomOptions
         {
-            CustomRoomPropertiesForLobby = new[] {IsStarted, IsTeamMode, Slot0, Slot1, Slot2, Slot3, Slot4, Slot5, Slot6, Slot7, "team"+Slot1, "team"+Slot2, "team"+Slot3, "team"+Slot4, "team"+Slot5, "team"+Slot6, "team"+Slot7,"name"+Slot1, "name"+Slot2, "name"+Slot3, "name"+Slot4, "name"+Slot5, "name"+Slot6, "name"+Slot7},
+            CustomRoomPropertiesForLobby = new[] {IsStarted, IsTeamMode, "GameMode", Slot0, Slot1, Slot2, Slot3, Slot4, Slot5, Slot6, Slot7, "team"+Slot1, "team"+Slot2, "team"+Slot3, "team"+Slot4, "team"+Slot5, "team"+Slot6, "team"+Slot7,"name"+Slot1, "name"+Slot2, "name"+Slot3, "name"+Slot4, "name"+Slot5, "name"+Slot6, "name"+Slot7},
             CustomRoomProperties = new Hashtable {
-                {IsStarted, false}, {IsTeamMode, LobbyManager.IT.isTeamMode},
+                {IsStarted, false}, {IsTeamMode, LobbyManager.IT.isTeamMode}, {"GameMode", 1},
                 {Slot0, 1}, {Slot1, -1}, {Slot2, -1}, {Slot3, -1}, {Slot4, -1}, {Slot5, -1}, {Slot6, -1}, {Slot7, -1},
                 {"team"+Slot0, LobbyManager.IT.roomPlayerSlots[0].teamNumber}, {"team"+Slot1, 0}, {"team"+Slot2, 0}, {"team"+Slot3, 0}, {"team"+Slot4, 0}, {"team"+Slot5, 0}, {"team"+Slot6, 0}, {"team"+Slot7, 0},
                 {"name"+Slot0, player.NickName}, {"name"+Slot1, string.Empty}, {"name"+Slot2, string.Empty}, {"name"+Slot3, string.Empty}, {"name"+Slot4, string.Empty}, {"name"+Slot5, string.Empty}, {"name"+Slot6, string.Empty}, {"name"+Slot7, string.Empty}
@@ -371,6 +372,24 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         }
         PhotonNetwork.CurrentRoom.SetCustomProperties(cProperties);
     }
+
+    public void SetChangeMode() {
+        var cProperties = PhotonNetwork.CurrentRoom.CustomProperties;
+
+        if ((int)cProperties["GameMode"] == 1)
+        {
+            cProperties["GameMode"] = 2;
+        } else {
+            cProperties["GameMode"] = 1;
+        }
+        PhotonNetwork.CurrentRoom.SetCustomProperties(cProperties);
+    }
+
+	public int GetGameMode()
+	{
+		var cProperties = PhotonNetwork.CurrentRoom.CustomProperties;
+		return (int)cProperties["GameMode"];
+	}
     
     public override void OnMasterClientSwitched(Player newMasterClient)
     {
@@ -431,6 +450,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             
                 return;
             }
+
+			var modeText = LobbyManager.IT.esayHardButton.GetComponentInChildren<TextMeshProUGUI>();
+			if ((int)propertiesThatChanged["GameMode"] == 1)
+				modeText.SetText("Easy");
+			else if ((int)propertiesThatChanged["GameMode"] == 2)
+				modeText.SetText("Hard");
 
             LobbyManager.IT.SetSlot(0, Slot0, (int)propertiesThatChanged[Slot0], (string)propertiesThatChanged["name"+Slot0], (int)propertiesThatChanged["team"+Slot0]);
             LobbyManager.IT.SetSlot(1, Slot1, (int)propertiesThatChanged[Slot1], (string)propertiesThatChanged["name"+Slot1], (int)propertiesThatChanged["team"+Slot1]);

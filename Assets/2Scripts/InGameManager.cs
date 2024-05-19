@@ -22,6 +22,7 @@ public class InGameManager : MonoBehaviour
     private string aiPrefabName = "AI"; // AI 프리팹 이름
 
     public bool isTeamMode;
+	public int gameMode;
     public int redTeam1;
     public int blueTeam2;
     public float MAX_WIDTH = 2048;
@@ -48,7 +49,6 @@ public class InGameManager : MonoBehaviour
     private float timer; // 타이머
     private bool isPlayingTimer; // 타이머 플레이 여부
 
-    
     private Player currentTurnPlayer; // 현재 턴의 플레이어
     private AIHandler currentTurnAI; // 현재 턴의 AI
     
@@ -71,7 +71,7 @@ public class InGameManager : MonoBehaviour
     public int maxWindPower = 10;
     public int windPower; // 바람 세기
     public float windPowerCoefficient = 0.5f; // 바람 세기 계수 (강도 조절용)
-    
+    public float powerCoefficient = 50;
     [Header("AI")]
     private List<AIHandler> aiList = new List<AIHandler>(); // AI 핸들러 리스트
     
@@ -87,6 +87,17 @@ public class InGameManager : MonoBehaviour
         cameraHandler = FindObjectOfType<CameraHandler>(); // 카메라 핸들러 설정
 
         isTeamMode = LobbyManager.IT.isTeamMode;
+		gameMode = NetworkManager.IT.GetGameMode();
+		if (gameMode == 1) // easy
+		{
+			//
+		}
+		else // hard
+		{
+			maxWindPower = 20;
+			turnTime = 25;
+			powerCoefficient = 75;
+		}
     }
 
     private async void Start()

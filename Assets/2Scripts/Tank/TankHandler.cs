@@ -70,6 +70,7 @@ public class  TankHandler : MonoBehaviour
         PV = GetComponent<PhotonView>(); // 포톤 뷰 컴포넌트 할당
         tankUIHandler = GetComponent<TankUIHandler>(); // 탱크 UI 핸들러 컴포넌트 할당
         rayOffset = new Vector3(0.15f,0,0);
+		powerCoefficient = InGameManager.IT.powerCoefficient;
     }
 
     public virtual void Start()

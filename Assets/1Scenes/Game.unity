@@ -3820,7 +3820,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 30
+  m_text: 00
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8696,6 +8696,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isTeamMode: 0
+  gameMode: 0
   redTeam1: 0
   blueTeam2: 0
   MAX_WIDTH: 2048
@@ -8735,6 +8736,7 @@ MonoBehaviour:
   maxWindPower: 10
   windPower: 0
   windPowerCoefficient: 0.5
+  powerCoefficient: 50
   maxHP: 300
 --- !u!4 &2004574663
 Transform:
