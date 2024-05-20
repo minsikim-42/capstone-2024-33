@@ -1,0 +1,12 @@
+Font: Maplestory OTF  Style: Bold
+Point Size: 74   SP/PD Ratio: 6.8%
+
+Characters included: 11617/11617
+Missing characters: 0
+Excluded characters: 0
+
+Characters missing from font file:
+----------------------------------------
+
+Characters excluded from packing:
+----------------------------------------
