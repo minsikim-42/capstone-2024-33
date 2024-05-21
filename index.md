@@ -1,14 +1,14 @@
 # Welcome to "OverWind" Page!
 <div>
     <img alt="overwind Login" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/35fa36e4-7abb-48e7-b7b9-5736d1286eff"
+    width="500" height="300" />
+</div>
+<div>
+    <img alt="overwind Lobby" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/c4587748-60b5-4dc1-b450-9ae205d2d37c"
     width="500" height="300">
 </div>
 <div>
-    <alt="overwind Lobby" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/c4587748-60b5-4dc1-b450-9ae205d2d37c"
-    width="500" height="300">
-</div>
-<div>
-    <alt="overwind Team" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/89a1225b-e0d3-46ec-b1a0-5ba38be04ad2"
+    <img alt="overwind Team" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/89a1225b-e0d3-46ec-b1a0-5ba38be04ad2"
     width="500" height="300">
 </div>
 <div>
