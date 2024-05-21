@@ -114,9 +114,9 @@
 
 ## 설치 방법
 ### 맥용 윈도우용 실행파일 배포, 바로 실행 가능합니다.
-[For Mac (Intel + Apple Silicon)]([https://drive.google.com/file/d/1FdBn03_y_Ic5abgreYtl68RzpOYE01n0/view?usp=sharing](https://drive.google.com/file/d/1sdAqWcAkpWgphD7kpUfm35jnZfqsVGY0/view?usp=drive_link))
+[For Mac (Intel + Apple Silicon)](https://drive.google.com/file/d/1sdAqWcAkpWgphD7kpUfm35jnZfqsVGY0/view?usp=drive_link)
 
-[For Window 64]([https://drive.google.com/file/d/1c6wU7N6afiUyeSNhuj8Vr_TggiAV0F0v/view?usp=sharing](https://drive.google.com/file/d/18kZK5VG15pp-iYEKncRIgZFmETpo6ahH/view?usp=drive_link))
+[For Window 64](https://drive.google.com/file/d/18kZK5VG15pp-iYEKncRIgZFmETpo6ahH/view?usp=drive_link)
 
 
 <br> <br>
