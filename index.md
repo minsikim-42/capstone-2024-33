@@ -104,10 +104,11 @@
 ## 시연 영상
 
 <div>
-    <img width="1434" alt="스크린샷 2024-04-07 오후 10 22 45" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/68fd87e1-a904-4744-85f4-3325e7d5fff1">
+    <img alt="overwind InGame" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/4d3f7f11-8ed1-491f-8368-6ee3af2f8e22"
+    width="500" height="300">
 </div>
 
-[유튜브 링크](https://youtu.be/yBHum1S55Eo)
+[유튜브 링크]([https://youtu.be/yBHum1S55Eo](https://youtu.be/UZhV_kJ3_T0))
 
 <br> <br>
 
