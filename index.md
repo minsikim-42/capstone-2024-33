@@ -24,6 +24,9 @@
 
 [최종발표 pptx](https://docs.google.com/presentation/d/1W6f307y4nkLyZVSOoYnx0Ev64Ul9og_A/edit?usp=sharing&ouid=114998932213411349234&rtpof=true&sd=true)
 
+![오버윈드 포스터](https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/0e77eda8-cc0e-4874-a415-8a9c9eb209ab)
+
+
 <br> <br>
 
 ## 팀 소개
