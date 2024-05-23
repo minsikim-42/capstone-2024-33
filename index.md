@@ -28,7 +28,7 @@
 
 [최종발표 pptx](https://docs.google.com/presentation/d/1W6f307y4nkLyZVSOoYnx0Ev64Ul9og_A/edit?usp=sharing&ouid=114998932213411349234&rtpof=true&sd=true)
 
-[포스터](https://drive.google.com/file/d/1gJM2umaUDTVlD_pjLyQXy8TWORLPUBeS/view?usp=drive_link)
+[포스터 png](https://drive.google.com/file/d/1gJM2umaUDTVlD_pjLyQXy8TWORLPUBeS/view?usp=drive_link)
 
 
 
