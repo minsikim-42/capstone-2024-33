@@ -111,7 +111,7 @@
     width="500" height="300">
 </div>
 
-[유튜브 링크]([https://youtu.be/yBHum1S55Eo](https://youtu.be/UZhV_kJ3_T0))
+[유튜브 링크](https://youtu.be/UZhV_kJ3_T0)
 
 <br> <br>
 
