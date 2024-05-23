@@ -62,7 +62,7 @@
     <img src="https://img.shields.io/badge/Unity-FFFFFF?style=for-the-badge&logo=Unity&logoColor=black">
 </div>
 <div>
-    <img src="https://img.shields.io/badge/Unity-FFFFFF?style=for-the-badge&logo=Unity&logoColor=black">
+    <img src="https://img.shields.io/badge/-C%23-000000?logo=Csharp&style=flat">
 </div>
 
 ### BackEnd
