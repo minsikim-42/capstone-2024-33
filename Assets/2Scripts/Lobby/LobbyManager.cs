@@ -58,7 +58,7 @@ public class LobbyManager : MonoBehaviour
     private List<RoomHandler> roomList = new List<RoomHandler>(); // 방 리스트
     [SerializeField] private Button leftRoomButton; // 방 뒤로가기 버튼
     [SerializeField] private Button gameStartButton; // 게임 시작 버튼
-    [SerializeField] public Button esayHardButton; // Easy Hart 버튼
+    [SerializeField] public Button esayHardButton; // Easy Hard 버튼
 	[SerializeField] private Button changeTeamButton; // 팀 변경 버튼
 
     [Header("Room Player List")] 

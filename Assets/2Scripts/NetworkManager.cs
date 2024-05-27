@@ -254,7 +254,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         }
         LobbyManager.IT.SetSlotPlayer(0, PhotonNetwork.MasterClient.NickName); // 방장 슬롯
         Debug.Log(slotLog);
-        
+
+        var modeText = LobbyManager.IT.esayHardButton.GetComponentInChildren<TextMeshProUGUI>();
+        modeText.SetText("Easy");
         LobbyManager.IT.HideLoading(); // 로딩 숨기기
     }
 
@@ -374,6 +376,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
 
     public void SetChangeMode() {
+        if (PhotonNetwork.LocalPlayer.IsMasterClient == false)
+            return;
         var cProperties = PhotonNetwork.CurrentRoom.CustomProperties;
 
         if ((int)cProperties["GameMode"] == 1)
