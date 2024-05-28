@@ -43,9 +43,9 @@
         <td>정윤민</td>
     </tr>
     <tr align="center">
-        <td>20171187</td>
-        <td>20175162</td>
-        <td>20213080</td>
+        <td>XXXX1187</td>
+        <td>XXXX5162</td>
+        <td>XXXX3080</td>
     </tr>
     <tr align="center">
         <td>게임파트</td>
