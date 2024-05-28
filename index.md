@@ -31,6 +31,7 @@
 [포스터 ai 596x843](https://drive.google.com/file/d/1b85_20fqHNlr-42ZiSO_1oisiCjMXWn_/view?usp=drive_link)
 [포스터 png](https://drive.google.com/file/d/1gJM2umaUDTVlD_pjLyQXy8TWORLPUBeS/view?usp=drive_link)
 
+[수행보고서_최종](https://docs.google.com/document/d/1GZ3a-qep1tCj5gTXBxU9SbI0QrJyfK3E/edit?usp=sharing&ouid=114998932213411349234&rtpof=true&sd=true)
 
 
 <br> <br>
