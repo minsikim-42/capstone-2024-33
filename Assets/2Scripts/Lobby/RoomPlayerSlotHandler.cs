@@ -65,11 +65,16 @@ public class RoomPlayerSlotHandler : MonoBehaviourPun
 		nickName = nickNa;
 		teamNumber = tNum;
 
-		if (actorNum == -1) {
+		if (actorNum == -1)
+        {
 			SetSlotEmpty();
-		} else if (actorNum == 99) {
+		}
+        else if (actorNum == 99)
+        {
 			SetSlotAI();
-		} else {
+		}
+        else
+        {
 			SetSlotPlayer();
 		}
 	}
@@ -103,7 +108,8 @@ public class RoomPlayerSlotHandler : MonoBehaviourPun
         }
     }
 
-    public void SetTeamColor(int teamNum) {
+    public void SetTeamColor(int teamNum)
+    {
         ColorBlock colorBlock = emptyButton.colors;
         if (teamNum == 1) {
             colorBlock.normalColor = Color.red;
