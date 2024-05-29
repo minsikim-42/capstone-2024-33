@@ -123,6 +123,8 @@
 
 [For Window 64](https://drive.google.com/file/d/18kZK5VG15pp-iYEKncRIgZFmETpo6ahH/view?usp=drive_link)
 
+[설치 불가시 대체 링크](https://mega.nz/folder/081yTIha#-NftS7gSlOkb2sSfbqDb7Q)
+
 
 <br> <br>
 
