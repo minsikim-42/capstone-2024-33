@@ -71,8 +71,6 @@ public class  TankHandler : MonoBehaviour
         tankUIHandler = GetComponent<TankUIHandler>(); // 탱크 UI 핸들러 컴포넌트 할당
         rayOffset = new Vector3(0.15f,0,0);
 		powerCoefficient = InGameManager.IT.powerCoefficient;
-        direction = Random.Range(0f, 1f) >= 0.5f ?
-             1 : -1;
     }
 
     public virtual void Start()
@@ -109,13 +107,13 @@ public class  TankHandler : MonoBehaviour
             }
 
             if (Input.GetKey(KeyCode.LeftArrow)) // 카메라 왼쪽으로 이동
-                InGameManager.IT.CamMove(-0.2f, 0);
+                InGameManager.IT.CamMove(-0.15f, 0);
             else if (Input.GetKey(KeyCode.RightArrow)) // Right
-                InGameManager.IT.CamMove(0.2f, 0);
+                InGameManager.IT.CamMove(0.15f, 0);
             else if (Input.GetKey(KeyCode.UpArrow)) // Up
-                InGameManager.IT.CamMove(0, 0.2f);
+                InGameManager.IT.CamMove(0, 0.15f);
             else if (Input.GetKey(KeyCode.DownArrow)) // Up
-                InGameManager.IT.CamMove(0, -0.2f);
+                InGameManager.IT.CamMove(0, -0.15f);
 
             return; // 줌인 중에는 탱크 못움직이게
         } else if (Input.GetKeyUp(KeyCode.Z)) {
@@ -133,7 +131,7 @@ public class  TankHandler : MonoBehaviour
         if (hit1 && hit3) // hit2
         {
             angle = -Vector2.Angle(direction * (hit1.point - hit3.point), Vector2.right); // 레이캐스트 충돌 정보 1과 3의 점 사이의 각도
-            angle = Mathf.Clamp(angle, -60, 60); // angle min: -60, max: 60
+            angle = Mathf.Clamp(angle, -55, 55); // angle min: -60, max: 60
 
             if (hit1.point.y >= hit3.point.y) // 레이캐스트 충돌 정보 2->3의 y값이 더 작다면
                 angle = -angle; // angle값을 반전
