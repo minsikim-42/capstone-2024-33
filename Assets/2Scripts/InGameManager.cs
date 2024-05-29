@@ -25,10 +25,10 @@ public class InGameManager : MonoBehaviour
 	public int gameMode;
     public int redTeam1;
     public int blueTeam2;
-    public float MAX_WIDTH = 2048;
-    public float MAX_HEIGHT = 1600;
+    public float MAX_WIDTH = 1600;
+    public float MAX_HEIGHT = 1200;
 
-    public float projectileMass = 3.5f;
+    public float projectileMass = 3.3f;
     public float lineRenderCount = 2.5f;
     
     [Header("Spawn Points")]
@@ -808,9 +808,9 @@ public class InGameManager : MonoBehaviour
         if (t == 0)
             GameManager.IT.resultText = "Result";
         else if (t == 1)
-            GameManager.IT.resultText = "Red Team";
+            GameManager.IT.resultText = "Red Team Win!";
         else
-            GameManager.IT.resultText = "Blue Team";
+            GameManager.IT.resultText = "Blue Team Win!";
 
         PhotonNetwork.LeaveRoom(); // 방 나가기
         PhotonNetwork.LoadLevel("Lobby"); // 로비 씬으로 이동
