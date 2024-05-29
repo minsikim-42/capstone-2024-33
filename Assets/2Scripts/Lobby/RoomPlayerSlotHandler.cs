@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public class RoomPlayerSlotHandler : MonoBehaviourPun
 {
     public int slotIndex; // 슬롯의 인덱스
-	public string slotName;
-    public int actorNumber;
-    public string nickName;
-    public int teamNumber;
+	public string slotName; // 슬롯의 이름
+    public int actorNumber; // 슬롯의 actorNumber
+    public string nickName; // 슬롯의 유저이름
+    public int teamNumber; // 슬롯의 팀 번호 (1, 2)
     
     [SerializeField] private TextMeshProUGUI playerNicknameText; // 플레이어 닉네임 텍스트
     [SerializeField] private Button emptyButton; // Empty 버튼
@@ -65,11 +65,16 @@ public class RoomPlayerSlotHandler : MonoBehaviourPun
 		nickName = nickNa;
 		teamNumber = tNum;
 
-		if (actorNum == -1) {
+		if (actorNum == -1)
+        {
 			SetSlotEmpty();
-		} else if (actorNum == 99) {
+		}
+        else if (actorNum == 99)
+        {
 			SetSlotAI();
-		} else {
+		}
+        else
+        {
 			SetSlotPlayer();
 		}
 	}
@@ -103,7 +108,8 @@ public class RoomPlayerSlotHandler : MonoBehaviourPun
         }
     }
 
-    public void SetTeamColor(int teamNum) {
+    public void SetTeamColor(int teamNum)
+    {
         ColorBlock colorBlock = emptyButton.colors;
         if (teamNum == 1) {
             colorBlock.normalColor = Color.red;
