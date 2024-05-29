@@ -39,7 +39,7 @@
 ## 팀 소개
 <table>
     <tr align="center">
-        <td>김민식 (팀장)</td>
+        <td>김민식</td>
         <td>박우진</td>
         <td>정윤민</td>
     </tr>
@@ -51,7 +51,7 @@
     <tr align="center">
         <td>팀전 구현 및 게임 모드 추가</td>
         <td>게임파트, UI디자인, 로비파트, 뒤끝서버</td>
-        <td>게임파트, 로비파트</td>
+        <td>게임파트, UI디자인, 로비파트, 뒤끝서버</td>
     </tr>
 </table>
 
