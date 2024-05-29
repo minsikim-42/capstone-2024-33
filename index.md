@@ -49,7 +49,7 @@
         <td>XXXX3080</td>
     </tr>
     <tr align="center">
-        <td>게임파트</td>
+        <td>팀전 구현 및 게임 모드 추가</td>
         <td>게임파트, UI디자인, 로비파트, 뒤끝서버</td>
         <td>게임파트, 로비파트</td>
     </tr>
