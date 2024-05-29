@@ -85,6 +85,7 @@ public class LobbyManager : MonoBehaviour
         nicknameSaveButton.onClick.AddListener(SaveNickname);
         nicknameBackButton.onClick.AddListener(BackNickname);
         
+        // createRoom 캔버스그룹 초기화
         createRoomCg.alpha = 0;
         createRoomButton.onClick.AddListener(ShowCreateRoom);
         createRoomCreateButton.onClick.AddListener(CreateRoom);
@@ -99,6 +100,7 @@ public class LobbyManager : MonoBehaviour
         
         leftRoomButton.onClick.AddListener(LeftRoom);
         
+        // 게임 시작전 설정 버튼
         gameStartButton.onClick.AddListener(GameStart);
         esayHardButton.onClick.AddListener(ChangeMode);
         changeTeamButton.onClick.AddListener(ChangeTeam);
@@ -220,7 +222,6 @@ public class LobbyManager : MonoBehaviour
 
         titleText.SetText("Lobby");
     }
-    
     
     // Nickname
     public void CheckNickname()
@@ -423,12 +424,14 @@ public class LobbyManager : MonoBehaviour
 
     private void SetIsTeamMode()
     {
-        if (isTeamMode == false) {
+        if (isTeamMode == false)
+        {
             isTeamMode = true;
             isTeamButtonTrue.gameObject.SetActive(true);
             isTeamButtonFalse.gameObject.SetActive(false);
         }
-        else {
+        else
+        {
             isTeamMode = false;
             isTeamButtonTrue.gameObject.SetActive(false);
             isTeamButtonFalse.gameObject.SetActive(true);
@@ -641,9 +644,9 @@ public class LobbyManager : MonoBehaviour
 				// 개인전
 				"0" => new Color(0.7f, 0.7f, 0.7f, 0.8f),
 				// 레드
-				"1" => new Color(0.9f, 0.2f, 0.2f, 0.8f),
+				"1" => new Color(0.85f, 0.2f, 0.2f, 0.8f),
 				// 블루
-				"2" => new Color(0.2f, 0.2f, 0.9f, 0.8f),
+				"2" => new Color(0.2f, 0.2f, 0.85f, 0.8f),
 				_ => Color.magenta,
 			};
 			slot.GetComponent<Image>().color = c;
