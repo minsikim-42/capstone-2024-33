@@ -107,13 +107,13 @@ public class  TankHandler : MonoBehaviour
             }
 
             if (Input.GetKey(KeyCode.LeftArrow)) // 카메라 왼쪽으로 이동
-                InGameManager.IT.CamMove(-0.15f, 0);
+                InGameManager.IT.CamMove(-0.17f, 0);
             else if (Input.GetKey(KeyCode.RightArrow)) // Right
-                InGameManager.IT.CamMove(0.15f, 0);
+                InGameManager.IT.CamMove(0.17f, 0);
             else if (Input.GetKey(KeyCode.UpArrow)) // Up
-                InGameManager.IT.CamMove(0, 0.15f);
+                InGameManager.IT.CamMove(0, 0.17f);
             else if (Input.GetKey(KeyCode.DownArrow)) // Up
-                InGameManager.IT.CamMove(0, -0.15f);
+                InGameManager.IT.CamMove(0, -0.17f);
 
             return; // 줌인 중에는 탱크 못움직이게
         } else if (Input.GetKeyUp(KeyCode.Z)) {

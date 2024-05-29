@@ -103,7 +103,9 @@ public class UIManager : MonoBehaviour
     {
         projectileAngleInstrument.SetAngle(value, direction); // 포탄의 발사각 변경
         if (draw)
+        {
             InGameManager.IT.DrawLine(predictPowerSlider.GetValue());
+        }
     }
     
     public float GetProjectileAngle()

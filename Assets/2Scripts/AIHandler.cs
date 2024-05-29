@@ -212,7 +212,7 @@ public class AIHandler : MonoBehaviour
 
             power = launchSpeed * (1 / tankHandler.projectileFireCoefficient) * Random.Range(0.7f, 0.9f); // 파워 랜덤 설정
 
-            Debug.Log("dir: " + direction + ",  windP: " + InGameManager.IT.windPower);
+            // Debug.Log("dir: " + direction + ",  windP: " + InGameManager.IT.windPower);
             if ((direction > 0 && InGameManager.IT.windPower > 0) || (direction < 0 && InGameManager.IT.windPower < 0)) // 바람방향 같으면
             {
                 power *= (float)(100f - InGameManager.IT.windPower * 2f) / 100; // windPower Range(-20, 21)
