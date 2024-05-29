@@ -50,7 +50,7 @@
     </tr>
     <tr align="center">
         <td>게임파트</td>
-        <td>디자인, 로비파트, 뒤끝</td>
+        <td>게임파트, UI디자인, 로비파트, 뒤끝서버</td>
         <td>게임파트, 로비파트</td>
     </tr>
 </table>
