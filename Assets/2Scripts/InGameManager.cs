@@ -808,9 +808,9 @@ public class InGameManager : MonoBehaviour
         if (t == 0)
             GameManager.IT.resultText = "Result";
         else if (t == 1)
-            GameManager.IT.resultText = "Red Team Win!";
+            GameManager.IT.resultText = "Red Team";
         else
-            GameManager.IT.resultText = "Blue Team Win!";
+            GameManager.IT.resultText = "Blue Team";
 
         PhotonNetwork.LeaveRoom(); // 방 나가기
         PhotonNetwork.LoadLevel("Lobby"); // 로비 씬으로 이동
