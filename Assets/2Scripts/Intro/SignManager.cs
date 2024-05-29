@@ -139,10 +139,10 @@ public class SignManager : MonoBehaviour
             signUpAlertText.text = "아이디를 입력해주세요.";
             return;
         }
-        // 아이디가 10자리 초과일 경우
-        if (id.Length > 10)
+        // 아이디가 11자리 초과일 경우
+        if (id.Length > 11)
         {
-            signUpAlertText.text = "아이디를 10자 이내로 입력해주세요.";
+            signUpAlertText.text = "아이디를 11자 이내로 입력해주세요.";
             return;
         }
         
