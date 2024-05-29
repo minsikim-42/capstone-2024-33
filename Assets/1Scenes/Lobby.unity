@@ -5307,6 +5307,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 211082775577004405, guid: b547023f3cc9cd145b50376ec685cd96,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -329
+      objectReference: {fileID: 0}
     - target: {fileID: 307918026909404421, guid: b547023f3cc9cd145b50376ec685cd96,
         type: 3}
       propertyPath: m_fontAsset
@@ -5445,6 +5450,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1223987651511156826, guid: b547023f3cc9cd145b50376ec685cd96,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -329
       objectReference: {fileID: 0}
     - target: {fileID: 1383036235159321809, guid: b547023f3cc9cd145b50376ec685cd96,
         type: 3}
@@ -5543,7 +5553,7 @@ PrefabInstance:
     - target: {fileID: 2110517699146642541, guid: b547023f3cc9cd145b50376ec685cd96,
         type: 3}
       propertyPath: m_text
-      value: Back To Robby
+      value: Go To Robby
       objectReference: {fileID: 0}
     - target: {fileID: 2110517699146642541, guid: b547023f3cc9cd145b50376ec685cd96,
         type: 3}
@@ -6022,7 +6032,7 @@ PrefabInstance:
     - target: {fileID: 8776230561472830119, guid: b547023f3cc9cd145b50376ec685cd96,
         type: 3}
       propertyPath: m_Alpha
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8776230561472830119, guid: b547023f3cc9cd145b50376ec685cd96,
         type: 3}
