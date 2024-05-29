@@ -160,22 +160,6 @@ public class  TankHandler : MonoBehaviour
         // 스페이스바를 누르지 않은 상태라면
         else
         {
-            // if (Input.GetKey(KeyCode.LeftArrow)) {
-            //     if (currentMoveValue > 0 && !isAi && isTurn) // 현재 이동가능이 0보다 크다면
-            //     {
-            //         LeftArrowPressed();
-            //     }
-            //     direction = -1;
-            // } else if (Input.GetKey(KeyCode.RightArrow)) {
-            //     if (currentMoveValue > 0 && !isAi && isTurn) // 현재 이동값이 0보다 크다면
-            //     {
-            //         RightArrowPressed();
-            //     }
-            //     direction = 1;
-            // } else {
-            //     anim.SetBool("Idle", true); // Idle 애니메이션 활성화
-            //     anim.SetBool("Move", false); // Move 애니메이션 비활성화
-            // }
             if (currentMoveValue > 0) 
             {
                 // Left, Right : Move

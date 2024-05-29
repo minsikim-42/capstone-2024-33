@@ -18,8 +18,6 @@ public class TankUIHandler : MonoBehaviour
     private void Awake()
     {
         tankHandler = GetComponent<TankHandler>();
-
-        // lineRenderer = gameObject.GetComponentInChildren<LineRenderer>();
     }
 
     private void Start()

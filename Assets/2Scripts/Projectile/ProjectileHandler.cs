@@ -7,7 +7,7 @@ public class ProjectileHandler : MonoBehaviour
     private float angle; // 이동에 따른 회전각
     public bool isDoubleShot = false; // 더블샷 여부
 
-    public float massPower;
+    public float massPower; // 질량에 대한 파워
 
     private void Awake()
     {
@@ -24,16 +24,7 @@ public class ProjectileHandler : MonoBehaviour
         // 방향 체크
         // position.x *= direction;
         
-        Debug.Log("set proj x: " + position.x + ", dir: " + direction);
-
-        // if (!transform.name.Contains("AI"))
-        // {
-        //     // 바람 적용
-        //     var windPower = InGameManager.IT.windPower; // 바람 세기
-        //     var windPowerCoefficient = InGameManager.IT.windPowerCoefficient; // 바람 세기 계수
-
-        //     position.x += windPower / 20f * windPowerCoefficient; // 바람 적용    
-        // }
+        // Debug.Log("set proj x: " + position.x + ", dir: " + direction);
 
         rb.AddForce(position * speed * massPower, ForceMode2D.Impulse); // 발사
 
