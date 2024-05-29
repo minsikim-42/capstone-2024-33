@@ -5417,6 +5417,11 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 923058589460681426, guid: b547023f3cc9cd145b50376ec685cd96,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 352.6828
+      objectReference: {fileID: 0}
     - target: {fileID: 1023396652323967031, guid: b547023f3cc9cd145b50376ec685cd96,
         type: 3}
       propertyPath: m_fontAsset
