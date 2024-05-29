@@ -641,9 +641,9 @@ public class LobbyManager : MonoBehaviour
 				// 개인전
 				"0" => new Color(0.7f, 0.7f, 0.7f, 0.8f),
 				// 레드
-				"1" => new Color(0.9f, 0.2f, 0.2f, 0.8f),
+				"1" => new Color(0.8f, 0.2f, 0.2f, 0.8f),
 				// 블루
-				"2" => new Color(0.2f, 0.2f, 0.9f, 0.8f),
+				"2" => new Color(0.2f, 0.2f, 0.8f, 0.8f),
 				_ => Color.magenta,
 			};
 			slot.GetComponent<Image>().color = c;

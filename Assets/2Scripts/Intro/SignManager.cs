@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class SignManager : MonoBehaviour
 {
-    public static SignManager IT; // 싱글톤
+    public static SignManager IT;
     
     [SerializeField] private string testId; // 테스트 아이디
     [SerializeField] private string testPassword; // 테스트 비밀번호
@@ -129,7 +129,6 @@ public class SignManager : MonoBehaviour
     
     private void SignUp()
     {
-        // 아이디 패스워드 변수
         var id = signUpId.text;
         var password = signUpPassword.text;
      
@@ -137,12 +136,6 @@ public class SignManager : MonoBehaviour
         if (id.Trim().Equals(""))
         {
             signUpAlertText.text = "아이디를 입력해주세요.";
-            return;
-        }
-        // 아이디가 11자리 초과일 경우
-        if (id.Length > 11)
-        {
-            signUpAlertText.text = "아이디를 11자 이내로 입력해주세요.";
             return;
         }
         
