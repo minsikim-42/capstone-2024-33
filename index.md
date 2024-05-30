@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -19,6 +20,9 @@
             color: #fff;
             padding: 2rem;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         header h1 {
@@ -28,6 +32,7 @@
 
         .logo {
             max-width: 150px;
+            margin-bottom: 1rem;
         }
 
         h2 {
@@ -127,6 +132,7 @@
 </head>
 <body>
     <header>
+        <img src="images/OverWind_Logo.webp" alt="OverWind Logo" class="logo">
         <h1>Over Wind</h1>
     </header>
 
