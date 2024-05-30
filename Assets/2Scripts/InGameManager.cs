@@ -12,7 +12,7 @@ using Random = UnityEngine.Random;
 
 public class InGameManager : MonoBehaviour
 {
-    public static InGameManager IT;
+    public static InGameManager IT; // 싱글 톤
     
     private TankHandler playerTankHandler; // 플레이어 탱크 핸들러
     private PhotonView PV; // 포톤 뷰
@@ -21,15 +21,15 @@ public class InGameManager : MonoBehaviour
     private string playerPrefabName = "Tank"; // 플레이어 프리팹 이름
     private string aiPrefabName = "AI"; // AI 프리팹 이름
 
-    public bool isTeamMode;
-	public int gameMode;
-    public int redTeam1;
-    public int blueTeam2;
+    public bool isTeamMode; // 팀전인지 개인전인지
+	public int gameMode; // 쉬움 & 어려움
+    public int redTeam1; // 빨강팀 수
+    public int blueTeam2; // 플루팀 수
     public float MAX_WIDTH = 1600;
     public float MAX_HEIGHT = 1200;
 
-    public float projectileMass = 3.3f;
-    public float lineRenderCount = 2.5f;
+    public float projectileMass = 3.3f; // 포탄 무게
+    public float lineRenderCount = 2.5f; // 라인렌더러 포인트 수
     
     [Header("Spawn Points")]
     [SerializeField] private List<Transform> spawnPoints; // 스폰 포인트 리스트
