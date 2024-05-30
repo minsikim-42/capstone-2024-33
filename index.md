@@ -126,7 +126,7 @@
 </head>
 <body>
     <header>
-        <img src="https://drive.google.com/uc?export=view&id=1eGsNDhhRZVYTUVZgD6c6V9tVYmOJBNft" alt="OverWind Logo" class="logo">
+        <img src="https://drive.google.com/uc?export=view&id=1eGsNDhhRZVYTUVZgD6c6V9tVYmOJBNft" alt="OverWind Logo" class="logo" onerror="this.src='https://via.placeholder.com/150'; this.onerror=null;">
     </header>
 
     <section>
@@ -169,12 +169,17 @@
             <tr>
                 <td>김민식</td>
                 <td>XXXX1187</td>
-                <td>팀전 구현 및 게임 모드 추가</td>
+                <td>팀전 구현 및 개선, 포톤 서버 관리</td>
+            </tr>
+            <tr>
+                <td>고영관</td>
+                <td>XXXX0220</td>
+                <td>다이나믹 랭킹전 구현</td>
             </tr>
         </table>
 
-        <h2>기술 스택</h2>
-        <h3>Game</h3>
+        <h2>개발 환경</h2>
+        <h3>유니티 (Unity) 및 C#</h3>
         <div class="badges">
             <img src="https://img.shields.io/badge/Unity-FFFFFF?style=for-the-badge&logo=Unity&logoColor=black">
             <img src="https://img.shields.io/badge/-C%23-000000?logo=Csharp&style=flat">
