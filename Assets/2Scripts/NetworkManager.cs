@@ -545,8 +545,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public int GetSlotTeamNum(string name)
     {
         Debug.Log("acNum: " + name);
-        foreach (var slot in LobbyManager.IT.roomPlayerSlots) {
-            if (slot.slotName == name) {
+        foreach (var slot in LobbyManager.IT.roomPlayerSlots)
+        {
+            if (slot.slotName == name)
+            {
                 Debug.Log("acNum: " +slot.slotName + ", teamNum: " + slot.teamNumber);
                 return slot.teamNumber;
             }
@@ -573,7 +575,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             aiCount = 0;
         
         CustomRoomProperties[IsStarted] = true; // 게임 시작
-        isStarted = true;
+        isStarted = true; // 게임 시작
         
         PhotonNetwork.CurrentRoom.SetCustomProperties(CustomRoomProperties); // 방의 프로퍼티 설정
     }
@@ -596,10 +598,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
         Hashtable CustomRoomProperties = PhotonNetwork.CurrentRoom.CustomProperties; // 방의 프로퍼티
         int slotIdx=0;
-        foreach (var turn in turnList) {
+        foreach (var turn in turnList)
+        {
             CustomRoomProperties["Slot" + slotIdx] = turn.actorNumber; // 슬롯 설정
             CustomRoomProperties["team" + "Slot" + slotIdx] = turn.teamNumber; // 슬롯 팀 설정
-            CustomRoomProperties["name" + "Slot" + slotIdx] = turn.nickName;
+            CustomRoomProperties["name" + "Slot" + slotIdx] = turn.nickName; // 슬롯 이름 설정
             slotIdx++;
         }
 
