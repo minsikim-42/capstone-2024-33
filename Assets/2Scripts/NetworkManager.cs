@@ -369,7 +369,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         if ((int)cProperties["team"+slot.slotName] == 1)
         {
             cProperties["team"+slot.slotName] = 2;
-        } else {
+        }
+        else
+        {
             cProperties["team"+slot.slotName] = 1;
         }
         PhotonNetwork.CurrentRoom.SetCustomProperties(cProperties);
@@ -383,7 +385,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         if ((int)cProperties["GameMode"] == 1)
         {
             cProperties["GameMode"] = 2;
-        } else {
+        }
+        else
+        {
             cProperties["GameMode"] = 1;
         }
         PhotonNetwork.CurrentRoom.SetCustomProperties(cProperties);
@@ -522,10 +526,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         }
     }
 
-    public int GetTeamNum(int t) { // 플레이어 수
+    public int GetTeamNum(int t) // 플레이어 수
+    {
         int n=0;
-        foreach (var slot in LobbyManager.IT.roomPlayerSlots) {
-            if (slot.actorNumber != -1 && slot.teamNumber == t) {
+        foreach (var slot in LobbyManager.IT.roomPlayerSlots)
+        {
+            if (slot.actorNumber != -1 && slot.teamNumber == t)
+            {
                 n++;
             }
         }
@@ -533,8 +540,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         return n;
     }
 
-    public int GetTankTeamNum(string name) {
-        foreach (var slot in LobbyManager.IT.roomPlayerSlots) {
+    public int GetTankTeamNum(string name)
+    {
+        foreach (var slot in LobbyManager.IT.roomPlayerSlots)
+        {
             if (slot.nickName == name)
                 return slot.teamNumber;
         }
