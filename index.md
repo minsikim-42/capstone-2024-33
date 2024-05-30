@@ -6,26 +6,34 @@
     <title>OverWind</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
+            color: #333;
         }
 
         header {
-            background: #333;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: #fff;
-            padding: 1rem 0;
+            padding: 2rem 0;
             text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
         }
 
         .logo {
             max-width: 150px;
         }
 
-        h1, h2 {
-            color: #333;
+        h2 {
+            color: #764ba2;
+            border-bottom: 2px solid #764ba2;
+            padding-bottom: 0.5rem;
         }
 
         section {
@@ -33,7 +41,8 @@
             margin: 2rem auto;
             background: #fff;
             max-width: 900px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
         }
 
         .images img {
@@ -44,6 +53,7 @@
 
         .images img:hover {
             transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         .badges img {
@@ -54,11 +64,56 @@
             text-align: center;
         }
 
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            background: #f4f4f4;
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            border-radius: 5px;
+        }
+
+        ul li a {
+            color: #764ba2;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        ul li a:hover {
+            text-decoration: underline;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: center;
+        }
+
+        th {
+            background-color: #764ba2;
+            color: white;
+        }
+
         footer {
             background: #333;
             color: #fff;
             text-align: center;
             padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
         }
     </style>
 </head>
@@ -88,20 +143,25 @@
         </ul>
 
         <h2>팀 소개</h2>
-        <table align="center">
-            <tr align="center">
-                <td><strong>김민식</strong></td>
-                <td><strong>박우진</strong></td>
-                <td><strong>정윤민</strong></td>
+        <table>
+            <tr>
+                <th>이름</th>
+                <th>학번</th>
+                <th>역할</th>
             </tr>
-            <tr align="center">
+            <tr>
+                <td>김민식</td>
                 <td>XXXX1187</td>
-                <td>XXXX5162</td>
-                <td>XXXX3080</td>
-            </tr>
-            <tr align="center">
                 <td>팀전 구현 및 게임 모드 추가,<br>추가 수정을 통해 마지막 완성도를 높임</td>
+            </tr>
+            <tr>
+                <td>박우진</td>
+                <td>XXXX5162</td>
                 <td>게임파트, UI디자인, 로비파트, 뒤끝서버</td>
+            </tr>
+            <tr>
+                <td>정윤민</td>
+                <td>XXXX3080</td>
                 <td>게임파트, UI디자인, 로비파트, 뒤끝서버</td>
             </tr>
         </table>
