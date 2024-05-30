@@ -7,10 +7,11 @@ public class UserInfo : MonoBehaviour
 {
     [Serializable]
     public class UserInfoEvent : UnityEvent { }
-    public UserInfoEvent onUserInfoEvent = new UserInfoEvent(); // 유저 정보 이벤트
+    public UserInfoEvent onUserInfoEvent = new(); // 유저 정보 이벤트
     
-    private static UserInfoData data = new UserInfoData(); // 유저 정보 데이터
+    private static UserInfoData data = new(); // 유저 정보 데이터
     public static UserInfoData Data => data; // 유저 정보 데이터 Getter
+    // public static UserInfoData Data { get; } = new(); // 유저 정보 데이터 Getter
 
     public void GetUserInfoFromBackend()
     {
