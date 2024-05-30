@@ -122,7 +122,7 @@
 </head>
 <body>
     <header>
-        <h1>OVER WIND</h1>
+        <h1>Welcome to "OverWind" Page!</h1>
     </header>
 
     <section>
