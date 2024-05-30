@@ -183,14 +183,7 @@
         <h3>BackEnd</h3>
         <div class="badges">
             <img class="badge-img" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/67a49b5d-4956-49ab-b5df-3a990999f0fd">
-            <img class="badge-img" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/11e45ff8-9231-4f04-a85b-3bc283a825e6">
-            <img class="badge-img" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/d75d3683-1fbb-4388-b711-b6d48ffcae0f">
-        </div>
-
-        <h3>Design</h3>
-        <div class="badges">
-            <img src="https://img.shields.io/badge/Adobe%20XD-470137?style=for-the-badge&logo=Adobe%20XD&logoColor=white">
-            <img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white">
+            <img class="badge-img" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/a85e15e5-33ef-4256-bad3-dbd1e5b9aacf">
         </div>
 
         <h3>GIT Tools</h3>
