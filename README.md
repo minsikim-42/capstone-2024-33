@@ -1,4 +1,4 @@
-# Welcome to "OverWind" Page!</h1>
+# Welcome to "OverWind" Page!
 
 **팀페이지 주소**
 
@@ -10,17 +10,17 @@ MD: https://kookmin-sw.github.io/capstone-2024-33/
 ## 프로젝트 소개
 ### "바람은 계산하는것이 아니라 극복하는것이다."
 
-### 저의 "OverWind"는 예전에 큰 인기를 끌엇던 포트리스게임을 재현 및 재구성하여 포트리스의 부활을 목표로 합니다.
+### 저의 "OverWind"는 예전에 큰 인기를 끌었던 포트리스게임을 재현 및 재구성하여 포트리스의 부활을 목표로 합니다.
 
 
 
 ## 팀 소개
-### 20171187 김민식
-- 역할: 팀전 구현 및 게임 모드 추가, 추가 수정을 통해 마지막 완성도를 높임
 ### 20175162 박우진
 - 역할: 게임파트, UI디자인, 로비파트, 뒤끝서버
 ### 20213080 정윤민
 - 역할: 게임파트, UI디자인, 로비파트, 뒤끝서버
+### 20171187 김민식
+- 역할: 팀전 구현 및 게임 모드 추가, 추가 수정을 통해 마지막 완성도를 높임
 
 
 
@@ -49,9 +49,9 @@ MD: https://kookmin-sw.github.io/capstone-2024-33/
 
 
 
-## Markdown을 사용하여 내용꾸미기
+## Markdown을 사용하여 내용 꾸미기
 
-Markdown은 작문을 스타일링하기위한 가볍고 사용하기 쉬운 구문입니다. 여기에는 다음을위한 규칙이 포함됩니다.
+Markdown은 작문을 스타일링하기 위한 가볍고 사용하기 쉬운 구문입니다. 여기에는 다음을 위한 규칙이 포함됩니다.
 
 ```markdown
 Syntax highlighted code block
@@ -69,10 +69,3 @@ Syntax highlighted code block
 **Bold** and _Italic_ and `Code` text
 
 [Link](url) and ![Image](src)
-```
-
-자세한 내용은 [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Support or Contact
-
-readme 파일 생성에 추가적인 도움이 필요하면 [도움말](https://help.github.com/articles/about-readmes/) 이나 [contact support](https://github.com/contact) 을 이용하세요.
