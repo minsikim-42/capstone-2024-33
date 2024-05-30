@@ -149,5 +149,4 @@ footer {
     padding: 1rem 0;
 }
 </style>
-
 <p>&copy; 2024 OverWind Team. All rights reserved.</p>
