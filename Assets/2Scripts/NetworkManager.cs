@@ -200,7 +200,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         var roomOptions = new RoomOptions
         {
             CustomRoomPropertiesForLobby = new[] {IsStarted, IsTeamMode, "GameMode", Slot0, Slot1, Slot2, Slot3, Slot4, Slot5, Slot6, Slot7, "team"+Slot1, "team"+Slot2, "team"+Slot3, "team"+Slot4, "team"+Slot5, "team"+Slot6, "team"+Slot7,"name"+Slot1, "name"+Slot2, "name"+Slot3, "name"+Slot4, "name"+Slot5, "name"+Slot6, "name"+Slot7},
-            CustomRoomProperties = new Hashtable {
+            CustomRoomProperties = new Hashtable
+            {
                 {IsStarted, false}, {IsTeamMode, LobbyManager.IT.isTeamMode}, {"GameMode", 1},
                 {Slot0, 1}, {Slot1, -1}, {Slot2, -1}, {Slot3, -1}, {Slot4, -1}, {Slot5, -1}, {Slot6, -1}, {Slot7, -1},
                 {"team"+Slot0, LobbyManager.IT.roomPlayerSlots[0].teamNumber}, {"team"+Slot1, 0}, {"team"+Slot2, 0}, {"team"+Slot3, 0}, {"team"+Slot4, 0}, {"team"+Slot5, 0}, {"team"+Slot6, 0}, {"team"+Slot7, 0},
@@ -329,7 +330,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         var slot = LobbyManager.IT.roomPlayerSlots[slotNumber];
         LobbyManager.IT.SetSlotAI(slotNumber); // 슬롯
         // slot.actorNumber = 99; // AI 번호인 99로 설정
-
         
         if (LobbyManager.IT.isTeamMode == true)
             SetSlotPp(slot.slotName, 99, "AI_"+slotNumber, 1); // 슬롯 설정
@@ -362,8 +362,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         var slot = LobbyManager.IT.roomPlayerSlots.Find(a => a.actorNumber == player.ActorNumber); // 슬롯
         var cProperties = PhotonNetwork.CurrentRoom.CustomProperties;
 
-        // Debug.Log(player);
-        // Debug.Log(slot);
         // Debug.Log(LobbyManager.IT.roomPlayerSlots[0].actorNumber);
         Debug.Log("Change Team To " + (int)cProperties["team"+slot.slotName] + ", Slot: " + slot.slotName);
         if ((int)cProperties["team"+slot.slotName] == 1)
