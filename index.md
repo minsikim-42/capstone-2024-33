@@ -1,4 +1,3 @@
-
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -23,11 +22,6 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 2.5rem;
         }
 
         .logo {
@@ -132,8 +126,7 @@
 </head>
 <body>
     <header>
-        <img src="images/OverWind_Logo.webp" alt="OverWind Logo" class="logo">
-        <h1>Over Wind</h1>
+        <img src="https://drive.google.com/uc?export=view&id=1eGsNDhhRZVYTUVZgD6c6V9tVYmOJBNft" alt="OverWind Logo" class="logo">
     </header>
 
     <section>
@@ -190,7 +183,14 @@
         <h3>BackEnd</h3>
         <div class="badges">
             <img class="badge-img" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/67a49b5d-4956-49ab-b5df-3a990999f0fd">
-            <img class="badge-img" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/a85e15e5-33ef-4256-bad3-dbd1e5b9aacf">
+            <img class="badge-img" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/11e45ff8-9231-4f04-a85b-3bc283a825e6">
+            <img class="badge-img" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/d75d3683-1fbb-4388-b711-b6d48ffcae0f">
+        </div>
+
+        <h3>Design</h3>
+        <div class="badges">
+            <img src="https://img.shields.io/badge/Adobe%20XD-470137?style=for-the-badge&logo=Adobe%20XD&logoColor=white">
+            <img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white">
         </div>
 
         <h3>GIT Tools</h3>
