@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OverWind</title>
+    <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -118,39 +119,44 @@
             width: 100%;
             bottom: 0;
         }
+
+        .badge-img {
+            width: 100px;
+            height: 35px;
+        }
     </style>
 </head>
 <body>
     <header>
-        <h1>Welcome to "OverWind" Page!</h1>
+        <h1>Over Wind</h1>
     </header>
 
     <section>
         <h2>프로젝트 소개</h2>
         <p>"바람은 계산하는것이 아니라 극복하는것이다."<br>영화 최종병기 활에서 나온 명언입니다. 플레이어들은 바람에 따라 변하는 궤도를 예측하며 도전 욕구를 끌어올릴 것입니다. 저희 "OverWind"는 예전에 큰 인기를 끌었던 포트리스 게임을 재현 및 재구성하여 포트리스류 게임의 부활을 목표로 합니다.</p>
         <div class="center images">
-            <img alt="overwind Login" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/35fa36e4-7abb-48e7-b7b9-5736d1286eff">
-            <img alt="overwind Lobby" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/c4587748-60b5-4dc1-b450-9ae205d2d37c">
-            <img alt="overwind Team" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/89a1225b-e0d3-46ec-b1a0-5ba38be04ad2">
-            <img alt="overwind InGame" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/4d3f7f11-8ed1-491f-8368-6ee3af2f8e22">
+            <img alt="OverWind Login 화면" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/35fa36e4-7abb-48e7-b7b9-5736d1286eff">
+            <img alt="OverWind 로비 화면" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/c4587748-60b5-4dc1-b450-9ae205d2d37c">
+            <img alt="OverWind 팀 화면" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/89a1225b-e0d3-46ec-b1a0-5ba38be04ad2">
+            <img alt="OverWind 인게임 화면" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/4d3f7f11-8ed1-491f-8368-6ee3af2f8e22">
         </div>
 
         <h2>발표 자료</h2>
         <ul>
-            <li><a href="https://docs.google.com/presentation/d/1JO1jnwr7y5JQ6jxWW7t-PiPppP9xzBQy/edit?usp=drive_link&ouid=114998932213411349234&rtpof=true&sd=true">중간발표 pptx</a></li>
-            <li><a href="https://docs.google.com/document/d/1UBRzcrMtn_R3fvz-Ow17mZ73ug6iCcqp/edit?usp=drive_link&ouid=114998932213411349234&rtpof=true&sd=true">중간 보고서 docs</a></li>
-            <li><a href="https://docs.google.com/presentation/d/1W6f307y4nkLyZVSOoYnx0Ev64Ul9og_A/edit?usp=sharing&ouid=114998932213411349234&rtpof=true&sd=true">최종발표 pptx</a></li>
-            <li><a href="https://drive.google.com/file/d/1b85_20fqHNlr-42ZiSO_1oisiCjMXWn_/view?usp=drive_link">포스터 ai 596x843</a></li>
-            <li><a href="https://drive.google.com/file/d/1gJM2umaUDTVlD_pjLyQXy8TWORLPUBeS/view?usp=drive_link">포스터 png</a></li>
-            <li><a href="https://docs.google.com/document/d/1GZ3a-qep1tCj5gTXBxU9SbI0QrJyfK3E/edit?usp=sharing&ouid=114998932213411349234&rtpof=true&sd=true">수행보고서_최종</a></li>
+            <li><a href="https://docs.google.com/presentation/d/1JO1jnwr7y5JQ6jxWW7t-PiPppP9xzBQy/edit?usp=drive_link&ouid=114998932213411349234&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer">중간발표 pptx</a></li>
+            <li><a href="https://docs.google.com/document/d/1UBRzcrMtn_R3fvz-Ow17mZ73ug6iCcqp/edit?usp=drive_link&ouid=114998932213411349234&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer">중간 보고서 docs</a></li>
+            <li><a href="https://docs.google.com/presentation/d/1W6f307y4nkLyZVSOoYnx0Ev64Ul9og_A/edit?usp=sharing&ouid=114998932213411349234&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer">최종발표 pptx</a></li>
+            <li><a href="https://drive.google.com/file/d/1b85_20fqHNlr-42ZiSO_1oisiCjMXWn_/view?usp=drive_link" target="_blank" rel="noopener noreferrer">포스터 ai 596x843</a></li>
+            <li><a href="https://drive.google.com/file/d/1gJM2umaUDTVlD_pjLyQXy8TWORLPUBeS/view?usp=drive_link" target="_blank" rel="noopener noreferrer">포스터 png</a></li>
+            <li><a href="https://docs.google.com/document/d/1GZ3a-qep1tCj5gTXBxU9SbI0QrJyfK3E/edit?usp=sharing&ouid=114998932213411349234&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer">수행보고서_최종</a></li>
         </ul>
 
         <h2>팀 소개</h2>
         <table>
             <tr>
-                <th>이름</th>
-                <th>학번</th>
-                <th>역할</th>
+                <th scope="col">이름</th>
+                <th scope="col">학번</th>
+                <th scope="col">역할</th>
             </tr>
             <tr>
                 <td>김민식</td>
@@ -178,8 +184,8 @@
 
         <h3>BackEnd</h3>
         <div class="badges">
-            <img src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/67a49b5d-4956-49ab-b5df-3a990999f0fd" width="100" height="35">
-            <img src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/a85e15e5-33ef-4256-bad3-dbd1e5b9aacf" width="100" height="35">
+            <img class="badge-img" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/67a49b5d-4956-49ab-b5df-3a990999f0fd">
+            <img class="badge-img" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/a85e15e5-33ef-4256-bad3-dbd1e5b9aacf">
         </div>
 
         <h3>GIT Tools</h3>
@@ -191,30 +197,30 @@
         <h2>게임 기술 소개</h2>
         <p>유니티, Photon, 뒤끝서버</p>
 
-        <h2>팀포트리스 첫 구상 feat.Figma</h2>
+        <h2>팀 오버윈드 첫 구상 feat.Figma</h2>
         <div class="center">
-            <img width="619" alt="팀포트리스 첫 구상" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/7cccd3f5-d478-4dbf-a0fc-8fb3ee0f8b6e">
+            <img width="619" alt="팀 오버윈드 첫 구상" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/7cccd3f5-d478-4dbf-a0fc-8fb3ee0f8b6e">
             <br>
-            <a href="https://www.figma.com/file/VrGnKXI2fd1GEfBjVr7mW1/Fortress-Project?type=design&mode=design&t=oQ4VLdoqE5T0LlQK-1">피그마 프로토타입 링크</a>
+            <a href="https://www.figma.com/file/VrGnKXI2fd1GEfBjVr7mW1/Fortress-Project?type=design&mode=design&t=oQ4VLdoqE5T0LlQK-1" target="_blank" rel="noopener noreferrer">피그마 프로토타입 링크</a>
         </div>
 
         <h2>시연 영상</h2>
         <div class="center">
-            <a href="https://youtu.be/UZhV_kJ3_T0">
-                <img alt="시연 영상" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/4d3f7f11-8ed1-491f-8368-6ee3af2f8e22" width="500" height="300">
+            <a href="https://youtu.be/UZhV_kJ3_T0" target="_blank" rel="noopener noreferrer">
+                <img alt="OverWind 시연 영상 썸네일" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/4d3f7f11-8ed1-491f-8368-6ee3af2f8e22" width="500" height="300">
             </a>
         </div>
 
         <h2>설치 방법</h2>
         <p>맥용 윈도우용 실행파일 배포, 바로 실행 가능합니다.</p>
         <div>
-            <a href="https://drive.google.com/file/d/1sdAqWcAkpWgphD7kpUfm35jnZfqsVGY0/view?usp=drive_link">For Mac (Intel + Apple Silicon)</a>
+            <a href="https://drive.google.com/file/d/1sdAqWcAkpWgphD7kpUfm35jnZfqsVGY0/view?usp=drive_link" target="_blank" rel="noopener noreferrer">For Mac (Intel + Apple Silicon)</a>
         </div>
         <div>
-            <a href="https://drive.google.com/file/d/18kZK5VG15pp-iYEKncRIgZFmETpo6ahH/view?usp=drive_link">For Window 64</a>
+            <a href="https://drive.google.com/file/d/18kZK5VG15pp-iYEKncRIgZFmETpo6ahH/view?usp=drive_link" target="_blank" rel="noopener noreferrer">For Window 64</a>
         </div>
         <div>
-            <a href="https://mega.nz/folder/081yTIha#-NftS7gSlOkb2sSfbqDb7Q">설치 불가시 대체 링크</a>
+            <a href="https://mega.nz/folder/081yTIha#-NftS7gSlOkb2sSfbqDb7Q" target="_blank" rel="noopener noreferrer">설치 불가시 대체 링크</a>
         </div>
 
         <h2>이후 추가할 내용</h2>
