@@ -205,7 +205,7 @@
         <h2>시연 영상</h2>
         <div class="center">
             <a href="https://youtu.be/UZhV_kJ3_T0" target="_blank" rel="noopener noreferrer">
-                <img alt="OverWind 시연 영상 썸네일" src="https://github.com/kookmin-sw/capstone-2024-33/assets/74590585/4d3f7f11-8ed1-491f-8368-6ee3af2f8e22" width="500" height="300">
+                <img alt="OverWind 시연 영상 썸네일" src="https://img.youtube.com/vi/UZhV_kJ3_T0/0.jpg" width="500" height="300">
             </a>
         </div>
 
