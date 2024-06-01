@@ -25,7 +25,8 @@
         }
 
         .logo {
-            max-width: 150px;
+            font-size: 2rem;
+            font-weight: bold;
             margin-bottom: 1rem;
         }
 
@@ -126,7 +127,7 @@
 </head>
 <body>
     <header>
-        <img src="https://drive.google.com/uc?export=view&id=1eGsNDhhRZVYTUVZgD6c6V9tVYmOJBNft" alt="OverWind Logo" class="logo" onerror="this.src='https://via.placeholder.com/150'; this.onerror=null;">
+        <div class="logo">OverWind</div>
     </header>
 
     <section>
