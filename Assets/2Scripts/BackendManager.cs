@@ -11,6 +11,7 @@ public class BackendManager : MonoBehaviour
     {
         IT = this;
         
+        // 씬이 바뀌어도 유지
         DontDestroyOnLoad(gameObject);
         
         // Init Server
