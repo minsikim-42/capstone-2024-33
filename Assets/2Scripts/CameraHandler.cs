@@ -45,6 +45,7 @@ public class CameraHandler : MonoBehaviour
         // orthographicSize와 value의 차이가 0.01f보다 큰 동안 반복 
         while (Math.Abs(_camera.m_Lens.OrthographicSize - value) > 0.01f)
         {
+            // Ortho방식으로 줌인
             _camera.m_Lens.OrthographicSize = Mathf.MoveTowards(_camera.m_Lens.OrthographicSize, value, zoomSpeed * Time.deltaTime); // 카메라의 orthographicSize를 value로 이동
             
             yield return null;
