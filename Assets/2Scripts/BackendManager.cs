@@ -31,12 +31,12 @@ public class BackendManager : MonoBehaviour
         // 서버 초기화 성공 여부 확인
         if (bro.IsSuccess())
         {
-            Debug.Log("Success");
+            Debug.Log("InitServer Success");
             IsSuccess = true;
         }
         else
         {
-            Debug.Log($"Fail : {bro}");
+            Debug.Log($"InitServer Fail : {bro}");
             IsSuccess = false;
         }
     }
