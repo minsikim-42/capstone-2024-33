@@ -193,11 +193,11 @@ public class InGameManager : MonoBehaviour
             return;
         
         // AI가 존재할 경우
-        for (var i = 0; i < NetworkManager.IT.aiCount; i++)
+        for (var i = 0; i < NetworkManager.IT.aiCount; i++) // 모든 AI
         {
             var aiPosition = aiSpawnPoints[i].position; // AI 스폰 포인트
             var ai = PhotonNetwork.Instantiate(aiPrefabName, aiPosition, Quaternion.identity).GetComponent<AIHandler>(); // AI 생성
-            ai.tankHandler.SetTeamNum(1);
+            ai.tankHandler.SetTeamNum(1); // 빨강팀이 기본
             Debug.Log(ai.actorNumber); // AI actorNumber
                 
             aiList.Add(ai); // AI 리스트에 추가
