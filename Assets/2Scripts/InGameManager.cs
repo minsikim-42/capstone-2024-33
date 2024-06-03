@@ -462,19 +462,19 @@ public class InGameManager : MonoBehaviour
 
     public void CamZoom(float size)
     {
-        cameraHandler.Zoom(size);
+        cameraHandler.Zoom(size); // 카메라 줌 (9, 13)
     }
     public void CamStopZoom()
     {
-        cameraHandler.StopZoom();
+        cameraHandler.StopZoom(); // 코루틴 중지
     }
     public void CamMove(float x, float y)
     {
-        cameraHandler.Move(x, y);
+        cameraHandler.Move(x, y); // 카메라 이동
     }
     public void CamMoveBack()
     {
-        cameraHandler.MoveBack();
+        cameraHandler.MoveBack(); // 타겟으로 이동
     }
     
     private void UpdateTimer()
