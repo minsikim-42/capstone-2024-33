@@ -250,11 +250,6 @@ public class InGameManager : MonoBehaviour
         
         damageList.Clear(); // 누적 데미지 리스트 초기화
         
-        // 누적 데미지 리스트에 플레이어, AI 추가
-        // foreach (var damage in turnList.Select(turn => new Damage { nickname = turn.nickname, damage = 0}))
-        // {
-        //     damageList.Add(damage); // 데미지 리스트에 추가
-        // }
         foreach (var turn in turnList)
         {
             var damage = new Damage { nickName = turn.nickName, damage = 0, teamNumber = turn.teamNumber };
