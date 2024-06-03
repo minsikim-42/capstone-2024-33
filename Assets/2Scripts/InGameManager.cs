@@ -143,7 +143,7 @@ public class InGameManager : MonoBehaviour
                 }
             }
         
-            await Task.Delay(2000); // 2초 대기
+            await Task.Delay(1200); // 1.2초 대기
             
             PV.RPC(nameof(RPC_GenerateTank), RpcTarget.All);
         }
