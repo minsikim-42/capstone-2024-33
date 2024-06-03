@@ -230,23 +230,23 @@ public class InGameManager : MonoBehaviour
 
         turnList = NetworkManager.IT.ShuffleTurn(turnList);
 
-        Debug.Log("InGameM::SetTurn");
-        foreach (var slot in turnList) {
-            if (slot.actorNumber == 99)
-            {
-                Debug.Log("AIslot actorNum: " + slot.actorNumber);
-                Debug.Log("AIslot nickname: " + slot.nickName);
-            }
-            else if (slot.actorNumber != -1)
-            {
-                Debug.Log("slot actor Num: " + slot.actorNumber);
-                Debug.Log("slot nickname: " + slot.nickName);
-            }
-            else
-            {
-                // 빈 슬롯
-            }
-        }
+        // Debug.Log("InGameM::SetTurn");
+        // foreach (var slot in turnList) {
+        //     if (slot.actorNumber == 99)
+        //     {
+        //         Debug.Log("AIslot actorNum: " + slot.actorNumber);
+        //         Debug.Log("AIslot nickname: " + slot.nickName);
+        //     }
+        //     else if (slot.actorNumber != -1)
+        //     {
+        //         Debug.Log("slot actor Num: " + slot.actorNumber);
+        //         Debug.Log("slot nickname: " + slot.nickName);
+        //     }
+        //     else
+        //     {
+        //         // 빈 슬롯
+        //     }
+        // }
         
         damageList.Clear(); // 누적 데미지 리스트 초기화
         
