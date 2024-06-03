@@ -182,7 +182,7 @@ public class InGameManager : MonoBehaviour
         }
         else
         {
-            await Task.Delay(1000); // 5초 대기
+            await Task.Delay(1000); // 1초 대기
             GetTurn();
         }
     }
