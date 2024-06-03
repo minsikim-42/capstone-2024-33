@@ -264,19 +264,19 @@ public class InGameManager : MonoBehaviour
 
     private void GetTurn()
     {
-        Debug.Log("InGameM::GetTurn");
+        // Debug.Log("InGameM::GetTurn");
         foreach (var slot in NetworkManager.IT.gameForSlots) {
             if (slot.actorNumber == 99)
             {
-                Debug.Log("AIslot actorNum: " + slot.actorNumber);
-                Debug.Log("AIslot nickname: " + slot.nickName);
+                // Debug.Log("AIslot actorNum: " + slot.actorNumber);
+                // Debug.Log("AIslot nickname: " + slot.nickName);
                 var turn = new Turn { actorNumber = -1, nickName = "AI_"+(-1), teamNumber = slot.teamNumber }; // AI턴 생성 // AiList[aiIdx].~
                 turnList.Add(turn);
             }
             else if (slot.actorNumber != -1)
             {
-                Debug.Log("slot actor Num: " + slot.actorNumber);
-                Debug.Log("slot nickname: " + slot.nickName);
+                // Debug.Log("slot actor Num: " + slot.actorNumber);
+                // Debug.Log("slot nickname: " + slot.nickName);
                 var turn = new Turn { actorNumber = slot.actorNumber, nickName = slot.nickName, teamNumber = slot.teamNumber }; // Player턴 생성
                 turnList.Add(turn);
             }
