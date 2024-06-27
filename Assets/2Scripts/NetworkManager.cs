@@ -422,6 +422,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnPlayerLeftRoom(Player player)
     {
+        Debug.Log("Net::OnPlayerLeftRoom" + player);
         // 로비에서
         if (SceneManager.GetActiveScene().name == "Lobby")
         {    
@@ -439,6 +440,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         {
             if (InGameManager.IT.GetIsTurn(player.NickName) && PhotonNetwork.IsMasterClient)
                 InGameManager.IT.NextTurn(); // 다음 턴
+            InGameManager.IT.RemoveTurn(player.NickName);
         }
     }
 

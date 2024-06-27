@@ -749,9 +749,11 @@ public class InGameManager : MonoBehaviour
         // 방장이 아닌 플레이어가 방을 나갈 경우
         else // 나머지 클라이언트에게 알림
         {
-            PV.RPC(nameof(RPC_LeaveUpdateTurn), RpcTarget.Others, PhotonNetwork.LocalPlayer.NickName);
             LeaveRoom(); // 방 나가기
         }
+    }
+    public void RemoveTurn(string nickName) {
+        PV.RPC(nameof(RPC_LeaveUpdateTurn), RpcTarget.Others, PhotonNetwork.LocalPlayer.NickName);
     }
     
     [PunRPC]
