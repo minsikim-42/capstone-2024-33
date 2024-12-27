@@ -420,7 +420,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             InGameManager.IT.ExitInGame(); // 인게임에서 나가기
     }
 
-    public override void OnPlayerLeftRoom(Player player)
+    public override void OnPlayerLeftRoom(Player player) // 방안의 모든 플레이어에게 호출
     {
         Debug.Log("Net::OnPlayerLeftRoom" + player);
         // 로비에서
@@ -455,6 +455,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             if ((bool)propertiesThatChanged[IsStarted])
             {
                 PhotonNetwork.LoadLevel("Game"); // Game 씬으로 이동
+                // 마스터 클라이언트가 방에 참가한 모든 플레이어들을 특정 Scene을 로드해줍니다
             
                 return;
             }

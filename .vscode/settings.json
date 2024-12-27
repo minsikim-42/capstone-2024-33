@@ -34,22 +34,20 @@
         "**/*.MA": true,
         "**/*.obj": true,
         "**/*.OBJ": true,
-        // "**/*.asset": true,
         "**/*.cubemap": true,
         "**/*.flare": true,
         "**/*.mat": true,
         "**/*.meta": true,
         "**/*.prefab": true,
-        "**/*.unity": false, //
+        "**/*.unity": false,
         "build/": true,
         "Build/": true,
         "Library/": true,
         "library/": true,
         "obj/": true,
         "Obj/": true,
-        // "ProjectSettings/": true,
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "capstone-2024-2024-33.sln"
+    "dotnet.defaultSolution": "minsikim_capstone-2024-33.sln"
 }
