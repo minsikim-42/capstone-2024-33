@@ -818,7 +818,7 @@ public class InGameManager : MonoBehaviour
         if (isAiTurn && turnList == null)
             return ;
 
-        Debug.Log("InGame::DrawL::turnIdx:" + turnIndex);
+        // Debug.Log("InGame::DrawL::turnIdx:" + turnIndex);
         if (turnList[turnIndex].actorNumber == PhotonNetwork.LocalPlayer.ActorNumber) {
             playerTankHandler.tankUIHandler.DrawLine(value);
         }
