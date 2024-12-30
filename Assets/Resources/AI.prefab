@@ -1094,7 +1094,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 2938510373628599943, guid: 91493534ea6144f469656897d6a0dba7,
     type: 3}
   raycastDistance: 2
-  rayOffset: {x: 0.3, y: 0, z: 0}
+  rayOffset: 0
   angle: 0
   isTurn: 0
   currentHP: 0

@@ -124,30 +124,11 @@ public class  TankHandler : MonoBehaviour
         }
 
         // rayOffset 간격으로 2개의 레이캐스트를 발사하여 지형의 기울기를 계산
-        // RaycastHit2D slopeHit = Physics2D.Raycast(transform.position, Vector3.down, raycastDistance, LayerMask.GetMask("Map"));
-        // if (slopeHit) {
-        //     angle = Vector2.Angle(Vector2.up, slopeHit.normal);
-        //     if (slopeHit.normal.x < 0) {
-        //         angle *= -1;
-        //     }
-        //     if (direction == 1) {
-        //         angle *= -1;
-        //     }
-
-        //     Debug.Log("ang: "+angle);
-            
-        //     if (isTurn && ((isAi && InGameManager.IT.IsAITurn()) || (!isAi && !InGameManager.IT.IsAITurn())))
-        //         UIManager.IT.SetTankHorizontal(-angle, direction); // 탱크 수평 각도 UI 설정
-        // }
+        // hit1 = Physics2D.Raycast(transform.position + new Vector3(rayOffset, 0, 0) * direction, Vector2.down, raycastDistance, LayerMask.GetMask("Map"));
+        // hit3 = Physics2D.Raycast(transform.position - new Vector3(rayOffset, 0, 0) * direction, Vector2.down, raycastDistance, LayerMask.GetMask("Map"));
         
-        // float angle90 = angle+90;
-        // Vector2 normVec = new tor2(Mathf.Cos(angle90*Mathf.PI/180f), Mathf.Sin(angle90*Mathf.PI/180f));
-        // Debug.Log($"normVec: {normVec}");
-        // hit1 = Physics2D.Raycast(transform.position + rayOffset * direction, -normVec, raycastDistance, LayerMask.GetMask("Map"));
-        // hit3 = Physics2D.Raycast(transform.position - rayOffset * direction, -normVec, raycastDistance, LayerMask.GetMask("Map"));
-        
-        // Debug.DrawRay(transform.position + rayOffset * frontVec, -normVec * 2f, Color.red);
-        // Debug.DrawRay(transform.position - rayOffset * frontVec, -normVec * 2f, Color.blue);
+        // Debug.DrawRay(transform.position + new Vector3(rayOffset, 0, 0) * direction, Vector2.down * 2f, Color.red);
+        // Debug.DrawRay(transform.position - new Vector3(rayOffset, 0, 0) * direction, Vector2.down * 2f, Color.blue);
 
         // // 레이캐스트 충돌 정보가 있다면
         // if (hit1 && hit3) // hit2
@@ -243,25 +224,14 @@ public class  TankHandler : MonoBehaviour
     
     Vector2 normVec;
     Vector3 frontVec;
-    public void LeftArrowPressed()
-    {
-        transform.Translate(Vector2.left * tankMoveSpeed * Time.deltaTime); // 왼쪽으로 이동
-        direction = -1; // 방향을 왼쪽으로 설정
-        transform.localScale = new Vector3(direction, 1.0f, 1.0f); // 스프라이트 방향 설정
-
-        currentMoveValue -= Time.deltaTime * moveCoefficient; // 이동값 감소
-                
-        anim.SetBool("Idle", false); // Idle 애니메이션 비활성화
-        anim.SetBool("Move", true); // Move 애니메이션 활성화
-                    
-        UIManager.IT.SetMove(currentMoveValue); // 이동 게이지 UI 설정
-        UIManager.IT.SetProjectileAngle(projectileDegrees, direction, true); // 미사일 발사 각도 UI 설정
-
+    public void SetAngleToRay(int direction) {
         frontVec = new Vector3(Mathf.Cos(angle*Mathf.PI/180f), Mathf.Sin(angle*Mathf.PI/180f), 0);
-        frontVec.x = -frontVec.x;
         float angle90 = angle+90;
         normVec = new Vector2(Mathf.Cos(angle90*Mathf.PI/180f), Mathf.Sin(angle90*Mathf.PI/180f));
-        normVec.x = -normVec.x;
+        if (direction == -1) {
+            frontVec.x = -frontVec.x;
+            normVec.x = -normVec.x;
+        }
         Debug.Log($"ang: {angle}, normVec: {normVec}");
         hit1 = Physics2D.Raycast(transform.position + rayOffset * frontVec, -normVec, raycastDistance, LayerMask.GetMask("Map"));
         hit3 = Physics2D.Raycast(transform.position - rayOffset * frontVec, -normVec, raycastDistance, LayerMask.GetMask("Map"));
@@ -286,7 +256,41 @@ public class  TankHandler : MonoBehaviour
         if (isTurn && ((isAi && InGameManager.IT.IsAITurn()) || (!isAi && !InGameManager.IT.IsAITurn())))
             UIManager.IT.SetTankHorizontal(-angle, direction); // 탱크 수평 각도 UI 설정
         
+        // 법선벡터
+        // RaycastHit2D slopeHit = Physics2D.Raycast(transform.position, Vector3.down, raycastDistance, LayerMask.GetMask("Map"));
+        // Debug.DrawRay(transform.position, Vector2.down * 2f, Color.red);
+        // Debug.DrawRay(transform.position, slopeHit.normal * 2f, Color.blue);
+        // if (slopeHit) {
+        //     angle = Vector2.Angle(Vector2.up, slopeHit.normal);
+        //     if (slopeHit.normal.x < 0) {
+        //         angle *= -1;
+        //     }
+        //     if (direction == 1) {
+        //         angle *= -1;
+        //     }
+
+        //     Debug.Log("ang: "+angle);
+            
+        //     if (isTurn && ((isAi && InGameManager.IT.IsAITurn()) || (!isAi && !InGameManager.IT.IsAITurn())))
+        //         UIManager.IT.SetTankHorizontal(-angle, direction); // 탱크 수평 각도 UI 설정
+        // }
         SetSprite(); // 탱크 스프라이트 설정
+    }
+    public void LeftArrowPressed()
+    {
+        transform.Translate(Vector2.left * tankMoveSpeed * Time.deltaTime); // 왼쪽으로 이동
+        direction = -1; // 방향을 왼쪽으로 설정
+        transform.localScale = new Vector3(direction, 1.0f, 1.0f); // 스프라이트 방향 설정
+
+        currentMoveValue -= Time.deltaTime * moveCoefficient; // 이동값 감소
+                
+        anim.SetBool("Idle", false); // Idle 애니메이션 비활성화
+        anim.SetBool("Move", true); // Move 애니메이션 활성화
+                    
+        UIManager.IT.SetMove(currentMoveValue); // 이동 게이지 UI 설정
+        UIManager.IT.SetProjectileAngle(projectileDegrees, direction, true); // 미사일 발사 각도 UI 설정
+
+        SetAngleToRay(direction);
     }
     
     public void RepeatLeftArrowPressed(float time)
@@ -339,34 +343,7 @@ public class  TankHandler : MonoBehaviour
         UIManager.IT.SetMove(currentMoveValue); // 이동 게이지 UI 설정
         UIManager.IT.SetProjectileAngle(projectileDegrees, direction, true); // 미사일 발사 각도 UI 설정
 
-        frontVec = new Vector3(Mathf.Cos(angle*Mathf.PI/180f), Mathf.Sin(angle*Mathf.PI/180f), 0);
-        float angle90 = angle+90;
-        normVec = new Vector2(Mathf.Cos(angle90*Mathf.PI/180f), Mathf.Sin(angle90*Mathf.PI/180f));
-        Debug.Log($"ang: {angle}, normVec: {normVec}");
-        hit1 = Physics2D.Raycast(transform.position + rayOffset * frontVec, -normVec, raycastDistance, LayerMask.GetMask("Map"));
-        hit3 = Physics2D.Raycast(transform.position - rayOffset * frontVec, -normVec, raycastDistance, LayerMask.GetMask("Map"));
-        
-        Debug.DrawRay(transform.position + rayOffset * frontVec, -normVec * 2f, Color.red);
-        Debug.DrawRay(transform.position - rayOffset * frontVec, -normVec * 2f, Color.blue);
-
-        // 레이캐스트 충돌 정보가 있다면
-        if (hit1 && hit3) // hit2
-        {
-            angle = -Vector2.Angle(direction * (hit1.point - hit3.point), Vector2.right); // 레이캐스트 충돌 정보 1과 3의 점 사이의 각도
-            angle = Mathf.Clamp(angle, -55, 55); // angle min: -60, max: 60
-
-            if (hit1.point.y >= hit3.point.y) // 레이캐스트 충돌 정보 2->3의 y값이 더 작다면
-                angle = -angle; // angle값을 반전
-
-            // Debug.Log("dir: " + direction + ",HitP: " + hit1.point + ", Hp2: " + hit3.point + ", ang: " + angle);
-        } else {
-            angle *= -1;
-        }
-
-        if (isTurn && ((isAi && InGameManager.IT.IsAITurn()) || (!isAi && !InGameManager.IT.IsAITurn())))
-            UIManager.IT.SetTankHorizontal(-angle, direction); // 탱크 수평 각도 UI 설정
-        
-        SetSprite(); // 탱크 스프라이트 설정
+        SetAngleToRay(direction);
     }
     
     public void SpaceDown()
@@ -419,6 +396,10 @@ public class  TankHandler : MonoBehaviour
     {
         Debug.DrawRay(transform.position + rayOffset * frontVec, -normVec * 2f, Color.red);
         Debug.DrawRay(transform.position - rayOffset * frontVec, -normVec * 2f, Color.blue);
+        // RaycastHit2D slopeHit = Physics2D.Raycast(transform.position, Vector3.down, raycastDistance, LayerMask.GetMask("Map"));
+        // Debug.DrawRay(transform.position, Vector2.down * 2f, Color.red);
+        // Debug.DrawRay(transform.position, slopeHit.normal * 2f, Color.blue);
+
         // 미사일 발사 각도가 90도보다 크거나 같다면
         if (projectileDegrees >= 90f)
         {

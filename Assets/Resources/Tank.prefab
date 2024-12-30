@@ -954,7 +954,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 2938510373628599943, guid: 91493534ea6144f469656897d6a0dba7,
     type: 3}
   raycastDistance: 2
-  rayOffset: {x: 0.12, y: 0, z: 0}
+  rayOffset: 0
   angle: 0
   isTurn: 0
   currentHP: 0
@@ -1015,7 +1015,7 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3137190436677289922}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 6200000, guid: 90c0c11aaf3b461418078624df9a6838, type: 2}
   m_IncludeLayers:
@@ -2491,6 +2491,7 @@ GameObject:
   - component: {fileID: 1871402576841191243}
   - component: {fileID: 23033807034707994}
   - component: {fileID: 4895448229348506616}
+  - component: {fileID: 7771148989154710476}
   m_Layer: 7
   m_Name: Tank
   m_TagString: Untagged
@@ -2509,7 +2510,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.04, y: -0.47, z: 0}
   m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7195998072077945766}
   - {fileID: 8150078357114845096}
@@ -2601,6 +2602,41 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!70 &7771148989154710476
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8645998065172898888}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 90c0c11aaf3b461418078624df9a6838, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.25669637, y: 1.7600186}
+  m_Size: {x: 5.6536884, y: 2.4812322}
+  m_Direction: 1
 --- !u!1 &8913233189255931348
 GameObject:
   m_ObjectHideFlags: 0
